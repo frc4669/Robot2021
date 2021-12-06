@@ -22,3 +22,9 @@ namespace OIConstants {
   constexpr int kControllerPort = 1;
   constexpr int kF310 = 1;
 }
+
+// Motor Controller Port Constants
+namespace DriveConstants {
+  constexpr int kRightMotorPort = 0;
+  constexpr int kLeftMotorPort = 1;
+}
