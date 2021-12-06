@@ -16,3 +16,9 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
+
+// Operator Interface Constants
+namespace OIConstants {
+  constexpr int kControllerPort = 1;
+  constexpr int kF310 = 1;
+}
