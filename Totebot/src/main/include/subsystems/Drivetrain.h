@@ -5,6 +5,7 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <ctre/Phoenix.h>
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -18,4 +19,8 @@ class Drivetrain : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+
+  // Add our phoenix motor controllers
+  WPI_TalonSRX m_rightMotor;
+  WPI_TalonSRX m_leftMotor;
 };
