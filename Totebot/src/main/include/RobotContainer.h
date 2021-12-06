@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc2/command/Command.h>
+#include <frc2/command/InstantCommand.h>
 
 #include <subsystems/Drivetrain.h>
 #include <F310.h>
