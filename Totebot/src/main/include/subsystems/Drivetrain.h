@@ -5,6 +5,7 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <frc/drive/DifferentialDrive.h>
 #include <ctre/Phoenix.h>
 
 #include "Constants.h"
@@ -25,4 +26,6 @@ class Drivetrain : public frc2::SubsystemBase {
   // Add our phoenix motor controllers WITH OUR PORTS
   WPI_TalonSRX m_rightMotor{DriveConstants::kRightMotorPort};
   WPI_TalonSRX m_leftMotor{DriveConstants::kLeftMotorPort};
+
+  frc::DifferentialDrive m_drive{m_leftMotor, m_rightMotor};
 };
