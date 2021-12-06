@@ -7,11 +7,19 @@
 
 #include "RobotContainer.h"
 
+#include <frc2/command/RunCommand.h>
+
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
 
   // Configure the button bindings
   ConfigureButtonBindings();
+
+  m_drivetrain.SetDefaultCommand(frc2::RunCommand(
+    [this] 
+    { m_drivetrain.Drive(-f310.getLeftY()*0.65, -f310.getRightX()*0.65);  },
+    { &m_drivetrain }
+    ));
 }
 
 void RobotContainer::ConfigureButtonBindings() {
