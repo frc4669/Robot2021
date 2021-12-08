@@ -20,3 +20,8 @@
 namespace IOConstants {
     constexpr int kF310 = 0;
 }
+
+namespace DriverConstants {
+    constexpr int kLeftMotorPort = 1;
+    constexpr int kRightMotorPort = 0;
+}
