@@ -8,3 +8,7 @@ Drivetrain::Drivetrain() = default;
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {}
+
+void Drivetrain::Drive(double speed, double rotation) {
+    m_driveArcadeDrive(speed, rotation);
+}
