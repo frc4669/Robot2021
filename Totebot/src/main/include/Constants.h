@@ -16,3 +16,7 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
+
+namespace IOConstants {
+    constexpr int kF310 = 0;
+}
