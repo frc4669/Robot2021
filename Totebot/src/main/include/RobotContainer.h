@@ -27,6 +27,7 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+  F310 f310;
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;

@@ -18,6 +18,7 @@
  */
 
  namespace IOConstants {
+    constexpr int kControllerPort = 0;
     constexpr int kF310 = 0;
  }
 
