@@ -13,6 +13,8 @@
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/Drivetrain.h"
 
+#include "F310.h"
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -28,6 +30,9 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+
+  F310 f310; 
+
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
