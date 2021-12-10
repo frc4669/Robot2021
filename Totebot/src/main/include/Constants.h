@@ -17,7 +17,7 @@
  * they are needed.
  */
 
-namespace IOConstants {
+namespace OIConstants {
     constexpr int kControllerPort = 0;
     constexpr int kF310 = 0;
 }
