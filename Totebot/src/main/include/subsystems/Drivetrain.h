@@ -10,9 +10,9 @@
 #include <ctre/Phoenix.h>
 #include <Constants.h>
 
-class drivetrain : public frc2::SubsystemBase {
+class Drivetrain : public frc2::SubsystemBase {
  public:
-  drivetrain();
+  Drivetrain();
 
   void Drive(double speed, double rotation);
 
