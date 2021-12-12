@@ -5,23 +5,28 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <frc/drive/DifferentialDrive.h>
 
-class ExampleSubsystem : public frc2::SubsystemBase {
+#include <ctre/Phoenix.h>
+#include <Constants.h>
+
+class Drivetrain : public frc2::SubsystemBase {
  public:
-  ExampleSubsystem();
+  Drivetrain();
+
+  void Drive(double speed, double rotation);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
 
-  /**
-   * Will be called periodically whenever the CommandScheduler runs during
-   * simulation.
-   */
-  void SimulationPeriodic() override;
-
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+
+  WPI_TalonSRX m_leftMotor{DriverConstants::kLeftMotorPort};
+  WPI_TalonSRX m_rightMotor{DriverConstants::kRightMotorPort};
+
+  frc::DifferentialDrive m_drive{m_leftMotor, m_rightMotor};
 };
