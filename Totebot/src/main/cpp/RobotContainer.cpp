@@ -14,7 +14,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
-      {  m_drivetrain.Drive(-f310.getLeftY()*0.50, -f310.getRightX()*0.50); },
+      {  m_drivetrain.Drive(-f310.getLeftY()*0.50, f310.getRightX()*0.50); },
       {  &m_drivetrain  }
   ));
 }
