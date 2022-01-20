@@ -43,18 +43,18 @@ namespace DriveConstants {
     constexpr double kSecondGearRatio = 44/30;          // 44 teeth driven by 30; dont change unless using diff gearbox
 
     // shifter ratios
-    constexpr double kFirstShiftedGearRatio = 50/14;    // 50 teeth driven by 14; dont change unless using diff gearbox
-    constexpr double kSecondShiftedGearRatio = 44/20;   // 44 teeth driven by 20; dont change unless using diff gearbox
+    constexpr double kLowGearRatio = 50/14;             // 50 teeth driven by 14; dont change unless using diff gearbox
+    constexpr double kHighGearRatio = 44/20;            // 44 teeth driven by 20; dont change unless using diff gearbox
 
     constexpr double kLastGearRatio = 40/34;            // 40 teeth driven by 34; dont change unless using diff gearbox
 
-    // if shifted at 1 (using first gear)
-    constexpr double kInchesPerTicks = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kFirstShiftedGearRatio * kLastGearRatio);
-    constexpr double kTicksPerInches = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kFirstShiftedGearRatio * kLastGearRatio) / kWheelCirc;
+    // if shifted at 1 (using low gear)
+    constexpr double kInchesPerTicksLowGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
+    constexpr double kTicksPerInchesLowGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio) / kWheelCirc;
 
-    // if shifted at 2 (using second gear)
-    constexpr double kInchesPerTicks = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kSecondShiftedGearRatio * kLastGearRatio);
-    constexpr double kTicksPerInches = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kSecondShiftedGearRatio * kLastGearRatio) / kWheelCirc;
+    // if shifted at 2 (using high gear)
+    constexpr double kInchesPerTicksHighGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
+    constexpr double kTicksPerInchesHighGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio) / kWheelCirc;
 
     // misc stuff
     constexpr auto kTurnTolerance = 5_deg;              // start with 5; aim for 2?
@@ -63,5 +63,5 @@ namespace DriveConstants {
 } // namespace DriveConstants
 
 namespace OperatorConstants {
-    constexpr auto kF310 = 0
+    constexpr auto kF310 = 0;
 } // namespace IO constants
