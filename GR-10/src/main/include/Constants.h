@@ -33,18 +33,33 @@ namespace DriveConstants {
     constexpr auto kMaxSpeed = 3_mps;
     constexpr auto kMaxAcceleration = 3_mps_sq;
 
-    constexpr double kWheelDiameter = 6; //accurate
-    constexpr double kPi = 3.14159265359; //accurate
-    constexpr double kTicksPerRotation = 4096; //accurate
-    constexpr double kWheelCircumference = kWheelDiameter * kPi;
-    constexpr double kFirstStageGearRatio = 0.25; // replace with actual number
-    constexpr double kSecondStageGearRatio = 0.25; //replace with actual number
-    constexpr double kThirdStageGearRatio = 0.25; //replace with actual number
-    constexpr double kInchesPerTicks = kWheelCircumference / (kTicksPerRotation * kFirstStageGearRatio * kSecondStageGearRatio * kThirdStageGearRatio);
-    constexpr double kTicksPerInches = kTicksPerRotation * kFirstStageGearRatio * kSecondStageGearRatio * kThirdStageGearRatio / kWheelCircumference;
-    constexpr auto kTurnTolerance = 5_deg; // replace with actual number
-    constexpr auto kTurnRateTolerance = 10_deg_per_s; // replace with actual number
-    constexpr bool kGyroReversed = false; //replace with actual number
+    constexpr double kWheelDiameter = 6;                // Wheel diameter; dont change unless using different wheels
+    constexpr double kPi = 3.14159265359;               // Value of PI; dont change unless bending rules of mathematics
+    constexpr double kTicksPerRev = 4096;               // Ticks per revolution; dont change
+    constexpr double kWheelCirc = kWheelDiameter * kPi; // Wheel circumference; dont change unless bending rules of mathematics
+
+    // before shifter
+    constexpr double kFirstGearRatio = 30/11;           // 30 teeth driven by 11; dont change unless using diff gearbox
+    constexpr double kSecondGearRatio = 44/30;          // 44 teeth driven by 30; dont change unless using diff gearbox
+
+    // shifter ratios
+    constexpr double kFirstShiftedGearRatio = 50/14;    // 50 teeth driven by 14; dont change unless using diff gearbox
+    constexpr double kSecondShiftedGearRatio = 44/20;   // 44 teeth driven by 20; dont change unless using diff gearbox
+
+    constexpr double kLastGearRatio = 40/34;            // 40 teeth driven by 34; dont change unless using diff gearbox
+
+    // if shifted at 1 (using first gear)
+    constexpr double kInchesPerTicks = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kFirstShiftedGearRatio * kLastGearRatio);
+    constexpr double kTicksPerInches = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kFirstShiftedGearRatio * kLastGearRatio) / kWheelCirc;
+
+    // if shifted at 2 (using second gear)
+    constexpr double kInchesPerTicks = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kSecondShiftedGearRatio * kLastGearRatio);
+    constexpr double kTicksPerInches = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kSecondShiftedGearRatio * kLastGearRatio) / kWheelCirc;
+
+    // misc stuff
+    constexpr auto kTurnTolerance = 5_deg;              // start with 5; aim for 2?
+    constexpr auto kTurnRateTolerance = 10_deg_per_s; 
+    constexpr bool kGyroReversed = false; 
 } // namespace DriveConstants
 
 namespace OperatorConstants {
