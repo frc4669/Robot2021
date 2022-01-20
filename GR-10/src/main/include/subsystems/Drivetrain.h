@@ -23,6 +23,60 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+  /**
+   * Drive robot using arcade controls
+   * 
+   * @param fwd Forward/backward value
+   * @param rot Rotation value
+   */
+  void ArcadeDrive(double fwd, double rot);
+
+  /**
+   * Rotate robot using given angle where positive is clockwise, and vice versa
+   * 
+   * @param angle Angle to rotate to
+   */
+  void RotateByAngle(double angle);
+
+  // Encoder stuff
+  /**
+   * Gets distance of encoder on the left gearbox
+   * 
+   * @return Average of the two encoders in the left gearbox
+   */
+  double GetLeftEncoderDistance();
+
+  /**
+   * Gets distance of encoder on the right gearbox
+   * 
+   * @return Average of the two encoders in the right gearbox
+   */
+  double GetRightEncoderDistance();
+
+  /**
+   * Returns heading of the robot
+   * 
+   * @return in degrees, the heading of the robot from -180 to 180
+   */
+  units::degree_t GetHeading();
+
+  /**
+   * Gets current IMU
+   * 
+   * @return pointer to the IMU object
+   */
+  frc::ADIS16470_IMU& GetIMU();
+
+  /**
+   * Shift to low gear
+   */
+  void ShiftToLowGear();
+
+  /**
+   * Shift to high gear
+   */
+  void ShiftToHighGear();
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
