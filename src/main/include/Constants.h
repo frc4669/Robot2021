@@ -44,14 +44,14 @@ namespace DriveConstants {
     constexpr double kWheelCirc = kWheelDiameter * kPi; // Wheel circumference; dont change unless bending rules of mathematics
 
     // before shifter
-    constexpr double kFirstGearRatio = 30/11;           // 30 teeth driven by 11; dont change unless using diff gearbox
-    constexpr double kSecondGearRatio = 44/30;          // 44 teeth driven by 30; dont change unless using diff gearbox
+    constexpr double kFirstGearRatio = (double) 30/11;  // 30 teeth driven by 11; dont change unless using diff gearbox
+    constexpr double kSecondGearRatio = (double) 44/30; // 44 teeth driven by 30; dont change unless using diff gearbox
 
     // shifter ratios
-    constexpr double kLowGearRatio = 50/14;             // 50 teeth driven by 14; dont change unless using diff gearbox
-    constexpr double kHighGearRatio = 44/20;            // 44 teeth driven by 20; dont change unless using diff gearbox
+    constexpr double kLowGearRatio = (double) 50/14;    // 50 teeth driven by 14; dont change unless using diff gearbox
+    constexpr double kHighGearRatio = (double) 44/20;   // 44 teeth driven by 20; dont change unless using diff gearbox
 
-    constexpr double kLastGearRatio = 40/34;            // 40 teeth driven by 34; dont change unless using diff gearbox
+    constexpr double kLastGearRatio = (double) 40/34;   // 40 teeth driven by 34; dont change unless using diff gearbox
 
     // if shifted at 1 (using low gear)
     constexpr double kInchesPerTicksLowGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
