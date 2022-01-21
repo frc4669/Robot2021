@@ -25,6 +25,9 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+  // Miscellaneous
+  double joyMultiplier = 0.50; // Joystick is too sensitive, multiply the output of the joystick by this value
+
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
