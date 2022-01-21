@@ -32,6 +32,13 @@ class Drivetrain : public frc2::SubsystemBase {
   void ArcadeDrive(double fwd, double rot);
 
   /**
+   * Drive robot given a set distance using encoders
+   * 
+   * @param inches Distance to travel
+   */
+  void DriveForward(double inches);
+
+  /**
    * Rotate robot using given angle where positive is clockwise, and vice versa
    * 
    * @param angle Angle to rotate to
@@ -39,6 +46,21 @@ class Drivetrain : public frc2::SubsystemBase {
   void RotateByAngle(double angle);
 
   // Encoder stuff
+  /**
+   * Reset the left encoder to 0
+   */
+  void ResetLeftEncoder();
+
+  /**
+   * Reset the right encoder to 0
+   */
+  void ResetRightEncoder();
+
+  /**
+   * Reset both encoders to 0
+   */
+  void ResetEncoders();
+
   /**
    * Gets distance of encoder on the left gearbox
    * 
@@ -81,15 +103,17 @@ class Drivetrain : public frc2::SubsystemBase {
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 
-  // motors
+  // Motor controllers
   WPI_TalonFX m_leftMaster{DriveConstants::kLeftMotor1Port};
   WPI_TalonFX m_leftSlave{DriveConstants::kLeftMotor2Port};
   WPI_TalonFX m_rightMaster{DriveConstants::kRightMotor1Port};
   WPI_TalonFX m_rightSlave{DriveConstants::kRightMotor2Port};
 
+  // Link motor controllers together (since we have two on each gearbox)
   frc::MotorControllerGroup m_leftMotors{m_leftMaster, m_leftSlave};
   frc::MotorControllerGroup m_rightMotors{m_rightMaster, m_rightSlave};
 
+  // Robot's main drive object
   frc::DifferentialDrive m_drive{m_leftMotors, m_rightMotors};
 
 
