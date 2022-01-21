@@ -7,10 +7,10 @@ name: GR-10 Build
 on:
   push:
     paths:
-    - 'GR-10/**'
+    - 'src/**'
   pull_request:
     paths:
-    - 'GR-10/**'
+    - 'src/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,8 +29,8 @@ jobs:
 
     # Grant execute permission for gradlew
     - name: Grant execute permission for gradlew
-      run: chmod +x .\GR-10\gradlew
+      run: chmod +x ./gradlew
 
     # Runs a single command using the runners shell
     - name: Compile and run tests on robot code
-      run: .\GR-10\gradlew build
+      run: ./gradlew build
