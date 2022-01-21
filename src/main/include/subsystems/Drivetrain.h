@@ -7,7 +7,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/SpeedController.h>
 #include <frc/drive/DifferentialDrive.h>
-#include <frc/SpeedControllerGroup.h>
+#include <frc/MotorControllerGroup.h>
 
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
@@ -82,10 +82,10 @@ class Drivetrain : public frc2::SubsystemBase {
   // declared private and exposed only through public methods.
 
   // motors
-  WPI_TalonFX m_leftMaster  = {DriveConstants::kLeftMotor1Port};
-  WPI_TalonFX m_leftSlave   = {DriveConstants::kLeftMotor2Port};
-  WPI_TalonFX m_rightMaster = {DriveConstants::kRightMotor1Port};
-  WPI_TalonFX m_rightSlave  = {DriveConstants::kRightMotor2Port};
+  WPI_TalonFX m_leftMaster{DriveConstants::kLeftMotor1Port};
+  WPI_TalonFX m_leftSlave{DriveConstants::kLeftMotor2Port};
+  WPI_TalonFX m_rightMaster{DriveConstants::kRightMotor1Port};
+  WPI_TalonFX m_rightSlave{DriveConstants::kRightMotor2Port};
 
   frc::SpeedControllerGroup m_leftMotors{m_leftMaster, m_leftSlave};
   frc::SpeedControllerGroup m_rightMotors{m_rightMaster, m_rightSlave};
