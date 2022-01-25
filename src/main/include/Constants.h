@@ -23,11 +23,11 @@
  */
 
 namespace DriveConstants {
-    constexpr int kLeftMotor1Port = 5;
-    constexpr int kLeftMotor2Port = 1;
+    constexpr int kLeftMotor1Port = 14;
+    constexpr int kLeftMotor2Port = 11;
 
-    constexpr int kRightMotor1Port = 8;
-    constexpr int kRightMotor2Port = 3;
+    constexpr int kRightMotor1Port = 12;
+    constexpr int kRightMotor2Port = 13;
 
     constexpr auto ks = 1_V;
     constexpr auto kv = 0.8_V * 1_s / 1_m;
