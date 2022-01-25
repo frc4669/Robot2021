@@ -14,7 +14,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Setup F310 drive bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
-      {  m_drivetrain.ArcadeDrive(-f310.getLeftY()*joyMultiplier, f310.getRightX()*joyMultiplier); },
+      {  m_drivetrain.ArcadeDrive(f310.getRightX()*joyMultiplier, -f310.getLeftY()*joyMultiplier); },
       {  &m_drivetrain  }
   ));
 }
