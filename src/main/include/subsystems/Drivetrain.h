@@ -118,7 +118,7 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::DifferentialDrive m_drive{m_leftMotors, m_rightMotors};
 
   // Shifter for gearboxes (solenoid)
-  frc::DoubleSolenoid m_shifter{1};
+  // frc::DoubleSolenoid m_shifter{1};
   bool shiftedToHighGear = false;
 
 
