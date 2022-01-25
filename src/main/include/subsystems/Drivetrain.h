@@ -99,14 +99,9 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::ADIS16470_IMU& GetIMU();
 
   /**
-   * Shift to low gear
+   * Shifts the gearbox solenoid to the other gear
    */
-  void ShiftToLowGear();
-
-  /**
-   * Shift to high gear
-   */
-  void ShiftToHighGear();
+  void ShiftGear();
 
   /**
    * Returns whether the robot is in high gear
@@ -133,9 +128,8 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::DifferentialDrive m_drive{m_leftMotors, m_rightMotors};
 
   // Shifter for gearboxes (solenoid)
-  // frc::DoubleSolenoid m_shifter{1};
+  frc::DoubleSolenoid m_shifter{frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel};
   bool shiftedToHighGear = false;
-
 
   frc::ADIS16470_IMU m_imu{ };
 };

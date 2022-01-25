@@ -84,14 +84,14 @@ frc::ADIS16470_IMU& Drivetrain::GetIMU() {
     return m_imu;
 }
 
-void Drivetrain::ShiftToLowGear() {
-    shiftedToHighGear = false;
-    // TODO: Add solenoid code once installed on drivetrain
-}
-
-void Drivetrain::ShiftToHighGear() {
-    shiftedToHighGear = true;
-    // TODO: Add solenoid code once installed on drivetrain
+void Drivetrain::ShiftGear() {
+    if(IsShiftedToHighGear()) { // check if in high gear
+        m_shifter.Set(frc::DoubleSolenoid::kReverse); // shift to low gear
+        shiftedToHighGear = false;
+    } else {
+        m_shifter.Set(frc::DoubleSolenoid::kForward); // shift to high gear
+        shiftedToHighGear = true;
+    }
 }
 
 bool Drivetrain::IsShiftedToHighGear() {
