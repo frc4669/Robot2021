@@ -33,6 +33,14 @@ class Drivetrain : public frc2::SubsystemBase {
   void ArcadeDrive(double fwd, double rot);
 
   /**
+   * Get ticks needed to travel given distance in inches
+   * 
+   * @param inches Distance in inches
+   * @return Ticks needed to travel given distance
+   */
+  double GetTicksToTravel(double inches);
+
+  /**
    * Drive robot given a set distance using encoders
    * 
    * @param inches Distance to travel
@@ -99,6 +107,13 @@ class Drivetrain : public frc2::SubsystemBase {
    * Shift to high gear
    */
   void ShiftToHighGear();
+
+  /**
+   * Returns whether the robot is in high gear
+   * 
+   * @return true if the robot is in high gear, false otherwise
+   */
+  bool IsShiftedToHighGear();
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

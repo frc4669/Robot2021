@@ -12,7 +12,7 @@ DriveForward::DriveForward(Drivetrain* drive, double inches) {
 
 // Called when the command is initially scheduled.
 void DriveForward::Initialize() {
-  drivetrain->ResetEncoders();
+  drivetrain->ResetEncoders(); // Reset encoders so we don't finish early
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -25,5 +25,6 @@ void DriveForward::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool DriveForward::IsFinished() {
-  return false;
+  return abs(drivetrain->GetLeftEncoderDistance() >= drivetrain->GetTicksToTravel(targetDistance) ||
+             drivetrain->GetRightEncoderDistance() >= drivetrain->GetTicksToTravel(targetDistance));
 }

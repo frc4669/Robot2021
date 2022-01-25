@@ -30,11 +30,21 @@ void Drivetrain::ArcadeDrive(double fwd, double rot) {
     m_drive.ArcadeDrive(fwd, rot);
 }
 
-void Drivetrain::DriveForward(double inches) {
-    m_leftMaster.Set(ControlMode::MotionMagic, inches*DriveConstants::kTicksPerInchesLowGear);
+double Drivetrain::GetTicksToTravel(double inches) {
+    if (shiftedToHighGear) {
+        return (inches * DriveConstants::kTicksPerInchesHighGear);
+    } else {
+        return (inches * DriveConstants::kTicksPerInchesLowGear);
+    }
+}
+
+void Drivetrain::DriveForward(double inches) {\
+    double ticksToTravel = GetTicksToTravel(inches);
+
+    m_leftMaster.Set(ControlMode::MotionMagic, ticksToTravel);
     m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
 
-    m_rightMaster.Set(ControlMode::MotionMagic, inches*DriveConstants::kTicksPerInchesLowGear);
+    m_rightMaster.Set(ControlMode::MotionMagic, ticksToTravel);
     m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
 }
 
@@ -82,4 +92,8 @@ void Drivetrain::ShiftToLowGear() {
 void Drivetrain::ShiftToHighGear() {
     shiftedToHighGear = true;
     // TODO: Add solenoid code once installed on drivetrain
+}
+
+bool Drivetrain::IsShiftedToHighGear() {
+    return shiftedToHighGear;
 }
