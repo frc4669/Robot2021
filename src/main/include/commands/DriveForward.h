@@ -7,6 +7,8 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+#include "subsystems/Drivetrain.h"
+
 /**
  * An example command.
  *
@@ -17,7 +19,7 @@
 class DriveForward
     : public frc2::CommandHelper<frc2::CommandBase, DriveForward> {
  public:
-  DriveForward();
+  DriveForward(Drivetrain* drive, double inches);
 
   void Initialize() override;
 
@@ -26,4 +28,8 @@ class DriveForward
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
+ private:
+  Drivetrain* drivetrain;
+  double targetDistance;
 };

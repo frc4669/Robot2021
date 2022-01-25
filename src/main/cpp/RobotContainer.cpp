@@ -5,6 +5,8 @@
 #include "RobotContainer.h"
 #include <frc2/command/RunCommand.h>
 
+#include <commands/DriveForward.h>
+
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
 
@@ -14,13 +16,13 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Setup F310 drive bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
-      {  m_drivetrain.ArcadeDrive(f310.getRightX()*joyMultiplier, -f310.getLeftY()*joyMultiplier); },
+      {  m_drivetrain.ArcadeDrive(-f310.getRightX()*joyMultiplier, -f310.getLeftY()*joyMultiplier); },
       {  &m_drivetrain  }
   ));
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  // Configure your button bindings here
+  f310.greenButtonObject.WhenPressed(DriveForward(&m_drivetrain, 12.0));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

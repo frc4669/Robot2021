@@ -11,6 +11,7 @@
 
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
+#include <frc/DoubleSolenoid.h> // gear shifter solenoid
 
 #include <Constants.h>
 
@@ -115,6 +116,9 @@ class Drivetrain : public frc2::SubsystemBase {
 
   // Robot's main drive object
   frc::DifferentialDrive m_drive{m_leftMotors, m_rightMotors};
+
+  // Shifter for gearboxes (solenoid)
+  // frc::DoubleSolenoid m_shifter{0, 4, 5};
 
 
 

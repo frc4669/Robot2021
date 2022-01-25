@@ -4,15 +4,21 @@
 
 #include "commands/DriveForward.h"
 
-DriveForward::DriveForward() {
-  // Use addRequirements() here to declare subsystem dependencies.
+DriveForward::DriveForward(Drivetrain* drive, double inches) {
+  AddRequirements({drive});
+  drivetrain = drive;
+  targetDistance = inches;
 }
 
 // Called when the command is initially scheduled.
-void DriveForward::Initialize() {}
+void DriveForward::Initialize() {
+  drivetrain->ResetEncoders();
+}
 
 // Called repeatedly when this Command is scheduled to run
-void DriveForward::Execute() {}
+void DriveForward::Execute() {
+  drivetrain->DriveForward(targetDistance);
+}
 
 // Called once the command ends or is interrupted.
 void DriveForward::End(bool interrupted) {}

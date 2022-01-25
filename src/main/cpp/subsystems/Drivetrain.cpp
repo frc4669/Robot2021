@@ -31,7 +31,11 @@ void Drivetrain::ArcadeDrive(double fwd, double rot) {
 }
 
 void Drivetrain::DriveForward(double inches) {
-    // TODO: Drive forward using encoders
+    m_leftMaster.Set(ControlMode::MotionMagic, inches*DriveConstants::kTicksPerInchesLowGear);
+    m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
+
+    m_rightMaster.Set(ControlMode::MotionMagic, inches*DriveConstants::kTicksPerInchesLowGear);
+    m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
 }
 
 void Drivetrain::RotateByAngle(double angle) {
