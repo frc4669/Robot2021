@@ -75,9 +75,11 @@ frc::ADIS16470_IMU& Drivetrain::GetIMU() {
 }
 
 void Drivetrain::ShiftToLowGear() {
+    shiftedToHighGear = false;
     // TODO: Add solenoid code once installed on drivetrain
 }
 
 void Drivetrain::ShiftToHighGear() {
+    shiftedToHighGear = true;
     // TODO: Add solenoid code once installed on drivetrain
 }

@@ -19,6 +19,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
       {  m_drivetrain.ArcadeDrive(-f310.getRightX()*joyMultiplier, -f310.getLeftY()*joyMultiplier); },
       {  &m_drivetrain  }
   ));
+
+  m_drivetrain.ResetEncoders();
 }
 
 void RobotContainer::ConfigureButtonBindings() {
