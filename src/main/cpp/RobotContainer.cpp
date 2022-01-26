@@ -16,7 +16,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Setup F310 drive bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
-      {  m_drivetrain.ArcadeDrive(-f310.getRightX()*joyMultiplier, -f310.getLeftY()*joyMultiplier); },
+      {  m_drivetrain.ArcadeDrive(-f310.getLeftY()*joyMultiplier, -f310.getRightX()*joyMultiplier); },
       {  &m_drivetrain  }
   ));
 
@@ -24,10 +24,18 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  f310.greenButtonObject.WhenPressed(DriveForward(&m_drivetrain, 12.0));
+  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 1.0) );
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return &m_autonomousCommand;
+}
+
+double RobotContainer::PassThrough(bool left) {
+  if(left) {
+    return m_drivetrain.GetLeftEncoderDistance();
+  } else {
+    return m_drivetrain.GetRightEncoderDistance();
+  }
 }

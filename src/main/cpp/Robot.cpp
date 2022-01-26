@@ -58,7 +58,10 @@ void Robot::TeleopInit() {
 /**
  * This function is called periodically during operator control.
  */
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  frc::SmartDashboard::PutNumber("Encoder left", m_container.PassThrough(true));
+  frc::SmartDashboard::PutNumber("Encoder right", m_container.PassThrough(false));
+}
 
 /**
  * This function is called periodically during test mode.

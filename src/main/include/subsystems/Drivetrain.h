@@ -132,4 +132,11 @@ class Drivetrain : public frc2::SubsystemBase {
   bool shiftedToHighGear = false;
 
   frc::ADIS16470_IMU m_imu{ };
+
+  /*
+   * Configure motor to settings.
+   * 
+   * @param Motor Reference to the motor object
+   */
+  void ConfigMotor(WPI_TalonFX &motor, bool inverted);
 };

@@ -9,11 +9,11 @@ Drivetrain::Drivetrain() {
     m_drive.SetSafetyEnabled(false);
 
     // Configure the drivetrain motors (for now)
-    m_leftMaster.ConfigFactoryDefault();
-    m_leftSlave.Follow(m_leftMaster);
+    ConfigMotor(m_leftMaster, true);
+    ConfigMotor(m_leftSlave, true);
 
-    m_rightMaster.ConfigFactoryDefault();
-    m_rightSlave.Follow(m_rightMaster);
+    ConfigMotor(m_rightMaster, false);
+    ConfigMotor(m_rightSlave, false);
 
     // Reset encoder values to 0 (this also syncs the motor controllers)
     ResetEncoders();
@@ -38,13 +38,13 @@ double Drivetrain::GetTicksToTravel(double inches) {
     }
 }
 
-void Drivetrain::DriveForward(double inches) {\
+void Drivetrain::DriveForward(double inches) {
     double ticksToTravel = GetTicksToTravel(inches);
 
-    m_leftMaster.Set(ControlMode::MotionMagic, ticksToTravel);
+    m_leftMaster.Set(ControlMode::MotionMagic, 4096);
     m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
 
-    m_rightMaster.Set(ControlMode::MotionMagic, ticksToTravel);
+    m_rightMaster.Set(ControlMode::MotionMagic, 4096);
     m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
 }
 
@@ -96,4 +96,22 @@ void Drivetrain::ShiftGear() {
 
 bool Drivetrain::IsShiftedToHighGear() {
     return shiftedToHighGear;
+}
+
+void Drivetrain::ConfigMotor(WPI_TalonFX &motor, bool inverted) {
+    motor.Config_kF(0, 1);
+    motor.Config_kP(0, 0);
+    motor.Config_kI(0, 0);
+    motor.Config_kD(0, 0);
+    motor.ConfigMotionCruiseVelocity(20000);
+    motor.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 25, 25, 0.5));
+    motor.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 25, 25, 0.5));
+    motor.ConfigOpenloopRamp(0.8);
+    motor.ConfigClosedloopRamp(0);
+    motor.ConfigMotionAcceleration(8000);
+    motor.SetNeutralMode(NeutralMode::Brake);
+    motor.SetSafetyEnabled(false);
+    //motor.SetExpiration(0.1);
+
+    motor.SetInverted(inverted);
 }
