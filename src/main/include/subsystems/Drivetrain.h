@@ -133,10 +133,11 @@ class Drivetrain : public frc2::SubsystemBase {
 
   frc::ADIS16470_IMU m_imu{ };
 
-  /*
-   * Configure motor to settings.
+  /**
+   * Configure motor to desired settings
    * 
-   * @param Motor Reference to the motor object
+   * @param motor Motor to configure
+   * @param invert Whether to invert the motor
    */
-  void ConfigMotor(WPI_TalonFX &motor, bool inverted);
+  void ConfigureMotor(WPI_TalonFX &motor, bool inverted);
 };

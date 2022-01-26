@@ -9,11 +9,11 @@ Drivetrain::Drivetrain() {
     m_drive.SetSafetyEnabled(false);
 
     // Configure the drivetrain motors (for now)
-    ConfigMotor(m_leftMaster, true);
-    ConfigMotor(m_leftSlave, true);
+    ConfigureMotor(m_leftMaster, true);
+    ConfigureMotor(m_leftSlave, true);
 
-    ConfigMotor(m_rightMaster, false);
-    ConfigMotor(m_rightSlave, false);
+    ConfigureMotor(m_rightMaster, false);
+    ConfigureMotor(m_rightSlave, false);
 
     // Reset encoder values to 0 (this also syncs the motor controllers)
     ResetEncoders();
@@ -98,20 +98,34 @@ bool Drivetrain::IsShiftedToHighGear() {
     return shiftedToHighGear;
 }
 
-void Drivetrain::ConfigMotor(WPI_TalonFX &motor, bool inverted) {
-    motor.Config_kF(0, 1);
-    motor.Config_kP(0, 0);
-    motor.Config_kI(0, 0);
-    motor.Config_kD(0, 0);
+void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
+    // set the max velocity and acceleration for motion magic
     motor.ConfigMotionCruiseVelocity(20000);
+    motor.ConfigMotionAcceleration(8000);
+
+    // set the current limit for the supply/output current
     motor.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 25, 25, 0.5));
     motor.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 25, 25, 0.5));
+
+    // time it takes for the motor to go from 0 to full power (in seconds) in an open/closed loop
     motor.ConfigOpenloopRamp(0.8);
     motor.ConfigClosedloopRamp(0);
-    motor.ConfigMotionAcceleration(8000);
-    motor.SetNeutralMode(NeutralMode::Brake);
-    motor.SetSafetyEnabled(false);
-    //motor.SetExpiration(0.1);
 
+    // when controller is neutral, set motor to break
+    motor.SetNeutralMode(NeutralMode::Brake);
+
+    // disable motor safety
+    motor.SetSafetyEnabled(false);
+
+    // motor set experation time
+    motor.SetExpiration(100_ms);
+
+    // invert the motor if necessary
     motor.SetInverted(inverted);
+
+    // Motor PID values (for now)
+    motor.Config_kP(0, 0.1); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
+    motor.Config_kI(0, 0.0); // kI, the integral constant (accumulates the area between the setpoint and output plots over time)
+    motor.Config_kD(0, 0.0); // kD, the derivative constant (drives the velocity error to zero)
+    motor.Config_kD(0, 0.0); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
