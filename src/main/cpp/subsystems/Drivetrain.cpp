@@ -127,5 +127,5 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
     motor.Config_kP(0, 0.1); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
     motor.Config_kI(0, 0.0); // kI, the integral constant (accumulates the area between the setpoint and output plots over time)
     motor.Config_kD(0, 0.0); // kD, the derivative constant (drives the velocity error to zero)
-    motor.Config_kD(0, 0.0); // kF, the feed forward constant (how much the output is affected by the setpoint)
+    motor.Config_kF(0, 0.0); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
