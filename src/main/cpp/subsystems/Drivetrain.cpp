@@ -49,12 +49,12 @@ double Drivetrain::GetTicksToTravel(double inches) {
     }
 }
 
-void Drivetrain::DriveForward(double inches) {
+void Drivetrain::DriveForward(double inches, double velocity = 40000) {
     // set velocity using motion magic
-    m_leftMaster.Set(ControlMode::MotionMagic, 40000);
+    m_leftMaster.Set(ControlMode::MotionMagic, velocity);
     m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
 
-    m_rightMaster.Set(ControlMode::MotionMagic, 40000);
+    m_rightMaster.Set(ControlMode::MotionMagic, velocity);
     m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
 }
 

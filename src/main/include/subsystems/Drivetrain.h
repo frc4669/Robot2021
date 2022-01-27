@@ -45,8 +45,9 @@ public:
    * Drive robot given a set distance using encoders
    *
    * @param inches Distance to travel
+   * @param velocity Velocity to travel at (by default 40000)
    */
-  void DriveForward(double inches);
+  void DriveForward(double inches, double velocity);
 
   /**
    * Rotate robot using given angle where positive is clockwise, and vice versa
@@ -130,7 +131,7 @@ private:
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel};
-  bool shiftedToHighGear = true;
+  bool shiftedToHighGear = false; // starting in low gear (since we shift the gear into low gear when we start)
 
   frc::ADIS16470_IMU m_imu{};
 

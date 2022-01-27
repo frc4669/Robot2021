@@ -17,7 +17,7 @@ void DriveForward::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DriveForward::Execute() {
-  drivetrain->DriveForward(targetDistance);
+  drivetrain->DriveForward(targetDistance, 40000);
 }
 
 // Called once the command ends or is interrupted.
@@ -28,6 +28,5 @@ bool DriveForward::IsFinished() {
   double expectedTicksTraveled = drivetrain->GetTicksToTravel(targetDistance); // Calculate how many ticks we need to travel
 
   // check if we've traveled the expected distance
-  return abs(drivetrain->GetLeftEncoderDistance() >= expectedTicksTraveled ||
-             drivetrain->GetRightEncoderDistance() >= expectedTicksTraveled);
+  return drivetrain->GetLeftEncoderDistance() >= expectedTicksTraveled || drivetrain->GetRightEncoderDistance() >= expectedTicksTraveled;
 }
