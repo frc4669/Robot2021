@@ -25,6 +25,9 @@ void DriveForward::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool DriveForward::IsFinished() {
-  return abs(drivetrain->GetLeftEncoderDistance() >= drivetrain->GetTicksToTravel(targetDistance) ||
-             drivetrain->GetRightEncoderDistance() >= drivetrain->GetTicksToTravel(targetDistance));
+  double expectedTicksTraveled = drivetrain->GetTicksToTravel(targetDistance); // Calculate how many ticks we need to travel
+
+  // check if we've traveled the expected distance
+  return abs(drivetrain->GetLeftEncoderDistance() >= expectedTicksTraveled ||
+             drivetrain->GetRightEncoderDistance() >= expectedTicksTraveled);
 }

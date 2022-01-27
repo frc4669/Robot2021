@@ -18,6 +18,9 @@ Drivetrain::Drivetrain() {
     // Reset encoder values to 0 (this also syncs the motor controllers)
     ResetEncoders();
 
+    // Shift into low gear by default (because we don't know if the last session was left in high gear)
+    m_shifter.Set(frc::DoubleSolenoid::kReverse);
+
     // TODO: SmartDashboard stuff
 }
 
@@ -39,12 +42,11 @@ double Drivetrain::GetTicksToTravel(double inches) {
 }
 
 void Drivetrain::DriveForward(double inches) {
-    double ticksToTravel = GetTicksToTravel(inches);
-
-    m_leftMaster.Set(ControlMode::MotionMagic, ticksToTravel); // -45339
+    // set velocity using motion magic
+    m_leftMaster.Set(ControlMode::MotionMagic, 40000);
     m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
 
-    m_rightMaster.Set(ControlMode::MotionMagic, ticksToTravel); // 43608
+    m_rightMaster.Set(ControlMode::MotionMagic, 40000);
     m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
 }
 
