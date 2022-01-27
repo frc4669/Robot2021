@@ -21,11 +21,8 @@ Drivetrain::Drivetrain() {
 
     // Shift into low gear by default (because we don't know if the last session was left in high gear)
     m_shifter.Set(frc::DoubleSolenoid::kReverse);
-}
 
-// This method will be called once per scheduler run
-void Drivetrain::Periodic() {
-    frc::ShuffleboardTab& drivetrainTab = frc::Shuffleboard::GetTab("Drivetrain");
+    // Create our values on shuffleboard
     frc::Shuffleboard::SelectTab("Drivetrain"); // Select the drivetrain tab
 
     drivetrainTab.Add("Left Encoder", m_leftMaster.GetSelectedSensorPosition());
@@ -35,6 +32,11 @@ void Drivetrain::Periodic() {
     drivetrainTab.Add("Right Velocity", m_rightMaster.GetSelectedSensorVelocity());
 
     drivetrainTab.Add("Gear Shifted to high", IsShiftedToHighGear());
+}
+
+// This method will be called once per scheduler run
+void Drivetrain::Periodic() {
+    frc::Shuffleboard::Update();
 }
 
 void Drivetrain::ArcadeDrive(double fwd, double rot) {
@@ -77,7 +79,7 @@ void Drivetrain::ResetEncoders() {
 }
 
 double Drivetrain::GetLeftEncoderDistance() {
-    return m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition();
+    return -m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition();
 }
 
 double Drivetrain::GetRightEncoderDistance() {
@@ -134,7 +136,7 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
     motor.SetInverted(inverted);
 
     // Motor PID values (for now)
-    motor.Config_kP(0, 0.1); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
+    motor.Config_kP(0, 0.005); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
     motor.Config_kI(0, 0.0); // kI, the integral constant (accumulates the area between the setpoint and output plots over time)
     motor.Config_kD(0, 0.0); // kD, the derivative constant (drives the velocity error to zero)
     motor.Config_kF(0, 0.0); // kF, the feed forward constant (how much the output is affected by the setpoint)
