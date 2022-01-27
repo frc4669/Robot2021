@@ -6,6 +6,7 @@
 #include <frc2/command/RunCommand.h>
 
 #include <commands/DriveForward.h>
+#include <commands/Shift.h>
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -16,7 +17,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Setup F310 drive bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
-      {  m_drivetrain.ArcadeDrive(-f310.getLeftY()*joyMultiplier, -f310.getRightX()*joyMultiplier); },
+      {  m_drivetrain.ArcadeDrive(f310.getLeftY()*joyMultiplier, -f310.getRightX()*joyMultiplier); },
       {  &m_drivetrain  }
   ));
 
@@ -24,7 +25,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 1.0) );
+  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 12.0) );
+  f310.leftShoulderButtonObject.WhenPressed( Shift(&m_drivetrain) );
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
@@ -38,4 +40,8 @@ double RobotContainer::PassThrough(bool left) {
   } else {
     return m_drivetrain.GetRightEncoderDistance();
   }
+}
+
+bool RobotContainer::Shifted() {
+  return m_drivetrain.IsShiftedToHighGear();
 }

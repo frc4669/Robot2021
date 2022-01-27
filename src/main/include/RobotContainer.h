@@ -25,6 +25,7 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
   double PassThrough(bool left);
+  bool Shifted();
 
  private:
   // Miscellaneous

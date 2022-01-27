@@ -61,6 +61,8 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
   frc::SmartDashboard::PutNumber("Encoder left", m_container.PassThrough(true));
   frc::SmartDashboard::PutNumber("Encoder right", m_container.PassThrough(false));
+
+  frc::SmartDashboard::PutBoolean("Is shifted to high gear", m_container.Shifted());
 }
 
 /**

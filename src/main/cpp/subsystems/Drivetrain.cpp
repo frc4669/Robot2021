@@ -41,10 +41,10 @@ double Drivetrain::GetTicksToTravel(double inches) {
 void Drivetrain::DriveForward(double inches) {
     double ticksToTravel = GetTicksToTravel(inches);
 
-    m_leftMaster.Set(ControlMode::MotionMagic, 4096);
+    m_leftMaster.Set(ControlMode::MotionMagic, ticksToTravel); // -45339
     m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
 
-    m_rightMaster.Set(ControlMode::MotionMagic, 4096);
+    m_rightMaster.Set(ControlMode::MotionMagic, ticksToTravel); // 43608
     m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
 }
 

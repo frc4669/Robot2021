@@ -15,8 +15,9 @@
 
 #include <Constants.h>
 
-class Drivetrain : public frc2::SubsystemBase {
- public:
+class Drivetrain : public frc2::SubsystemBase
+{
+public:
   Drivetrain();
 
   /**
@@ -26,7 +27,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   /**
    * Drive robot using arcade controls
-   * 
+   *
    * @param fwd Forward/backward value
    * @param rot Rotation value
    */
@@ -34,7 +35,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   /**
    * Get ticks needed to travel given distance in inches
-   * 
+   *
    * @param inches Distance in inches
    * @return Ticks needed to travel given distance
    */
@@ -42,14 +43,14 @@ class Drivetrain : public frc2::SubsystemBase {
 
   /**
    * Drive robot given a set distance using encoders
-   * 
+   *
    * @param inches Distance to travel
    */
   void DriveForward(double inches);
 
   /**
    * Rotate robot using given angle where positive is clockwise, and vice versa
-   * 
+   *
    * @param angle Angle to rotate to
    */
   void RotateByAngle(double angle);
@@ -72,31 +73,31 @@ class Drivetrain : public frc2::SubsystemBase {
 
   /**
    * Gets distance of encoder on the left gearbox
-   * 
+   *
    * @return Average of the two encoders in the left gearbox
    */
   double GetLeftEncoderDistance();
 
   /**
    * Gets distance of encoder on the right gearbox
-   * 
+   *
    * @return Average of the two encoders in the right gearbox
    */
   double GetRightEncoderDistance();
 
   /**
    * Returns heading of the robot
-   * 
+   *
    * @return in degrees, the heading of the robot from -180 to 180
    */
   units::degree_t GetHeading();
 
   /**
    * Gets current IMU
-   * 
+   *
    * @return pointer to the IMU object
    */
-  frc::ADIS16470_IMU& GetIMU();
+  frc::ADIS16470_IMU &GetIMU();
 
   /**
    * Shifts the gearbox solenoid to the other gear
@@ -105,12 +106,12 @@ class Drivetrain : public frc2::SubsystemBase {
 
   /**
    * Returns whether the robot is in high gear
-   * 
-   * @return true if the robot is in high gear, false otherwise
+   *
+   * @return true if the robot is in high gear, true otherwise
    */
   bool IsShiftedToHighGear();
 
- private:
+private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 
@@ -129,13 +130,13 @@ class Drivetrain : public frc2::SubsystemBase {
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel};
-  bool shiftedToHighGear = false;
+  bool shiftedToHighGear = true;
 
-  frc::ADIS16470_IMU m_imu{ };
+  frc::ADIS16470_IMU m_imu{};
 
   /**
    * Configure motor to desired settings
-   * 
+   *
    * @param motor Motor to configure
    * @param invert Whether to invert the motor
    */
