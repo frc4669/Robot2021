@@ -33,15 +33,3 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return &m_autonomousCommand;
 }
-
-double RobotContainer::PassThrough(bool left) {
-  if(left) {
-    return m_drivetrain.GetLeftEncoderDistance();
-  } else {
-    return m_drivetrain.GetRightEncoderDistance();
-  }
-}
-
-bool RobotContainer::Shifted() {
-  return m_drivetrain.IsShiftedToHighGear();
-}

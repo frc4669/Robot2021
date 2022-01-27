@@ -4,7 +4,6 @@
 
 #include "Robot.h"
 
-#include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
 
 void Robot::RobotInit() {}
@@ -58,12 +57,7 @@ void Robot::TeleopInit() {
 /**
  * This function is called periodically during operator control.
  */
-void Robot::TeleopPeriodic() {
-  frc::SmartDashboard::PutNumber("Encoder left", m_container.PassThrough(true));
-  frc::SmartDashboard::PutNumber("Encoder right", m_container.PassThrough(false));
-
-  frc::SmartDashboard::PutBoolean("Is shifted to high gear", m_container.Shifted());
-}
+void Robot::TeleopPeriodic() {}
 
 /**
  * This function is called periodically during test mode.

@@ -24,9 +24,6 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
 
-  double PassThrough(bool left);
-  bool Shifted();
-
  private:
   // Miscellaneous
   double joyMultiplier = 0.50; // Joystick is too sensitive, multiply the output of the joystick by this value
