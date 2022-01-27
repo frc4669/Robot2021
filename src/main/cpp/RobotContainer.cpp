@@ -7,6 +7,7 @@
 
 #include <commands/DriveForward.h>
 #include <commands/Shift.h>
+#include <commands/RunShooter.h>
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -25,8 +26,10 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 12.0) );
-  f310.leftShoulderButtonObject.WhenPressed( Shift(&m_drivetrain) );
+  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 12.0) );  // Drive forward 12 inches when green button is pressed
+  f310.leftShoulderButtonObject.WhenPressed( Shift(&m_drivetrain) );        // Shift when left shoulder is pressed
+
+  f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, 1.0) );  // Run shooter at 1.0 when right shoulder is pressed
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
