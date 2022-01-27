@@ -70,6 +70,11 @@ namespace DriveConstants {
     constexpr bool kGyroReversed = false; 
 } // namespace DriveConstants
 
+namespace ShooterConstants {
+    constexpr int kLauncherMasterPort = 8;
+    constexpr int kLauncherSlavePort = 9;
+} // namespace ShooterConstants
+
 namespace OperatorConstants {
     constexpr auto kF310 = 0;
 } // namespace IO constants

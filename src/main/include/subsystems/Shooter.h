@@ -7,6 +7,8 @@
 #include <frc2/command/SubsystemBase.h>
 // TODO: Add REV robotics vendor library and include here
 
+#include <Constants.h>
+
 class Shooter : public frc2::SubsystemBase {
  public:
   Shooter();
