@@ -8,7 +8,10 @@
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
+
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Shooter.h"
+
 #include "F310.h"
 
 /**
@@ -36,6 +39,7 @@ class RobotContainer {
 
   // Subsystems
   Drivetrain m_drivetrain;
+  Shooter m_shooter;
   
   F310 f310;
 };
