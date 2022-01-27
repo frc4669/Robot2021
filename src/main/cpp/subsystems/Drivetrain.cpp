@@ -25,13 +25,16 @@ Drivetrain::Drivetrain() {
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {
-    frc::Shuffleboard::GetTab("Drivetrain").Add("Left Encoder", m_leftMaster.GetSelectedSensorPosition());
-    frc::Shuffleboard::GetTab("Drivetrain").Add("Right Encoder", m_rightMaster.GetSelectedSensorPosition());
+    frc::ShuffleboardTab& drivetrainTab = frc::Shuffleboard::GetTab("Drivetrain");
+    frc::Shuffleboard::SelectTab("Drivetrain"); // Select the drivetrain tab
 
-    frc::Shuffleboard::GetTab("Drivetrain").Add("Left Velocity", m_leftMaster.GetSelectedSensorVelocity());
-    frc::Shuffleboard::GetTab("Drivetrain").Add("Right Velocity", m_rightMaster.GetSelectedSensorVelocity());
+    drivetrainTab.Add("Left Encoder", m_leftMaster.GetSelectedSensorPosition());
+    drivetrainTab.Add("Right Encoder", m_rightMaster.GetSelectedSensorPosition());
 
-    frc::Shuffleboard::GetTab("Drivetrain").Add("Gear Shifted to high", IsShiftedToHighGear());
+    drivetrainTab.Add("Left Velocity", m_leftMaster.GetSelectedSensorVelocity());
+    drivetrainTab.Add("Right Velocity", m_rightMaster.GetSelectedSensorVelocity());
+
+    drivetrainTab.Add("Gear Shifted to high", IsShiftedToHighGear());
 }
 
 void Drivetrain::ArcadeDrive(double fwd, double rot) {
