@@ -6,9 +6,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-
-#include "subsystems/Drivetrain.h"
+#include <subsystems/Drivetrain.h>
 
 /**
  * An example command.
@@ -20,6 +18,12 @@
 class DriveForward
     : public frc2::CommandHelper<frc2::CommandBase, DriveForward> {
  public:
+  /**
+   * Creates a new DriveForward command.
+   *
+   * @param drive a Drivetrain object
+   * @param distance the distance to drive in inches
+   */
   DriveForward(Drivetrain* drive, double inches);
 
   void Initialize() override;

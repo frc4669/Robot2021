@@ -18,7 +18,12 @@
 class Shift
     : public frc2::CommandHelper<frc2::CommandBase, Shift> {
  public:
-  Shift(Drivetrain* drivetrain);
+  /**
+   * Creates a new Shift.
+   *
+   * @param drive a Drivetrain object
+   */
+  Shift(Drivetrain* drive);
 
   void Initialize() override;
 
@@ -29,5 +34,5 @@ class Shift
   bool IsFinished() override;
 
   private:
-  Drivetrain* drive;
+  Drivetrain* drivetrain;
 };

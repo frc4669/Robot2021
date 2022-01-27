@@ -5,7 +5,7 @@
 #include "commands/DriveForward.h"
 
 DriveForward::DriveForward(Drivetrain* drive, double inches) {
-  AddRequirements({drive});
+  AddRequirements({ drive });
   drivetrain = drive;
   targetDistance = inches;
 }

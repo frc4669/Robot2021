@@ -4,25 +4,24 @@
 
 #include "commands/Shift.h"
 
-Shift::Shift(Drivetrain* drivetrain) {
+Shift::Shift(Drivetrain* drive) {
   // Use AddRequirements() here to declare subsystem dependencies.
-  AddRequirements({ drivetrain });
-  drive = drivetrain;
+  AddRequirements({ drive });
+  drivetrain = drive;
 }
 
 // Called when the command is initially scheduled.
 void Shift::Initialize() {
-  drive->ShiftGear();
+  drivetrain->ShiftGear();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Shift::Execute() {
-}
+void Shift::Execute() {}
 
 // Called once the command ends or is interrupted.
 void Shift::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool Shift::IsFinished() {
-  return true;
+  return true;  // finish instantly after Initialize() is called
 }
