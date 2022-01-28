@@ -4,6 +4,8 @@
 
 #include "commands/DriveForward.h"
 
+#include <frc/smartdashboard/SmartDashboard.h> // for debugging
+
 DriveForward::DriveForward(Drivetrain* drive, double inches) {
   AddRequirements({ drive });
   drivetrain = drive;
@@ -13,6 +15,8 @@ DriveForward::DriveForward(Drivetrain* drive, double inches) {
 // Called when the command is initially scheduled.
 void DriveForward::Initialize() {
   drivetrain->ResetEncoders(); // Reset encoders so we don't finish early
+
+  frc::SmartDashboard::PutNumber("DriveForward ticks", drivetrain->GetTicksToTravel(targetDistance)); // display ticks needed for the command call
 }
 
 // Called repeatedly when this Command is scheduled to run

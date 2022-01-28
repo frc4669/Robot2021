@@ -142,8 +142,4 @@ private:
    * @param invert Whether to invert the motor
    */
   void ConfigureMotor(WPI_TalonFX &motor, bool inverted);
-
-
-  // Drivetrain shuffleboard menu
-  frc::ShuffleboardTab& drivetrainTab = frc::Shuffleboard::GetTab("Drivetrain");
 };

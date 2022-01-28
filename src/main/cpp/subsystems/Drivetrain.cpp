@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Drivetrain.h"
-#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 Drivetrain::Drivetrain() {
     // Disable safety on the drivetrain motors
@@ -21,22 +21,18 @@ Drivetrain::Drivetrain() {
 
     // Shift into low gear by default (because we don't know if the last session was left in high gear)
     m_shifter.Set(frc::DoubleSolenoid::kReverse);
-
-    // Create our values on shuffleboard
-    frc::Shuffleboard::SelectTab("Drivetrain"); // Select the drivetrain tab
-
-    drivetrainTab.Add("Left Encoder", m_leftMaster.GetSelectedSensorPosition());
-    drivetrainTab.Add("Right Encoder", m_rightMaster.GetSelectedSensorPosition());
-
-    drivetrainTab.Add("Left Velocity", m_leftMaster.GetSelectedSensorVelocity());
-    drivetrainTab.Add("Right Velocity", m_rightMaster.GetSelectedSensorVelocity());
-
-    drivetrainTab.Add("Gear Shifted to high", IsShiftedToHighGear());
 }
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {
-    frc::Shuffleboard::Update();
+    // setup smartdashboard to show our drivetrain values
+    frc::SmartDashboard::PutNumber("Left Encoder", m_leftMaster.GetSelectedSensorPosition());
+    frc::SmartDashboard::PutNumber("Right Encoder", m_rightMaster.GetSelectedSensorPosition());
+
+    frc::SmartDashboard::PutNumber("Left Velocity", m_leftMaster.GetSelectedSensorVelocity());
+    frc::SmartDashboard::PutNumber("Right Velocity", m_rightMaster.GetSelectedSensorVelocity());
+
+    frc::SmartDashboard::PutBoolean("Shifted to High", IsShiftedToHighGear());
 }
 
 void Drivetrain::ArcadeDrive(double fwd, double rot) {
