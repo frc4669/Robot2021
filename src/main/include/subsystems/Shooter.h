@@ -5,7 +5,7 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-// TODO: Add REV robotics vendor library and include here
+#include <rev/CANSparkMax.h>
 
 #include <Constants.h>
 
@@ -42,6 +42,10 @@ class Shooter : public frc2::SubsystemBase {
   // declared private and exposed only through public methods.
 
   // Our shooter motors
-  // TODO: declare masterShooterMotor{ShooterConstants::kMasterShooterMotorPort, rev::CANSparkMax::MotorType::kBrushless};
-  // TODO: declare slaveShooterMotor{ShooterConstants::kSlaveShooterMotorPort, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax masterShooterMotor{ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax slaveShooterMotor{ShooterConstants::kShooterSlavePort, rev::CANSparkMax::MotorType::kBrushless};
+
+  // PID controllers so we dont kill motors
+  rev::SparkMaxPIDController masterPIDController{masterShooterMotor.GetPIDController()};
+  rev::SparkMaxPIDController slavePIDController{slaveShooterMotor.GetPIDController()};
 };

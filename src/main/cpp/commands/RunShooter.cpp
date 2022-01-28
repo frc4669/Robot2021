@@ -16,12 +16,12 @@ void RunShooter::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
-  // TODO: shooter->RunShooter(targetVelocity);
+  shooter->RunShooter(targetVelocity);
 }
 
 // Called once the command ends or is interrupted.
 void RunShooter::End(bool interrupted) {
-  // TODO: shooter->StopShooter();
+  shooter->StopShooter();
 }
 
 // Returns true when the command should end.
