@@ -29,8 +29,8 @@ namespace DriveConstants {
     constexpr int kRightMotor1Port = 12;
     constexpr int kRightMotor2Port = 13;
 
-    constexpr int kGearShifterForwardChannel = 4;       // The forward channel on the module to control
-    constexpr int kGearShifterReverseChannel = 5;       // The reverse channel on the module to control
+    constexpr int kGearShifterForwardChannel = 5;       // The forward channel on the module to control
+    constexpr int kGearShifterReverseChannel = 4;       // The reverse channel on the module to control
     
     constexpr auto ks = 1_V;
     constexpr auto kv = 0.8_V * 1_s / 1_m;
