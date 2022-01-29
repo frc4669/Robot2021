@@ -132,7 +132,7 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
     motor.SetInverted(inverted);
 
     // Motor PID values (for now)
-    motor.Config_kP(0, 0.5); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
-    motor.Config_kD(0, 0.2); // kD, the derivative constant (drives the velocity error to zero)
-    motor.Config_kF(0, 0.2); // kF, the feed forward constant (how much the output is affected by the setpoint)
+    motor.Config_kP(0, 0.01); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
+    motor.Config_kD(0, 0.02); // kD, the derivative constant (drives the velocity error to zero)
+    motor.Config_kF(0, 0.05); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
