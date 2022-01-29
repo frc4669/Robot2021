@@ -32,5 +32,5 @@ bool DriveForward::IsFinished() {
   double expectedTicksTraveled = drivetrain->GetTicksToTravel(targetDistance); // Calculate how many ticks we need to travel
 
   // check if we've traveled the expected distance
-  return drivetrain->GetLeftEncoderDistance() >= expectedTicksTraveled || drivetrain->GetRightEncoderDistance() >= expectedTicksTraveled;
+  return false;
 }

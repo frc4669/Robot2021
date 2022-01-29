@@ -26,7 +26,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 12.0) );  // Drive forward 12 inches when green button is pressed
+  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 36.0) );  // Drive forward 12 inches when green button is pressed
+  f310.orangeButtonObject.WhenPressed ( DriveForward(&m_drivetrain, 12.0));
   f310.leftShoulderButtonObject.WhenPressed( Shift(&m_drivetrain) );        // Shift when left shoulder is pressed
 
   f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, 1.0) );  // Run shooter at 1.0 when right shoulder is pressed
