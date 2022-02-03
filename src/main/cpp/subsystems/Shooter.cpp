@@ -7,6 +7,7 @@
 Shooter::Shooter() {
     // Invert master shooter motor
     masterShooterMotor.SetInverted(true);
+    slaveShooterMotor.SetInverted(true);
 
     // Set slave to follow
     slaveShooterMotor.Follow(masterShooterMotor, true);
@@ -21,7 +22,7 @@ Shooter::Shooter() {
 void Shooter::Periodic() {}
 
 void Shooter::RunShooter(double velocity) {
-    masterPIDController.SetReference(velocity, rev::ControlType::kVelocity);
+    masterPIDController.SetReference(-velocity, rev::ControlType::kVelocity);
 }
 
 void Shooter::StopShooter() {
