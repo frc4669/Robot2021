@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Shooter.h"
+#include <frc/smartdashboard/SmartDashboard.h> // for debugging
 
 Shooter::Shooter() {
     // Invert master shooter motor
@@ -19,7 +20,9 @@ Shooter::Shooter() {
 }
 
 // This method will be called once per scheduler run
-void Shooter::Periodic() {}
+void Shooter::Periodic() {
+    frc::SmartDashboard::PutNumber("Master PID Velocity", GetShooterVelocity());
+}
 
 void Shooter::RunShooter(double velocity) {
     masterPIDController.SetReference(-velocity, rev::ControlType::kVelocity);
