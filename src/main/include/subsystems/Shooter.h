@@ -31,21 +31,32 @@ class Shooter : public frc2::SubsystemBase {
   void StopShooter();
 
   /**
-   * Get the current velocity of the shooter
+   * Get the current velocity of the master shooter
    *
-   * @return the current velocity of the shooter
+   * @return the current velocity of the master shooter
    */
-  double GetShooterVelocity();
+  double GetMasterShooterVelocity();
+
+  /**
+   * Get the current velocity of the slave shooter
+   *
+   * @return the current velocity of the slave shooter
+   */
+  double GetSlaveShooterVelocity();
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 
   // Our shooter motors
-  rev::CANSparkMax masterShooterMotor{ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax slaveShooterMotor{ShooterConstants::kShooterSlavePort, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_masterShooterMotor{ ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless };
+  rev::CANSparkMax m_slaveShooterMotor{ ShooterConstants::kShooterSlavePort, rev::CANSparkMax::MotorType::kBrushless };
 
   // PID controllers so we dont kill motors
-  rev::SparkMaxPIDController masterPIDController{masterShooterMotor.GetPIDController()};
-  rev::SparkMaxPIDController slavePIDController{slaveShooterMotor.GetPIDController()};
+  rev::SparkMaxPIDController m_masterPIDController{ m_masterShooterMotor.GetPIDController() };
+  rev::SparkMaxPIDController m_slavePIDController{ m_slaveShooterMotor.GetPIDController() };
+
+  // Motor encoders
+  rev::SparkMaxRelativeEncoder m_masterEncoder{ m_masterShooterMotor.GetEncoder() };
+  rev::SparkMaxRelativeEncoder m_slaveEncoder{ m_slaveShooterMotor.GetEncoder() };
 };

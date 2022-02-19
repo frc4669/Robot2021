@@ -4,6 +4,7 @@
 
 #include "subsystems/Drivetrain.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 
 Drivetrain::Drivetrain() {
     // Disable safety on the drivetrain motors
@@ -21,6 +22,8 @@ Drivetrain::Drivetrain() {
 
     // Shift into low gear by default (because we don't know if the last session was left in high gear)
     m_shifter.Set(frc::DoubleSolenoid::kReverse);
+
+    frc::Shuffleboard::GetTab("IMU Gyro").Add(m_imu);
 }
 
 // This method will be called once per scheduler run

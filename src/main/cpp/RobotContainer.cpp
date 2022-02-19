@@ -30,7 +30,7 @@ void RobotContainer::ConfigureButtonBindings() {
   f310.orangeButtonObject.WhenPressed ( DriveForward(&m_drivetrain, 12.0));
   f310.leftShoulderButtonObject.WhenPressed( Shift(&m_drivetrain) );        // Shift when left shoulder is pressed
 
-  f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, 1.0) );  // Run shooter at 1.0 when right shoulder is pressed
+  f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, 3000.0) );  // Run shooter at 1.0 when right shoulder is pressed
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
