@@ -11,6 +11,8 @@
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/Intake.h"
+#include "subsystems/Climber.h"
 
 #include "F310.h"
 
@@ -40,6 +42,9 @@ class RobotContainer {
   // Subsystems
   Drivetrain m_drivetrain;
   Shooter m_shooter;
+  Intake m_intake;
+  Climber m_climber;
   
+  // Controllers
   F310 f310;
 };

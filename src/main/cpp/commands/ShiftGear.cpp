@@ -2,26 +2,26 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/Shift.h"
+#include "commands/ShiftGear.h"
 
-Shift::Shift(Drivetrain* drive) {
-  // Use AddRequirements() here to declare subsystem dependencies.
+ShiftGear::ShiftGear(Drivetrain *drive) {
+  // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({ drive });
   drivetrain = drive;
 }
 
 // Called when the command is initially scheduled.
-void Shift::Initialize() {
+void ShiftGear::Initialize() {
   drivetrain->ShiftGear();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Shift::Execute() {}
+void ShiftGear::Execute() {}
 
 // Called once the command ends or is interrupted.
-void Shift::End(bool interrupted) {}
+void ShiftGear::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool Shift::IsFinished() {
+bool ShiftGear::IsFinished() {
   return true;  // finish instantly after Initialize() is called
 }

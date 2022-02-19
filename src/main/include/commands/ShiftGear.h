@@ -6,6 +6,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Drivetrain.h>
 
 /**
@@ -15,15 +16,9 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Shift
-    : public frc2::CommandHelper<frc2::CommandBase, Shift> {
+class ShiftGear : public frc2::CommandHelper<frc2::CommandBase, ShiftGear> {
  public:
-  /**
-   * Creates a new Shift.
-   *
-   * @param drive a Drivetrain object
-   */
-  Shift(Drivetrain* drive);
+  ShiftGear(Drivetrain *drive);
 
   void Initialize() override;
 
@@ -33,6 +28,6 @@ class Shift
 
   bool IsFinished() override;
 
-  private:
+ private:
   Drivetrain* drivetrain;
 };

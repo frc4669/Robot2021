@@ -14,8 +14,7 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class DeployIntake
-    : public frc2::CommandHelper<frc2::CommandBase, DeployIntake> {
+class DeployIntake : public frc2::CommandHelper<frc2::CommandBase, DeployIntake> {
  public:
   DeployIntake();
 

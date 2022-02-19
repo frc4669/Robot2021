@@ -45,14 +45,11 @@ class Shooter : public frc2::SubsystemBase {
   double GetSlaveShooterVelocity();
 
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-
   // Our shooter motors
   rev::CANSparkMax m_masterShooterMotor{ ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless };
   rev::CANSparkMax m_slaveShooterMotor{ ShooterConstants::kShooterSlavePort, rev::CANSparkMax::MotorType::kBrushless };
 
-  // PID controllers so we dont kill motors
+  // PID controllers so we can slowly ramp up the shooter to a given speed
   rev::SparkMaxPIDController m_masterPIDController{ m_masterShooterMotor.GetPIDController() };
   rev::SparkMaxPIDController m_slavePIDController{ m_slaveShooterMotor.GetPIDController() };
 

@@ -15,9 +15,8 @@
 
 #include <Constants.h>
 
-class Drivetrain : public frc2::SubsystemBase
-{
-public:
+class Drivetrain : public frc2::SubsystemBase {
+ public:
   Drivetrain();
 
   /**
@@ -112,10 +111,7 @@ public:
    */
   bool IsShiftedToHighGear();
 
-private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-
+ private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{DriveConstants::kLeftMotor1Port};
   WPI_TalonFX m_leftSlave{DriveConstants::kLeftMotor2Port};

@@ -6,7 +6,7 @@
 #include <frc2/command/RunCommand.h>
 
 #include <commands/DriveForward.h>
-#include <commands/Shift.h>
+#include <commands/ShiftGear.h>
 #include <commands/RunShooter.h>
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -15,7 +15,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Configure the button bindings
   ConfigureButtonBindings();
 
-  // Setup F310 drive bindings
+  // Setup F310 joystick bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
       {  m_drivetrain.ArcadeDrive(f310.getLeftY()*joyMultiplier, -f310.getRightX()*joyMultiplier); },
@@ -26,9 +26,9 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 36.0) );  // Drive forward 12 inches when green button is pressed
-  f310.orangeButtonObject.WhenPressed ( DriveForward(&m_drivetrain, 12.0));
-  f310.leftShoulderButtonObject.WhenPressed( Shift(&m_drivetrain) );        // Shift when left shoulder is pressed
+  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 36.0) );  // Drive forward 36 inches when green button is pressed
+  f310.orangeButtonObject.WhenPressed ( DriveForward(&m_drivetrain, 12.0)); // Drive forward 12 inches when orange button is pressed
+  f310.leftShoulderButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );    // Shift when left shoulder is pressed
 
   f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, 3000.0) );  // Run shooter at 1.0 when right shoulder is pressed
 }

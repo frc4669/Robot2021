@@ -15,8 +15,7 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class DriveForward
-    : public frc2::CommandHelper<frc2::CommandBase, DriveForward> {
+class DriveForward : public frc2::CommandHelper<frc2::CommandBase, DriveForward> {
  public:
   /**
    * Creates a new DriveForward command.
