@@ -22,6 +22,11 @@
  * they are needed.
  */
 
+namespace ClimbConstants {
+  constexpr int kLeftMotorPort = 3;
+  constexpr int kRightMotorPort = 4;
+} //namespace ClimbConstants
+
 namespace DriveConstants {
   constexpr int kLeftMotor1Port = 14;
   constexpr int kLeftMotor2Port = 11;

@@ -5,6 +5,11 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <frc/motorcontrol/MotorControllerGroup.h>
+
+#include <ctre/Phoenix.h>       // talon
+
+#include <Constants.h>
 
 class Climber : public frc2::SubsystemBase {
  public:
@@ -15,7 +20,18 @@ class Climber : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+
+  void RaiseExtendingArms();
+
+  void LowerExtendingArms();
+
+  void StopExtendingArms();
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+  WPI_TalonFX m_leftMotor{ClimbConstants::kLeftMotorPort};
+  WPI_TalonFX m_rightMotor{ClimbConstants::kRightMotorPort};
+
+  frc::MotorControllerGroup m_climbMotors{m_leftMotor, m_rightMotor};
 };
