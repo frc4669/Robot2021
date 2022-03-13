@@ -6,18 +6,22 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <subsystems/Climber.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
-class ExtendingArms : public frc2::CommandHelper<frc2::CommandBase, ExtendingArms> {
+#include <subsystems/Climber.h>
+#include <subsystems/Shooter.h>
+#include <subsystems/Intake.h>
+
+
+class StartClimbSequence : public frc2::CommandHelper<frc2::CommandBase, StartClimbSequence> {
  public:
-  ExtendingArms(Climber* climb, bool isRaising);
+  /**
+   * Starts the automated climb sequence for a traversal climb.
+   * 
+   * @param climber a Climber object pointer
+   * @param shooter a Shooter object pointer
+   * @param intake an Intake object pointer
+   */
+  StartClimbSequence(Climber* climber, Shooter* shooter, Intake* intake);
 
   void Initialize() override;
 
@@ -29,5 +33,6 @@ class ExtendingArms : public frc2::CommandHelper<frc2::CommandBase, ExtendingArm
 
  private:
   Climber* climber;
-  bool raising;
+  Shooter* shooter;
+  Intake* intake;
 };

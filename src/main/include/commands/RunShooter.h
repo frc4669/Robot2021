@@ -9,22 +9,16 @@
 
 #include <subsystems/Shooter.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
+
 class RunShooter : public frc2::CommandHelper<frc2::CommandBase, RunShooter> {
  public:
   /**
-   * Creates a new RunShooter command.
+   * Run the shooter motors at a given velocity.
    *
-   * @param shooter a Shooter object
-   * @param speed the speed to run the shooter at
+   * @param shooter a Shooter object pointer
+   * @param targetVelocity the speed to run the shooter at
    */
-  RunShooter(Shooter* shooter, double speed);
+  RunShooter(Shooter* shooter, double targetVelocity);
 
   void Initialize() override;
 

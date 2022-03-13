@@ -2,22 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/DeployIntake.h"
+#include "commands/SetHoodAngle.h"
 
-DeployIntake::DeployIntake() {
-  // Use addRequirements() here to declare subsystem dependencies.
+SetHoodAngle::SetHoodAngle(Shooter* shooter, bool raiseHood) {
+  AddRequirements( {shooter} );
+  this->shooter = shooter;
+  this->raiseHood = raiseHood;
 }
 
 // Called when the command is initially scheduled.
-void DeployIntake::Initialize() {}
+void SetHoodAngle::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void DeployIntake::Execute() {}
+void SetHoodAngle::Execute() {}
 
 // Called once the command ends or is interrupted.
-void DeployIntake::End(bool interrupted) {}
+void SetHoodAngle::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool DeployIntake::IsFinished() {
+bool SetHoodAngle::IsFinished() {
   return false;
 }

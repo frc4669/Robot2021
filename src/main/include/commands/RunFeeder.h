@@ -7,18 +7,17 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Drivetrain.h>
+#include <subsystems/Intake.h>
 
 
-class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngle> {
+class RunFeeder : public frc2::CommandHelper<frc2::CommandBase, RunFeeder> {
  public:
   /**
-   * Rotates by set angle.
+   * Run the vertical feeder.
    *
-   * @param drivetrain a Drivetrain object pointer
-   * @param targetAngle the angle to rotate by
+   * @param intake an Intake object pointer
    */
-  RotateByAngle(Drivetrain* drivetrain, double targetAngle);
+  RunFeeder(Intake* intake);
 
   void Initialize() override;
 
@@ -29,6 +28,5 @@ class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngl
   bool IsFinished() override;
 
  private:
-  Drivetrain* drivetrain;
-  double targetAngle;
+  Intake* intake;
 };

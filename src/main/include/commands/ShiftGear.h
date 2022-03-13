@@ -9,16 +9,15 @@
 
 #include <subsystems/Drivetrain.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
+
 class ShiftGear : public frc2::CommandHelper<frc2::CommandBase, ShiftGear> {
  public:
-  ShiftGear(Drivetrain *drive);
+   /**
+   * Shifts the drivebox's gearbox to low/high gear.
+   *
+   * @param drivetrain a Drivetrain object pointer
+   */
+  ShiftGear(Drivetrain* drivetrain);
 
   void Initialize() override;
 

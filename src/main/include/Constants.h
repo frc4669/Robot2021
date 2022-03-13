@@ -10,6 +10,7 @@
 #include <units/acceleration.h>
 #include <units/angle.h>
 #include <units/angular_velocity.h>
+//#include <units/length.h>
 
 
 /**
@@ -25,6 +26,8 @@
 namespace ClimbConstants {
   constexpr int kLeftMotorPort = 3;
   constexpr int kRightMotorPort = 4;
+
+  //constexpr auto kInchesHubHeight 10_in;
 } //namespace ClimbConstants
 
 namespace DriveConstants {

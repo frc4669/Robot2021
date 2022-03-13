@@ -8,22 +8,16 @@
 #include <frc2/command/CommandHelper.h>
 #include <subsystems/Drivetrain.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
+
 class DriveForward : public frc2::CommandHelper<frc2::CommandBase, DriveForward> {
  public:
   /**
-   * Creates a new DriveForward command.
+   * Drives forward a set distance.
    *
-   * @param drive a Drivetrain object
-   * @param distance the distance to drive in inches
+   * @param drivetrain a Drivetrain object pointer
+   * @param targetDistance the distance to drive in inches
    */
-  DriveForward(Drivetrain* drive, double inches);
+  DriveForward(Drivetrain* drivetrain, double targetDistance);
 
   void Initialize() override;
 

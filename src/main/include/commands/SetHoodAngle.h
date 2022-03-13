@@ -7,18 +7,18 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Drivetrain.h>
+#include <subsystems/Shooter.h>
 
 
-class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngle> {
+class SetHoodAngle : public frc2::CommandHelper<frc2::CommandBase, SetHoodAngle> {
  public:
   /**
-   * Rotates by set angle.
-   *
-   * @param drivetrain a Drivetrain object pointer
-   * @param targetAngle the angle to rotate by
+   * Move the shooter hood to a given angle.
+   * 
+   * @param shooter a Shooter object pointer
+   * @param raiseHood whether to raise or lower the hood
    */
-  RotateByAngle(Drivetrain* drivetrain, double targetAngle);
+  SetHoodAngle(Shooter* shooter, bool raiseHood);
 
   void Initialize() override;
 
@@ -29,6 +29,6 @@ class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngl
   bool IsFinished() override;
 
  private:
-  Drivetrain* drivetrain;
-  double targetAngle;
+  Shooter* shooter;
+  bool raiseHood;
 };

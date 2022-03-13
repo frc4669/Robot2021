@@ -7,16 +7,18 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
+#include <subsystems/Intake.h>
+
+
 class RunIntake : public frc2::CommandHelper<frc2::CommandBase, RunIntake> {
  public:
-  RunIntake();
+  /**
+   * Run the intake system inwards.
+   *
+   * @param intake an Intake object pointer
+   * @param runReverse whether to reverse the intake
+   */
+  RunIntake(Intake* intake, bool runReverse);
 
   void Initialize() override;
 
@@ -25,4 +27,8 @@ class RunIntake : public frc2::CommandHelper<frc2::CommandBase, RunIntake> {
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
+ private:
+  Intake* intake;
+  bool runReverse;
 };

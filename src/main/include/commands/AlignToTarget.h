@@ -10,15 +10,14 @@
 #include <subsystems/Drivetrain.h>
 
 
-class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngle> {
+class AlignToTarget : public frc2::CommandHelper<frc2::CommandBase, AlignToTarget> {
  public:
   /**
-   * Rotates by set angle.
-   *
+   * Align to the hub if seen by targetting system.
+   * 
    * @param drivetrain a Drivetrain object pointer
-   * @param targetAngle the angle to rotate by
    */
-  RotateByAngle(Drivetrain* drivetrain, double targetAngle);
+  AlignToTarget(Drivetrain* drivetrain);
 
   void Initialize() override;
 
@@ -30,5 +29,4 @@ class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngl
 
  private:
   Drivetrain* drivetrain;
-  double targetAngle;
 };

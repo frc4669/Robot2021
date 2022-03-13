@@ -10,15 +10,15 @@
 #include <subsystems/Drivetrain.h>
 
 
-class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngle> {
+class InverseMode : public frc2::CommandHelper<frc2::CommandBase, InverseMode> {
  public:
   /**
-   * Rotates by set angle.
+   * Switches mode of robot, changing the relative "front" of the robot. 
+   * Making driving much easier as shooter and intake do not face the same way.
    *
    * @param drivetrain a Drivetrain object pointer
-   * @param targetAngle the angle to rotate by
    */
-  RotateByAngle(Drivetrain* drivetrain, double targetAngle);
+  InverseMode(Drivetrain* drivetrain);
 
   void Initialize() override;
 
@@ -30,5 +30,4 @@ class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngl
 
  private:
   Drivetrain* drivetrain;
-  double targetAngle;
 };

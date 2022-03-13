@@ -7,18 +7,18 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Drivetrain.h>
+#include <subsystems/Climber.h>
 
 
-class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngle> {
+class ExtendArms : public frc2::CommandHelper<frc2::CommandBase, ExtendArms> {
  public:
   /**
-   * Rotates by set angle.
-   *
-   * @param drivetrain a Drivetrain object pointer
-   * @param targetAngle the angle to rotate by
+   * Raise/lower the telescopic arms.
+   * 
+   * @param climber a Climber object pointer
+   * @param isRaising whether to raise or lower arms
    */
-  RotateByAngle(Drivetrain* drivetrain, double targetAngle);
+  ExtendArms(Climber* climber, bool isRaising);
 
   void Initialize() override;
 
@@ -29,6 +29,6 @@ class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngl
   bool IsFinished() override;
 
  private:
-  Drivetrain* drivetrain;
-  double targetAngle;
+  Climber* climber;
+  bool isRaising;
 };

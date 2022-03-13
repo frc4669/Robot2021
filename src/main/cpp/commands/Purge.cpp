@@ -2,24 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/RotateByAngle.h"
+#include "commands/Purge.h"
 
-RotateByAngle::RotateByAngle(Drivetrain* drivetrain, double targetAngle) {
-  AddRequirements( {drivetrain} );
-  this->drivetrain = drivetrain;
-  this->targetAngle = targetAngle;
+Purge::Purge(Intake* intake, Shooter* shooter) {
+  AddRequirements( {intake, shooter} );
+  this->intake = intake;
+  this->shooter = shooter;
 }
 
 // Called when the command is initially scheduled.
-void RotateByAngle::Initialize() {}
+void Purge::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RotateByAngle::Execute() {}
+void Purge::Execute() {}
 
 // Called once the command ends or is interrupted.
-void RotateByAngle::End(bool interrupted) {}
+void Purge::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool RotateByAngle::IsFinished() {
+bool Purge::IsFinished() {
   return false;
 }

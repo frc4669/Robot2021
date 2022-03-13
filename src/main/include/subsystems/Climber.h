@@ -20,18 +20,26 @@ class Climber : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
-
+  /**
+   * Sets both climber motors to unspool, raising the arms.
+   */
   void RaiseExtendingArms();
 
+  /**
+   * Sets both climber motors to spool, lowering the arms.
+   */
   void LowerExtendingArms();
 
+  /**
+   * Sets both climber motors to stop.
+   */
   void StopExtendingArms();
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  WPI_TalonFX m_leftMotor{ClimbConstants::kLeftMotorPort};
-  WPI_TalonFX m_rightMotor{ClimbConstants::kRightMotorPort};
+  WPI_TalonFX m_leftMotor{ClimbConstants::kLeftMotorPort};    // master motor
+  WPI_TalonFX m_rightMotor{ClimbConstants::kRightMotorPort};  // slave motor
 
   frc::MotorControllerGroup m_climbMotors{m_leftMotor, m_rightMotor};
 };

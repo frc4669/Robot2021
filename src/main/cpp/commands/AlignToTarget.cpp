@@ -2,24 +2,23 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/RotateByAngle.h"
+#include "commands/AlignToTarget.h"
 
-RotateByAngle::RotateByAngle(Drivetrain* drivetrain, double targetAngle) {
+AlignToTarget::AlignToTarget(Drivetrain* drivetrain) {
   AddRequirements( {drivetrain} );
   this->drivetrain = drivetrain;
-  this->targetAngle = targetAngle;
 }
 
 // Called when the command is initially scheduled.
-void RotateByAngle::Initialize() {}
+void AlignToTarget::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RotateByAngle::Execute() {}
+void AlignToTarget::Execute() {}
 
 // Called once the command ends or is interrupted.
-void RotateByAngle::End(bool interrupted) {}
+void AlignToTarget::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool RotateByAngle::IsFinished() {
+bool AlignToTarget::IsFinished() {
   return false;
 }

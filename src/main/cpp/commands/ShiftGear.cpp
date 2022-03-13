@@ -4,10 +4,9 @@
 
 #include "commands/ShiftGear.h"
 
-ShiftGear::ShiftGear(Drivetrain *drive) {
-  // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({ drive });
-  drivetrain = drive;
+ShiftGear::ShiftGear(Drivetrain* drivetrain) {
+  AddRequirements({ drivetrain });
+  this->drivetrain = drivetrain;
 }
 
 // Called when the command is initially scheduled.

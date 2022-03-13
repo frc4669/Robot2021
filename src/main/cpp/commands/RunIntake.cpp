@@ -4,8 +4,10 @@
 
 #include "commands/RunIntake.h"
 
-RunIntake::RunIntake() {
-  // Use addRequirements() here to declare subsystem dependencies.
+RunIntake::RunIntake(Intake* intake, bool runReverse) {
+  AddRequirements( {intake} );
+  this->intake = intake;
+  this->runReverse = runReverse;
 }
 
 // Called when the command is initially scheduled.

@@ -7,18 +7,20 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Drivetrain.h>
+#include <subsystems/Intake.h>
+#include <subsystems/Shooter.h>
 
 
-class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngle> {
+class Purge : public frc2::CommandHelper<frc2::CommandBase, Purge> {
  public:
   /**
-   * Rotates by set angle.
-   *
-   * @param drivetrain a Drivetrain object pointer
-   * @param targetAngle the angle to rotate by
+   * Runs feeder and shooter to purge the robot of all cargo. 
+   * Mainly to make sure that we purge cargo safely.
+   * 
+   * @param intake an Intake object pointer
+   * @param shooter a Shooter object pointer
    */
-  RotateByAngle(Drivetrain* drivetrain, double targetAngle);
+  Purge(Intake* intake, Shooter* shooter);
 
   void Initialize() override;
 
@@ -27,8 +29,7 @@ class RotateByAngle : public frc2::CommandHelper<frc2::CommandBase, RotateByAngl
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-
  private:
-  Drivetrain* drivetrain;
-  double targetAngle;
+  Intake* intake;
+  Shooter* shooter;
 };

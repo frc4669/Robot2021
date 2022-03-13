@@ -2,32 +2,31 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/ExtendingArms.h"
+#include "commands/ExtendArms.h"
 
-ExtendingArms::ExtendingArms(Climber* climb, bool isRaising) {
-  AddRequirements({ climb });
-  climber = climb;
-  raising = isRaising;
+ExtendArms::ExtendArms(Climber* climber, bool isRaising) {
+  AddRequirements( {climber} );
+  this->climber = climber;
+  this->isRaising = isRaising;
 }
 
 // Called when the command is initially scheduled.
-void ExtendingArms::Initialize() {}
+void ExtendArms::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ExtendingArms::Execute() {
-  if(raising) {
+void ExtendArms::Execute() {
+  if(isRaising)
     climber->RaiseExtendingArms();
-  } else {
+  else
     climber->LowerExtendingArms();
-  }
 }
 
 // Called once the command ends or is interrupted.
-void ExtendingArms::End(bool interrupted) {
+void ExtendArms::End(bool interrupted) {
   climber->StopExtendingArms();
 }
 
 // Returns true when the command should end.
-bool ExtendingArms::IsFinished() {
-  return true;
+bool ExtendArms::IsFinished() {
+  return false;
 }
