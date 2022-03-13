@@ -23,6 +23,14 @@
  * they are needed.
  */
 
+namespace VisionContants {
+  constexpr units::meter_t kCameraHeight = 0_in;
+  constexpr units::meter_t kHubHeight = 0_in;
+
+  constexpr units::radian_t kCameraAngle = 0_deg;
+} // namespace VisionContants
+
+
 namespace ClimbConstants {
   constexpr int kLeftMotorPort = 3;
   constexpr int kRightMotorPort = 4;

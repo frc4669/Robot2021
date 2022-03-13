@@ -9,12 +9,13 @@
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
 
-#include "subsystems/Drivetrain.h"
-#include "subsystems/Shooter.h"
-#include "subsystems/Intake.h"
-#include "subsystems/Climber.h"
+#include <subsystems/Climber.h>
+#include <subsystems/Drivetrain.h>
+#include <subsystems/Intake.h>
+#include <subsystems/Shooter.h>
+#include <subsystems/Vision.h>
 
-#include "F310.h"
+#include <F310.h>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -44,6 +45,7 @@ class RobotContainer {
   Shooter m_shooter;
   Intake m_intake;
   Climber m_climber;
+  Vision m_vision;
   
   // Controllers
   F310 f310;
