@@ -1,2 +1,2 @@
-# GR-10
+# GR-X
 Our primary robot code for the 2022 FRC season
