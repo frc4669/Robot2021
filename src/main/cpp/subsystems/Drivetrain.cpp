@@ -43,11 +43,10 @@ void Drivetrain::ArcadeDrive(double fwd, double rot) {
 }
 
 double Drivetrain::GetTicksToTravel(double inches) {
-  if (shiftedToHighGear) {
+  if (shiftedToHighGear)
     return (inches * DriveConstants::kTicksPerInchesHighGear);
-  } else {
+  else
     return (inches * DriveConstants::kTicksPerInchesLowGear);
-  }
 }
 
 void Drivetrain::DriveForward(double inches, double velocity = 40000) {
@@ -107,6 +106,16 @@ void Drivetrain::ShiftGear() {
 
 bool Drivetrain::IsShiftedToHighGear() {
   return shiftedToHighGear;
+}
+
+
+void Drivetrain::ReverseRelativeFront() {
+  // basically gets the inverted status and adds "!" to it which inverts it
+  m_leftMaster.SetInverted(!m_leftMaster.GetInverted());
+  m_leftSlave.SetInverted(!m_leftSlave.GetInverted());
+
+  m_rightMaster.SetInverted(!m_rightMaster.GetInverted());
+  m_rightSlave.SetInverted(!m_rightSlave.GetInverted());
 }
 
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
