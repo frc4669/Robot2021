@@ -7,6 +7,7 @@
 #include <frc2/command/SubsystemBase.h>
 
 #include <frc/DoubleSolenoid.h> //for intake arm
+#include <ctre/Phoenix.h>       //for intake/feeder belts
 
 #include <Constants.h>
 
@@ -19,7 +20,47 @@ class Intake : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+  /**
+   * Manipulate the intake arm, extending or retracting, 
+   * works as a flip flop switch
+   */
+  void ManipulateArm();
+
+  /**
+   * Get the current state of the intake arm
+   * 
+   * @return extended or retracted
+   */
+  bool IsArmExtended();
+
+  /**
+   * Run intake motor
+   */
+  void RunIntake();
+
+  /**
+   * Stop intake motor
+   */
+  void StopIntake();
+
+  /**
+   * Run feeder motor
+   */
+  void RunFeeder();
+
+  /**
+   * Stop feeder motor
+   */
+  void StopFeeder();
+
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
+  // Motor controller for main intake
+  WPI_TalonSRX m_intakeMotor{IntakeConstants::kIntakeMotorPort};
+
+  // Motor controller for vertical feeder
+  WPI_TalonSRX m_feederMotor{IntakeConstants::kFeederMotorPort};
+
+  // Intake arm
+  frc::DoubleSolenoid m_intakeArm{frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kIntakeSolenoidForwardChannel, IntakeConstants::kIntakeSolenoidReverseChannel};
+  bool m_intakeArmExtended = false; //start with intake arm retracted
 };

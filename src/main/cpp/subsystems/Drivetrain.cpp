@@ -43,7 +43,7 @@ void Drivetrain::ArcadeDrive(double fwd, double rot) {
 }
 
 double Drivetrain::GetTicksToTravel(double inches) {
-  if (shiftedToHighGear)
+  if (m_shiftedToHighGear)
     return (inches * DriveConstants::kTicksPerInchesHighGear);
   else
     return (inches * DriveConstants::kTicksPerInchesLowGear);
@@ -95,17 +95,17 @@ frc::ADIS16470_IMU& Drivetrain::GetIMU() {
 }
 
 void Drivetrain::ShiftGear() {
-  if(IsShiftedToHighGear()) { // check if in high gear
+  if (IsShiftedToHighGear()) { // check if in high gear
     m_shifter.Set(frc::DoubleSolenoid::kReverse); // shift to low gear
-    shiftedToHighGear = false;
+    m_shiftedToHighGear = false;
   } else {
     m_shifter.Set(frc::DoubleSolenoid::kForward); // shift to high gear
-    shiftedToHighGear = true;
+    m_shiftedToHighGear = true;
   }
 }
 
 bool Drivetrain::IsShiftedToHighGear() {
-  return shiftedToHighGear;
+  return m_shiftedToHighGear;
 }
 
 

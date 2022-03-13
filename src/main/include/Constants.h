@@ -30,6 +30,14 @@ namespace ClimbConstants {
   //constexpr auto kInchesHubHeight 10_in;
 } //namespace ClimbConstants
 
+namespace IntakeConstants {
+  constexpr int kIntakeMotorPort = 0;       // the primary intake
+  constexpr int kFeederMotorPort = 0;       // vertical feeder
+
+  constexpr int kIntakeSolenoidForwardChannel = 0; // channel for extending intake arm
+  constexpr int kIntakeSolenoidReverseChannel = 0; // channel for retracting intake arm
+} //namespace IntakeConstants
+
 namespace DriveConstants {
   constexpr int kLeftMotor1Port = 14;
   constexpr int kLeftMotor2Port = 11;

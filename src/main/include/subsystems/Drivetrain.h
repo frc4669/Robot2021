@@ -133,7 +133,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel};
-  bool shiftedToHighGear = false; // starting in low gear (since we shift the gear into low gear when we start)
+  bool m_shiftedToHighGear = false; // starting in low gear (since we shift the gear into low gear when we start)
 
   frc::ADIS16470_IMU m_imu{};
 
