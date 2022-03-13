@@ -30,8 +30,11 @@ bool Intake::IsArmExtended() {
   return m_intakeArmExtended;
 }
 
-void Intake::RunIntake() {
-  m_intakeMotor.Set(ControlMode::PercentOutput, 0.5);
+void Intake::RunIntake(bool runReverse) {
+  if (runReverse)
+    m_intakeMotor.Set(ControlMode::PercentOutput, -0.5);
+  else
+    m_intakeMotor.Set(ControlMode::PercentOutput, 0.5);
 }
 
 void Intake::StopIntake() {

@@ -13,10 +13,14 @@ RunFeeder::RunFeeder(Intake* intake) {
 void RunFeeder::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RunFeeder::Execute() {}
+void RunFeeder::Execute() {
+  intake->RunFeeder();
+}
 
 // Called once the command ends or is interrupted.
-void RunFeeder::End(bool interrupted) {}
+void RunFeeder::End(bool interrupted) {
+  intake->StopFeeder();
+}
 
 // Returns true when the command should end.
 bool RunFeeder::IsFinished() {

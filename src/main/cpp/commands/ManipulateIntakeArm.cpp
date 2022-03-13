@@ -2,23 +2,25 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/DeployIntakeArm.h"
+#include "commands/ManipulateIntakeArm.h"
 
-DeployIntakeArm::DeployIntakeArm(Intake* intake) {
+ManipulateIntakeArm::ManipulateIntakeArm(Intake* intake) {
   AddRequirements( {intake} );
   this->intake = intake;
 }
 
 // Called when the command is initially scheduled.
-void DeployIntakeArm::Initialize() {}
+void ManipulateIntakeArm::Initialize() {
+  intake->ManipulateArm();
+}
 
 // Called repeatedly when this Command is scheduled to run
-void DeployIntakeArm::Execute() {}
+void ManipulateIntakeArm::Execute() {}
 
 // Called once the command ends or is interrupted.
-void DeployIntakeArm::End(bool interrupted) {}
+void ManipulateIntakeArm::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool DeployIntakeArm::IsFinished() {
-  return false;
+bool ManipulateIntakeArm::IsFinished() {
+  return true;  // finish instantly after Initialize() is called
 }

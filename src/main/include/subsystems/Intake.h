@@ -35,8 +35,10 @@ class Intake : public frc2::SubsystemBase {
 
   /**
    * Run intake motor
+   * 
+   * @param runReverse whether to reverse the intake
    */
-  void RunIntake();
+  void RunIntake(bool runReverse);
 
   /**
    * Stop intake motor

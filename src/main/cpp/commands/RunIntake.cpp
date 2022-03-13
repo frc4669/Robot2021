@@ -14,10 +14,14 @@ RunIntake::RunIntake(Intake* intake, bool runReverse) {
 void RunIntake::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RunIntake::Execute() {}
+void RunIntake::Execute() {
+  intake->RunIntake(runReverse);
+}
 
 // Called once the command ends or is interrupted.
-void RunIntake::End(bool interrupted) {}
+void RunIntake::End(bool interrupted) {
+  intake->StopIntake();
+}
 
 // Returns true when the command should end.
 bool RunIntake::IsFinished() {

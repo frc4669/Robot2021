@@ -10,14 +10,14 @@
 #include <subsystems/Intake.h>
 
 
-class DeployIntakeArm : public frc2::CommandHelper<frc2::CommandBase, DeployIntakeArm> {
+class ManipulateIntakeArm : public frc2::CommandHelper<frc2::CommandBase, ManipulateIntakeArm> {
  public:
   /**
    * Deploy the intake arm down/up.
    *
    * @param intake an Intake object pointer
    */
-  DeployIntakeArm(Intake* intake);
+  ManipulateIntakeArm(Intake* intake);
 
   void Initialize() override;
 
