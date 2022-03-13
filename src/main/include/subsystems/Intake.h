@@ -6,6 +6,10 @@
 
 #include <frc2/command/SubsystemBase.h>
 
+#include <frc/DoubleSolenoid.h> //for intake arm
+
+#include <Constants.h>
+
 class Intake : public frc2::SubsystemBase {
  public:
   Intake();

@@ -111,6 +111,12 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   bool IsShiftedToHighGear();
 
+  /**
+   * Reverse relative front, switching from the intake being the 
+   * "front", to the shooter side being the "front". Vice-versa.
+   */
+  void ReverseRelativeFront();
+
  private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{DriveConstants::kLeftMotor1Port};
