@@ -14,6 +14,7 @@
 #include <commands/RunFeeder.h>
 #include <commands/RunIntake.h>
 #include <commands/SetHoodAngle.h>
+#include <commands/PlayAwesomeSong.h>
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -43,6 +44,8 @@ void RobotContainer::ConfigureButtonBindings() {
 
   f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) ); // raise hood angle
   f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) ); // lower hood angle
+
+  f310.rightShoulderButtonObject.WhenPressed( PlayAwesomeSong(&m_drivetrain) );
 
   //f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, -3500.0) );  // Run shooter at 1.0 when right shoulder is pressed
 

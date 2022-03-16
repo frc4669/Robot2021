@@ -10,6 +10,8 @@ Drivetrain::Drivetrain() {
   // Disable safety on the drivetrain motors
   m_drive.SetSafetyEnabled(false);
 
+  _orchestra.AddInstrument(m_leftMaster);
+
   // Configure the drivetrain motors (for now)
   ConfigureMotor(m_leftMaster, true);
   ConfigureMotor(m_leftSlave, true);
@@ -161,4 +163,9 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.Config_kP(0, 0.01); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
   motor.Config_kD(0, 0.02); // kD, the derivative constant (drives the velocity error to zero)
   motor.Config_kF(0, 0.05); // kF, the feed forward constant (how much the output is affected by the setpoint)
+}
+
+void Drivetrain::PlayTheBestSong() {
+  _orchestra.LoadMusic("FATU_NA_TOTO.chrp");
+  _orchestra.Play();
 }
