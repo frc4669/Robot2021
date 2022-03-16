@@ -25,12 +25,16 @@ class Drivetrain : public frc2::SubsystemBase {
   void Periodic() override;
 
   /**
-   * Drive robot using arcade controls
+   * Drive robot using CurvatureDrive controls.
    *
    * @param fwd Forward/backward value
    * @param rot Rotation value
    */
-  void ArcadeDrive(double fwd, double rot);
+  void CurvatureDrive(double fwd, double rot);
+
+  void ToggleCurvatureTurnInPlace();
+
+  bool GetCurvatureTurnInPlaceStatus();
 
   /**
    * Get ticks needed to travel given distance in inches
@@ -120,8 +124,6 @@ class Drivetrain : public frc2::SubsystemBase {
   double GetLeftVel();
   double GetRightVel();
 
-  void CurvatureDrive(double fwd, double rot, bool turnInPlace);
-
  private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{DriveConstants::kLeftFront};
@@ -149,4 +151,6 @@ class Drivetrain : public frc2::SubsystemBase {
    * @param invert Whether to invert the motor
    */
   void ConfigureMotor(WPI_TalonFX &motor, bool inverted);
+
+  bool m_curvatureDriveTurnInPlace = true;
 };

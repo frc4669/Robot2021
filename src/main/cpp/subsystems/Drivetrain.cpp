@@ -13,11 +13,11 @@ Drivetrain::Drivetrain() {
   // Configure the drivetrain motors (for now)
   ConfigureMotor(m_leftMaster, true);
   ConfigureMotor(m_leftSlave, true);
-  m_leftSlave.Follow(m_leftMaster);
+  m_leftSlave.Follow(m_leftMaster); // set back left motor to follow the front left motor
 
   ConfigureMotor(m_rightMaster, false);
   ConfigureMotor(m_rightSlave, false);
-  m_rightSlave.Follow(m_rightMaster);
+  m_rightSlave.Follow(m_rightMaster); // set back right motor to follow the front right motor
 
   // Reset encoder values to 0 (this also syncs the motor controllers)
   ResetEncoders();
@@ -40,12 +40,16 @@ void Drivetrain::Periodic() {
   frc::SmartDashboard::PutBoolean("Shifted to High", IsShiftedToHighGear());
 }
 
-void Drivetrain::ArcadeDrive(double fwd, double rot) {
-  m_drive.ArcadeDrive(fwd, rot);
+void Drivetrain::CurvatureDrive(double fwd, double rot) {
+  m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace); // when 3rd param is true; mimics arcade drive
 }
 
-void Drivetrain::CurvatureDrive(double fwd, double rot, bool turnInPlace) {
-  m_drive.CurvatureDrive(fwd, rot, turnInPlace);
+void Drivetrain::ToggleCurvatureTurnInPlace() {
+  m_curvatureDriveTurnInPlace = !m_curvatureDriveTurnInPlace;
+}
+
+bool Drivetrain::GetCurvatureTurnInPlaceStatus() {
+  return m_curvatureDriveTurnInPlace;
 }
 
 double Drivetrain::GetTicksToTravel(double inches) {
@@ -55,18 +59,9 @@ double Drivetrain::GetTicksToTravel(double inches) {
     return (inches * DriveConstants::kTicksPerInchesLowGear);
 }
 
-void Drivetrain::DriveForward(double inches, double velocity = 40000) {
-  // set velocity using motion magic
-  double t = 2048*10;
-  frc::SmartDashboard::PutNumber("ticks", t);
-  frc::SmartDashboard::PutNumber("inches", inches);
-  
-
-  m_leftMaster.Set(ControlMode::MotionMagic, t);
-  m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftFront);
-
-  m_rightMaster.Set(ControlMode::MotionMagic, t);
-  m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightFront);
+void Drivetrain::DriveForward(double ticksToTravel) {
+  m_leftMaster.Set(ControlMode::MotionMagic, ticksToTravel);
+  m_rightMaster.Set(ControlMode::MotionMagic, ticksToTravel);
 }
 
 void Drivetrain::RotateByAngle(double angle) {

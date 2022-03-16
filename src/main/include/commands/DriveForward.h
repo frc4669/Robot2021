@@ -15,9 +15,9 @@ class DriveForward : public frc2::CommandHelper<frc2::CommandBase, DriveForward>
    * Drives forward a set distance.
    *
    * @param drivetrain a Drivetrain object pointer
-   * @param targetDistance the distance to drive in inches
+   * @param targetInchesDistance the distance to drive in inches
    */
-  DriveForward(Drivetrain* drivetrain, double targetDistance);
+  DriveForward(Drivetrain* drivetrain, double targetInchesDistance);
 
   void Initialize() override;
 
@@ -29,8 +29,6 @@ class DriveForward : public frc2::CommandHelper<frc2::CommandBase, DriveForward>
 
  private:
   Drivetrain* drivetrain;
-  double targetDistance;
-
-  double leftLast = 0.0;
-  double rightLast = 0.0;
+  double targetInchesDistance;
+  double targetTicksDistance;
 };

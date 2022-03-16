@@ -6,46 +6,32 @@
 
 #include <frc/smartdashboard/SmartDashboard.h> // for debugging
 
-DriveForward::DriveForward(Drivetrain* drivetrain, double targetDistance) {
+DriveForward::DriveForward(Drivetrain* drivetrain, double targetInchesDistance) {
   AddRequirements({ drivetrain });
   this->drivetrain = drivetrain;
-  this->targetDistance = targetDistance;
+  this->targetInchesDistance = targetInchesDistance;
 }
 
 // Called when the command is initially scheduled.
 void DriveForward::Initialize() {
   drivetrain->ResetEncoders(); // Reset encoders so we don't finish early
-  leftLast = 0.0;
-  rightLast = 0.0;
+  targetInchesDistance = drivetrain->GetTicksToTravel(targetInchesDistance);
 
-  frc::SmartDashboard::PutNumber("DriveForward ticks", drivetrain->GetTicksToTravel(targetDistance)); // display ticks needed for the command call
-  drivetrain->DriveForward(targetDistance, 40000);
+  frc::SmartDashboard::PutNumber("DriveForward ticks", targetInchesDistance); // display ticks needed for the command call
+  drivetrain->DriveForward(targetDistance); // call motion magic with how many ticks we want to travel
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveForward::Execute() {
-  
-}
+void DriveForward::Execute() {}
 
 // Called once the command ends or is interrupted.
 void DriveForward::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool DriveForward::IsFinished() {
-  double expectedTicksTraveled = drivetrain->GetTicksToTravel(targetDistance); // Calculate how many ticks we need to travel
-  double left = drivetrain->GetLeftEncoderDistance();
-  double right = drivetrain->GetRightEncoderDistance();
-  frc::SmartDashboard::PutNumber("left", left);
-  frc::SmartDashboard::PutNumber("right", right);
+  double leftVelocity = drivetrain->GetLeftVel();
+  double rightVelocity = drivetrain->GetRightVel()
 
-  bool ret = left == leftLast && right == rightLast;
-
-  frc::SmartDashboard::PutNumber("Lvel", drivetrain->GetLeftVel());
-  frc::SmartDashboard::PutNumber("Rvel", drivetrain->GetRightVel());
-
-  
-  
-  // check if we've traveled the expected distance
-  //return abs(expectedTicksTraveled-left) < 50 && abs(expectedTicksTraveled-right) < 50;
-  return abs(drivetrain->GetLeftVel()-10) < 10 && abs(drivetrain->GetRightVel()-10) < 10;
+  // Check if we've stopped moving
+  return abs(10-leftVelocity) < 10 && abs(10-rightVelocity) < 10;
 }
