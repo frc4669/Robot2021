@@ -13,9 +13,11 @@ Drivetrain::Drivetrain() {
   // Configure the drivetrain motors (for now)
   ConfigureMotor(m_leftMaster, true);
   ConfigureMotor(m_leftSlave, true);
+  m_leftSlave.Follow(m_leftMaster);
 
   ConfigureMotor(m_rightMaster, false);
   ConfigureMotor(m_rightSlave, false);
+  m_rightSlave.Follow(m_rightMaster);
 
   // Reset encoder values to 0 (this also syncs the motor controllers)
   ResetEncoders();
@@ -42,6 +44,10 @@ void Drivetrain::ArcadeDrive(double fwd, double rot) {
   m_drive.ArcadeDrive(fwd, rot);
 }
 
+void Drivetrain::CurvatureDrive(double fwd, double rot, bool turnInPlace) {
+  m_drive.CurvatureDrive(fwd, rot, turnInPlace);
+}
+
 double Drivetrain::GetTicksToTravel(double inches) {
   if (m_shiftedToHighGear)
     return (inches * DriveConstants::kTicksPerInchesHighGear);
@@ -51,11 +57,16 @@ double Drivetrain::GetTicksToTravel(double inches) {
 
 void Drivetrain::DriveForward(double inches, double velocity = 40000) {
   // set velocity using motion magic
-  m_leftMaster.Set(ControlMode::MotionMagic, velocity);
-  m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftMotor1Port);
+  double t = 2048*10;
+  frc::SmartDashboard::PutNumber("ticks", t);
+  frc::SmartDashboard::PutNumber("inches", inches);
+  
 
-  m_rightMaster.Set(ControlMode::MotionMagic, velocity);
-  m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightMotor1Port);
+  m_leftMaster.Set(ControlMode::MotionMagic, t);
+  m_leftSlave.Set(ControlMode::Follower, DriveConstants::kLeftFront);
+
+  m_rightMaster.Set(ControlMode::MotionMagic, t);
+  m_rightSlave.Set(ControlMode::Follower, DriveConstants::kRightFront);
 }
 
 void Drivetrain::RotateByAngle(double angle) {
@@ -69,6 +80,14 @@ void Drivetrain::ResetLeftEncoder() {
 
 void Drivetrain::ResetRightEncoder() {
   m_rightMaster.GetSensorCollection().SetIntegratedSensorPosition(0);
+}
+
+double Drivetrain::GetLeftVel() {
+  return m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity();
+}
+
+double Drivetrain::GetRightVel() {
+  return m_rightMaster.GetSensorCollection().GetIntegratedSensorVelocity();
 }
 
 void Drivetrain::ResetEncoders() {
@@ -121,14 +140,14 @@ void Drivetrain::ReverseRelativeFront() {
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   // set the max velocity and acceleration for motion magic
   motor.ConfigMotionCruiseVelocity(20000);
-  motor.ConfigMotionAcceleration(8000);
+  motor.ConfigMotionAcceleration(6000);
 
   // set the current limit for the supply/output current
   motor.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 25, 25, 0.5));
   motor.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 25, 25, 0.5));
 
   // time it takes for the motor to go from 0 to full power (in seconds) in an open/closed loop
-  motor.ConfigOpenloopRamp(0.8);
+  motor.ConfigOpenloopRamp(1.4);
   motor.ConfigClosedloopRamp(0);
 
   // when controller is neutral, set motor to break

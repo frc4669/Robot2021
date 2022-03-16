@@ -16,6 +16,20 @@ Shooter::Shooter() {
   m_masterPIDController.SetP(0.00);     // kP
   m_masterPIDController.SetD(0.00);     // kD
   m_masterPIDController.SetFF(0.0002);  // kFF
+
+  // Setup hood motors
+  m_leftHoodMotor.SetInverted(true);
+  m_rightHoodMotor.Follow(m_leftHoodMotor); //follow left climb motor
+
+  m_leftHoodMotor.ConfigNominalOutputForward(0);
+  m_leftHoodMotor.ConfigNominalOutputReverse(0);
+  m_leftHoodMotor.ConfigPeakOutputForward(1);
+  m_leftHoodMotor.ConfigPeakOutputReverse(-1);
+
+  m_leftHoodMotor.ConfigMotionCruiseVelocity(1500);
+  m_leftHoodMotor.ConfigMotionAcceleration(1500);
+
+  m_leftHoodMotor.SetNeutralMode(NeutralMode::Brake);
 }
 
 // This method will be called once per scheduler run
@@ -39,4 +53,16 @@ double Shooter::GetMasterShooterVelocity() {
 
 double Shooter::GetSlaveShooterVelocity() {
   return m_slaveEncoder.GetVelocity();
+}
+
+void Shooter::MoveHoodForward() {
+  m_leftHoodMotor.Set( ControlMode::PercentOutput, 0.2 );
+}
+
+void Shooter::MoveHoodBackwawrd() {
+  m_leftHoodMotor.Set( ControlMode::PercentOutput, -0.2 );
+}
+
+void Shooter::StopHood() {
+  m_leftHoodMotor.Set( ControlMode::PercentOutput, 0.0);
 }

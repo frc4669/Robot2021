@@ -117,12 +117,17 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   void ReverseRelativeFront();
 
+  double GetLeftVel();
+  double GetRightVel();
+
+  void CurvatureDrive(double fwd, double rot, bool turnInPlace);
+
  private:
   // Motor controllers
-  WPI_TalonFX m_leftMaster{DriveConstants::kLeftMotor1Port};
-  WPI_TalonFX m_leftSlave{DriveConstants::kLeftMotor2Port};
-  WPI_TalonFX m_rightMaster{DriveConstants::kRightMotor1Port};
-  WPI_TalonFX m_rightSlave{DriveConstants::kRightMotor2Port};
+  WPI_TalonFX m_leftMaster{DriveConstants::kLeftFront};
+  WPI_TalonFX m_leftSlave{DriveConstants::kLeftBack};
+  WPI_TalonFX m_rightMaster{DriveConstants::kRightFront};
+  WPI_TalonFX m_rightSlave{DriveConstants::kRightBack};
 
   // Link motor controllers together (since we have two on each gearbox)
   frc::MotorControllerGroup m_leftMotors{m_leftMaster, m_leftSlave};

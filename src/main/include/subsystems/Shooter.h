@@ -5,7 +5,10 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <frc/motorcontrol/MotorControllerGroup.h>
+
 #include <rev/CANSparkMax.h>
+#include <ctre/Phoenix.h>       // talon
 
 #include <Constants.h>
 
@@ -44,6 +47,12 @@ class Shooter : public frc2::SubsystemBase {
    */
   double GetSlaveShooterVelocity();
 
+  void MoveHoodForward();
+
+  void MoveHoodBackwawrd();
+
+  void StopHood();
+
  private:
   // Our shooter motors
   rev::CANSparkMax m_masterShooterMotor{ ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless };
@@ -56,4 +65,9 @@ class Shooter : public frc2::SubsystemBase {
   // Motor encoders
   rev::SparkMaxRelativeEncoder m_masterEncoder{ m_masterShooterMotor.GetEncoder() };
   rev::SparkMaxRelativeEncoder m_slaveEncoder{ m_slaveShooterMotor.GetEncoder() };
+
+  WPI_TalonFX m_leftHoodMotor{ ShooterConstants::kHoodLeftPort };
+  WPI_TalonFX m_rightHoodMotor{ ShooterConstants::kHoodRightPort };
+
+  frc::MotorControllerGroup m_hoodMotors{ m_leftHoodMotor, m_rightHoodMotor };
 };

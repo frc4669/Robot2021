@@ -14,10 +14,18 @@ SetHoodAngle::SetHoodAngle(Shooter* shooter, bool raiseHood) {
 void SetHoodAngle::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void SetHoodAngle::Execute() {}
+void SetHoodAngle::Execute() {
+  if(raiseHood)
+    shooter->MoveHoodForward();
+  else
+    shooter->MoveHoodBackwawrd();
+}
 
 // Called once the command ends or is interrupted.
-void SetHoodAngle::End(bool interrupted) {}
+
+void SetHoodAngle::End(bool interrupted) {
+  shooter->StopHood();
+}
 
 // Returns true when the command should end.
 bool SetHoodAngle::IsFinished() {

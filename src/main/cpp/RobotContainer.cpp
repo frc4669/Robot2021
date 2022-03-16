@@ -9,6 +9,11 @@
 #include <commands/ShiftGear.h>
 #include <commands/RunShooter.h>
 #include <commands/ExtendArms.h>
+#include <commands/InverseMode.h>
+#include <commands/ManipulateIntakeArm.h>
+#include <commands/RunFeeder.h>
+#include <commands/RunIntake.h>
+#include <commands/SetHoodAngle.h>
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -19,7 +24,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Setup F310 joystick bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
-      {  m_drivetrain.ArcadeDrive(f310.getLeftY()*joyMultiplier, -f310.getRightX()*joyMultiplier); },
+      {  m_drivetrain.CurvatureDrive(f310.getLeftY()*joyMultiplier, -f310.getRightX()*joyMultiplier, true); },
       {  &m_drivetrain  }
   ));
 
@@ -27,14 +32,24 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 36.0) );  // Drive forward 36 inches when green button is pressed
-  f310.orangeButtonObject.WhenPressed ( DriveForward(&m_drivetrain, 12.0)); // Drive forward 12 inches when orange button is pressed
-  //f310.leftShoulderButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );    // Shift when left shoulder is pressed
+  //f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 36.0) );  // Drive forward 36 inches when green button is pressed
+  //f310.blueButtonObject.WhenPressed( DriveForward(&m_drivetrain, 5.607) );
+  //f310.redButtonObject.WhenPressed( DriveForward(&m_drivetrain, 56.07) );
+  //f310.orangeButtonObject.WhenPressed( DriveForward(&m_drivetrain, .5607)); // Drive forward 12 inches when orange button is pressed
+  //f310.orangeButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );    // Shift when left shoulder is pressed
+  //f310.greenButtonObject.WhenPressed( ManipulateIntakeArm(&m_intake) );
+  //f310.rightShoulderButtonObject.WhenHeld( RunIntake(&m_intake, false) );
+  //f310.leftShoulderButtonObject.WhenHeld( RunFeeder(&m_intake) );
+
+  f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) ); // raise hood angle
+  f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) ); // lower hood angle
 
   //f310.rightShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, -3500.0) );  // Run shooter at 1.0 when right shoulder is pressed
 
-  f310.leftShoulderButtonObject.WhenHeld( ExtendArms(&m_climber, true) ); //raise
-  f310.rightShoulderButtonObject.WhenHeld( ExtendArms(&m_climber, false) ); //lower
+  f310.orangeButtonObject.WhenHeld( ExtendArms(&m_climber, true) ); //raise
+  f310.greenButtonObject.WhenHeld( ExtendArms(&m_climber, false) ); //lower
+
+  //f310.leftShoulderButtonObject.WhenPressed( InverseMode(&m_drivetrain) );
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

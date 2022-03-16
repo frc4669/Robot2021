@@ -30,4 +30,7 @@ class DriveForward : public frc2::CommandHelper<frc2::CommandBase, DriveForward>
  private:
   Drivetrain* drivetrain;
   double targetDistance;
+
+  double leftLast = 0.0;
+  double rightLast = 0.0;
 };

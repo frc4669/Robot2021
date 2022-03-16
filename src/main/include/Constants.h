@@ -32,29 +32,29 @@ namespace VisionContants {
 
 
 namespace ClimbConstants {
-  constexpr int kLeftMotorPort = 3;
-  constexpr int kRightMotorPort = 4;
+  constexpr int kLeftMotorPort = 20;
+  constexpr int kRightMotorPort = 21;
 
   //constexpr auto kInchesHubHeight 10_in;
 } //namespace ClimbConstants
 
 namespace IntakeConstants {
-  constexpr int kIntakeMotorPort = 0;       // the primary intake
-  constexpr int kFeederMotorPort = 0;       // vertical feeder
+  constexpr int kIntakeMotorPort = 11;       // the primary intake
+  constexpr int kFeederMotorPort = 10;       // vertical feeder
 
   constexpr int kIntakeSolenoidForwardChannel = 0; // channel for extending intake arm
-  constexpr int kIntakeSolenoidReverseChannel = 0; // channel for retracting intake arm
+  constexpr int kIntakeSolenoidReverseChannel = 1; // channel for retracting intake arm
 } //namespace IntakeConstants
 
 namespace DriveConstants {
-  constexpr int kLeftMotor1Port = 14;
-  constexpr int kLeftMotor2Port = 11;
+  constexpr int kLeftFront = 50;
+  constexpr int kLeftBack = 51;
 
-  constexpr int kRightMotor1Port = 12;
-  constexpr int kRightMotor2Port = 13;
+  constexpr int kRightFront = 52;
+  constexpr int kRightBack = 53;
 
-  constexpr int kGearShifterForwardChannel = 5;     // The forward channel on the module to control
-  constexpr int kGearShifterReverseChannel = 4;     // The reverse channel on the module to control
+  constexpr int kGearShifterForwardChannel = 2;     // red tape blue tube
+  constexpr int kGearShifterReverseChannel = 3;     // non tape blue tube
   
   constexpr auto ks = 1_V;
   constexpr auto kv = 0.8_V * 1_s / 1_m;
@@ -67,7 +67,7 @@ namespace DriveConstants {
 
   constexpr double kWheelDiameter = 6;                  // Wheel diameter; dont change unless using different wheels
   constexpr double kPi = 3.14159265359;                 // Value of PI; dont change unless bending rules of mathematics
-  constexpr double kTicksPerRev = 4096;                 // Ticks per revolution; dont change
+  constexpr double kTicksPerRev = 2048;                 // Ticks per revolution; dont change
   constexpr double kWheelCirc = kWheelDiameter * kPi;   // Wheel circumference; dont change unless bending rules of mathematics
 
   // Gear ratios prior to shifter portion
@@ -97,6 +97,9 @@ namespace DriveConstants {
 namespace ShooterConstants {
   constexpr int kShooterMasterPort = 8;
   constexpr int kShooterSlavePort = 9;
+
+  constexpr int kHoodLeftPort = 30;
+  constexpr int kHoodRightPort = 31; 
 } // namespace ShooterConstants
 
 namespace OperatorConstants {

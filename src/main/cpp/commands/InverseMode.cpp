@@ -10,7 +10,9 @@ InverseMode::InverseMode(Drivetrain* drivetrain) {
 }
 
 // Called when the command is initially scheduled.
-void InverseMode::Initialize() {}
+void InverseMode::Initialize() {
+  drivetrain->ReverseRelativeFront();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void InverseMode::Execute() {}
@@ -20,5 +22,5 @@ void InverseMode::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool InverseMode::IsFinished() {
-  return false;
+  return true;
 }

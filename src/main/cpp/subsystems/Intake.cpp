@@ -7,8 +7,8 @@
 
 Intake::Intake() {
   // Start robot with intake retracted
-  if (IsArmExtended())
-    ManipulateArm();
+  m_intakeArm.Set(frc::DoubleSolenoid::kReverse);
+  m_intakeMotor.SetInverted(true);
 }
 
 // This method will be called once per scheduler run

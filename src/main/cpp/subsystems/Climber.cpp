@@ -5,6 +5,7 @@
 #include "subsystems/Climber.h"
 
 Climber::Climber() {
+  m_leftMotor.SetInverted(true);
   m_leftMotor.Set(ControlMode::Follower, ClimbConstants::kRightMotorPort); //follow right climb motor
 
   m_rightMotor.ConfigNominalOutputForward(0);
@@ -14,17 +15,19 @@ Climber::Climber() {
 
   m_rightMotor.ConfigMotionCruiseVelocity(1500); // 2500
   m_rightMotor.ConfigMotionAcceleration(1500);
+
+  m_rightMotor.SetNeutralMode(NeutralMode::Brake);
 };
 
 // This method will be called once per scheduler run
 void Climber::Periodic() {}
 
 void Climber::RaiseExtendingArms() {
-  m_rightMotor.Set(ControlMode::PercentOutput, 0.2);
+  m_rightMotor.Set(ControlMode::PercentOutput, 0.8);
 }
 
 void Climber::LowerExtendingArms() {
-  m_rightMotor.Set(ControlMode::PercentOutput, -0.2);
+  m_rightMotor.Set(ControlMode::PercentOutput, -0.8);
 }
 
 void Climber::StopExtendingArms() {
