@@ -47,10 +47,9 @@ class Drivetrain : public frc2::SubsystemBase {
   /**
    * Drive robot given a set distance using encoders
    *
-   * @param inches Distance to travel
-   * @param velocity Velocity to travel at (by default 40000)
+   * @param ticksToTravel Distance to travel in ticks
    */
-  void DriveForward(double inches, double velocity);
+  void DriveForward(double ticksToTravel);
 
   /**
    * Rotate robot using given angle where positive is clockwise, and vice versa
