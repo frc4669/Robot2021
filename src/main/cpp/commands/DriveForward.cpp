@@ -15,10 +15,10 @@ DriveForward::DriveForward(Drivetrain* drivetrain, double targetInchesDistance) 
 // Called when the command is initially scheduled.
 void DriveForward::Initialize() {
   drivetrain->ResetEncoders(); // Reset encoders so we don't finish early
-  targetInchesDistance = drivetrain->GetTicksToTravel(targetInchesDistance);
+  targetTicksDistance = drivetrain->GetTicksToTravel(targetInchesDistance);
 
-  frc::SmartDashboard::PutNumber("DriveForward ticks", targetInchesDistance); // display ticks needed for the command call
-  drivetrain->DriveForward(targetDistance); // call motion magic with how many ticks we want to travel
+  frc::SmartDashboard::PutNumber("DriveForward ticks", targetTicksDistance); // display ticks needed for the command call
+  drivetrain->DriveForward(targetTicksDistance); // call motion magic with how many ticks we want to travel
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -30,8 +30,8 @@ void DriveForward::End(bool interrupted) {}
 // Returns true when the command should end.
 bool DriveForward::IsFinished() {
   double leftVelocity = drivetrain->GetLeftVel();
-  double rightVelocity = drivetrain->GetRightVel()
+  double rightVelocity = drivetrain->GetRightVel();
 
   // Check if we've stopped moving
-  return abs(10-leftVelocity) < 10 && abs(10-rightVelocity) < 10;
+  return ( abs(10-leftVelocity) < 10 ) && ( abs(10-rightVelocity) < 10 );
 }
