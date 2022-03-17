@@ -35,23 +35,61 @@ class Climber : public frc2::SubsystemBase {
    */
   void StopExtendingArms();
 
+  /**
+   * Gets the current encoder position of the right climber motor.
+   * 
+   * @return encoder position of the right climber motor 
+   */
+  double GetRightPostion();
+
+  /**
+   * Gets the current encoder position of the left climber motor.
+   * 
+   * @return encoder position of the left climber motor 
+   */
+  double GetLeftPosition();
+
+  /**
+   * Lowers both arms to their starting positions making sure they're in sync.
+   */
   void ZeroArms();
 
+  /**
+   * Check if the right climber is hitting its limit switch. 
+   * If true, you cannot lower the arm any more.
+   * 
+   * @return true if the right climber is at its limit switch, false otherwise.
+   */
   bool IsRightLimitHit();
 
+  /**
+   * Check if the left climber is hitting its limit switch. 
+   * If true, you cannot lower the arm any more.
+   * 
+   * @return true if the left climber is at its limit switch, false otherwise.
+   */
   bool IsLeftLimitHit();
 
+  /**
+   * Check if the climbing arms have been zeroed and are in sync.
+   * 
+   * @return true if the arms are in have been zeroed (synced), false otherwise.
+   */
   bool AreArmsZeroed();
 
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-  WPI_TalonFX m_leftMotor{ ClimbConstants::kLeftMotorPort };    // master motor
-  WPI_TalonFX m_rightMotor{ ClimbConstants::kRightMotorPort };  // slave motor
+  WPI_TalonFX m_masterMotor{ ClimbConstants::kRightMotorPort };  // Leading motor, right side
+  WPI_TalonFX m_slaveMotor{ ClimbConstants::kLeftMotorPort };    // Following Motor, left side
 
-  frc::MotorControllerGroup m_climbMotors{ m_leftMotor, m_rightMotor} ;
+  frc::MotorControllerGroup m_climbMotors{ m_slaveMotor, m_masterMotor };
 
+  bool m_armsZeroed = false;  // Whether the arms have been zeroed and are in sync
+
+  /**
+   * Configure motor to desired settings
+   *
+   * @param motor Motor to configure
+   * @param invert Whether to invert the motor
+   */
   void ConfigureMotor(WPI_TalonFX &motor, bool inverted);
-
-  bool armsZeroed = false;
 };
