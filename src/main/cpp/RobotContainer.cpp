@@ -52,7 +52,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   //f310.leftShoulderButtonObject.WhenPressed( InverseMode(&m_drivetrain) );
 
-  f310.leftShoulderButtonObject.WhenHeld( RunShooter(&m_shooter, 4000) );
+  f310.leftShoulderButtonObject.WhenHeld( RunShooter(&m_shooter) );
   
 }
 

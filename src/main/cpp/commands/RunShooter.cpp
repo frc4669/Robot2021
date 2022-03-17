@@ -4,10 +4,9 @@
 
 #include "commands/RunShooter.h"
 
-RunShooter::RunShooter(Shooter* shooter, double targetVelocity) {
+RunShooter::RunShooter(Shooter* shooter) {
   AddRequirements({ shooter });
   this->shooter = shooter;
-  this->targetVelocity = targetVelocity;
 }
 
 // Called when the command is initially scheduled.
@@ -15,7 +14,7 @@ void RunShooter::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
-  shooter->RunShooter(targetVelocity);
+  shooter->RunShooter();
 }
 
 // Called once the command ends or is interrupted.

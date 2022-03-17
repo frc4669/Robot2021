@@ -16,9 +16,8 @@ class RunShooter : public frc2::CommandHelper<frc2::CommandBase, RunShooter> {
    * Run the shooter motors at a given velocity.
    *
    * @param shooter a Shooter object pointer
-   * @param targetVelocity the speed to run the shooter at
    */
-  RunShooter(Shooter* shooter, double targetVelocity);
+  RunShooter(Shooter* shooter);
 
   void Initialize() override;
 
@@ -30,5 +29,4 @@ class RunShooter : public frc2::CommandHelper<frc2::CommandBase, RunShooter> {
 
  private:
   Shooter* shooter;
-  double targetVelocity;
 };
