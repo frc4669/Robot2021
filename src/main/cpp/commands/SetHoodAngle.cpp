@@ -15,10 +15,10 @@ void SetHoodAngle::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void SetHoodAngle::Execute() {
-  if(raiseHood)
+  if (raiseHood)
     shooter->MoveHoodForward();
   else
-    shooter->MoveHoodBackwawrd();
+    shooter->MoveHoodBackward();
 }
 
 // Called once the command ends or is interrupted.

@@ -47,6 +47,8 @@ class Intake : public frc2::SubsystemBase {
 
   /**
    * Run feeder motor
+   * 
+   * @param runReverse whether to reverse the feeder
    */
   void RunFeeder(bool runReverse);
 
@@ -57,12 +59,12 @@ class Intake : public frc2::SubsystemBase {
 
  private:
   // Motor controller for main intake
-  WPI_TalonSRX m_intakeMotor{IntakeConstants::kIntakeMotorPort};
+  WPI_TalonSRX m_intakeMotor{ IntakeConstants::kIntakeMotorPort };
 
   // Motor controller for vertical feeder
-  WPI_TalonSRX m_feederMotor{IntakeConstants::kFeederMotorPort};
+  WPI_TalonSRX m_feederMotor{ IntakeConstants::kFeederMotorPort };
 
   // Intake arm
-  frc::DoubleSolenoid m_intakeArm{frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kIntakeSolenoidForwardChannel, IntakeConstants::kIntakeSolenoidReverseChannel};
+  frc::DoubleSolenoid m_intakeArm{ frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kIntakeSolenoidForwardChannel, IntakeConstants::kIntakeSolenoidReverseChannel };
   bool m_intakeArmExtended = false; //start with intake arm retracted
 };

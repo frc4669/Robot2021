@@ -32,8 +32,16 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   void CurvatureDrive(double fwd, double rot);
 
+  /**
+   * Toggle if we should be in ArcadeDrive or CurvatureDrive mode.
+   */
   void ToggleCurvatureTurnInPlace();
 
+  /**
+   * Gets current status of being able to turn in place.
+   * 
+   * @return true if we can turn in place, false otherwise
+   */
   bool GetCurvatureTurnInPlaceStatus();
 
   /**
@@ -120,28 +128,41 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   void ReverseRelativeFront();
 
+  /**
+   * Gets the left gearbox's velocity
+   * 
+   * @return left gearbox's velocity
+   */
   double GetLeftVel();
+
+  /**
+   * Gets the right gearbox's velocity
+   * 
+   * @return right gearbox's velocity
+   */
   double GetRightVel();
 
  private:
   // Motor controllers
-  WPI_TalonFX m_leftMaster{DriveConstants::kLeftFront};
-  WPI_TalonFX m_leftSlave{DriveConstants::kLeftBack};
-  WPI_TalonFX m_rightMaster{DriveConstants::kRightFront};
-  WPI_TalonFX m_rightSlave{DriveConstants::kRightBack};
+  WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFront };
+  WPI_TalonFX m_leftSlave{ DriveConstants::kLeftBack };
+  WPI_TalonFX m_rightMaster{ DriveConstants::kRightFront };
+  WPI_TalonFX m_rightSlave{ DriveConstants::kRightBack };
 
   // Link motor controllers together (since we have two on each gearbox)
-  frc::MotorControllerGroup m_leftMotors{m_leftMaster, m_leftSlave};
-  frc::MotorControllerGroup m_rightMotors{m_rightMaster, m_rightSlave};
+  frc::MotorControllerGroup m_leftMotors{ m_leftMaster, m_leftSlave };
+  frc::MotorControllerGroup m_rightMotors{ m_rightMaster, m_rightSlave };
 
   // Robot's main drive object
-  frc::DifferentialDrive m_drive{m_leftMotors, m_rightMotors};
+  frc::DifferentialDrive m_drive{ m_leftMotors, m_rightMotors };
 
   // Shifter for gearboxes (solenoid)
-  frc::DoubleSolenoid m_shifter{frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel};
-  bool m_shiftedToHighGear = false; // starting in low gear (since we shift the gear into low gear when we start)
+  frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel };
+  bool m_shiftedToHighGear = false; // whether we are in low gear or not
 
-  frc::ADIS16470_IMU m_imu{};
+  frc::ADIS16470_IMU m_imu{ };
+
+  bool m_curvatureDriveTurnInPlace = true; // whether we are able to turn in place
 
   /**
    * Configure motor to desired settings
@@ -150,6 +171,4 @@ class Drivetrain : public frc2::SubsystemBase {
    * @param invert Whether to invert the motor
    */
   void ConfigureMotor(WPI_TalonFX &motor, bool inverted);
-
-  bool m_curvatureDriveTurnInPlace = true;
 };

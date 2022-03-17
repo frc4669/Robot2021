@@ -25,23 +25,24 @@ Drivetrain::Drivetrain() {
   // Shift into low gear by default (because we don't know if the last session was left in high gear)
   m_shifter.Set(frc::DoubleSolenoid::kReverse);
 
-  frc::Shuffleboard::GetTab("IMU Gyro").Add(m_imu);
+  //frc::Shuffleboard::GetTab("IMU Gyro").Add(m_imu); //!: Come back to this
 }
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {
   // setup smartdashboard to show our drivetrain values
-  frc::SmartDashboard::PutNumber("Left Encoder", m_leftMaster.GetSelectedSensorPosition());
-  frc::SmartDashboard::PutNumber("Right Encoder", m_rightMaster.GetSelectedSensorPosition());
+  frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
+  frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
 
-  frc::SmartDashboard::PutNumber("Left Velocity", m_leftMaster.GetSelectedSensorVelocity());
-  frc::SmartDashboard::PutNumber("Right Velocity", m_rightMaster.GetSelectedSensorVelocity());
+  frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVel());
+  frc::SmartDashboard::PutNumber("Right Velocity", GetRightVel());
 
   frc::SmartDashboard::PutBoolean("Shifted to High", IsShiftedToHighGear());
 }
 
 void Drivetrain::CurvatureDrive(double fwd, double rot) {
-  m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace); // when 3rd param is true; mimics arcade drive
+  //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
+  m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace);
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
@@ -98,10 +99,9 @@ double Drivetrain::GetRightEncoderDistance() {
   return m_rightMaster.GetSensorCollection().GetIntegratedSensorPosition();
 }
 
-
 units::degree_t Drivetrain::GetHeading() {
   // return units::degree_t(std::remainder(m_imu.GetAngle(), 360.0)) * (DriveConstants::kGyroReversed ? -1.0 : 1.0); // !: Come back to this
-  return units::degree_t(0); // temp
+  return units::degree_t(0);
 }
 
 frc::ADIS16470_IMU& Drivetrain::GetIMU() {
@@ -121,7 +121,6 @@ void Drivetrain::ShiftGear() {
 bool Drivetrain::IsShiftedToHighGear() {
   return m_shiftedToHighGear;
 }
-
 
 void Drivetrain::ReverseRelativeFront() {
   // basically gets the inverted status and adds "!" to it which inverts it

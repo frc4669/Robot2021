@@ -38,13 +38,13 @@ void Shooter::Periodic() {
   frc::SmartDashboard::PutNumber("Slave Shooter Velocity", GetSlaveShooterVelocity());
 }
 
-void Shooter::RunShooter(double velocity) {
-  m_masterPIDController.SetReference(velocity, rev::ControlType::kVelocity);
-  // Slave shooter motor not set because it's already following the master motor
+void Shooter::RunShooter() {
+  m_masterPIDController.SetReference(m_shooterVelocity, rev::ControlType::kVelocity);
+  //?: Slave shooter motor not set because it's already following the master motor
 }
 
 void Shooter::StopShooter() {
-  RunShooter(0);
+  m_masterPIDController.SetReference(0.0, rev::ControlType::kVelocity);
 }
 
 double Shooter::GetMasterShooterVelocity() {
@@ -56,13 +56,13 @@ double Shooter::GetSlaveShooterVelocity() {
 }
 
 void Shooter::MoveHoodForward() {
-  m_leftHoodMotor.Set( ControlMode::PercentOutput, -0.2 );
+  m_leftHoodMotor.Set(ControlMode::PercentOutput, -m_hoodMoveSpeed);
 }
 
-void Shooter::MoveHoodBackwawrd() {
-  m_leftHoodMotor.Set( ControlMode::PercentOutput, 0.2 );
+void Shooter::MoveHoodBackward() {
+  m_leftHoodMotor.Set(ControlMode::PercentOutput, m_hoodMoveSpeed);
 }
 
 void Shooter::StopHood() {
-  m_leftHoodMotor.Set( ControlMode::PercentOutput, 0.0);
+  m_leftHoodMotor.Set(ControlMode::PercentOutput, 0.0);
 }

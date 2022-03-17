@@ -22,11 +22,9 @@ class Shooter : public frc2::SubsystemBase {
   void Periodic() override;
 
   /**
-   * Run the shooter at a given speed
-   *
-   * @param velocity the speed to run the shooter at
+   * Run the shooter with a given velocity.
    */
-  void RunShooter(double velocity);
+  void RunShooter();
 
   /**
    * Stop the shooter
@@ -46,12 +44,84 @@ class Shooter : public frc2::SubsystemBase {
    * @return the current velocity of the slave shooter
    */
   double GetSlaveShooterVelocity();
+  
+  /**
+   * Get the current set velocity of the shooter system.
+   * 
+   * @return set velocity of the shooter system
+   */
+  double GetSetVelocityPoint();
 
+  /**
+   * Get the max velocity of the shooter system.
+   * 
+   * @return max velocity of the shooter system
+   */
+  double GetMaxVelocity();
+
+  /**
+   * Raise the hood, making a smaller angle.
+   */
   void MoveHoodForward();
 
-  void MoveHoodBackwawrd();
+  /**
+   * Lower the hood, making a larger angle.
+   */
+  void MoveHoodBackward();
 
+  /**
+   * Stop the hood motors.
+   */
   void StopHood();
+
+  /**
+   * Zero the hood to the largest angle. 
+   * This is so both hood motors are synchronized.
+   */
+  void ZeroHood();
+
+  /**
+   * Returns whether the hood has been zeroed. 
+   * Meaning both hood motors are synchronized.
+   * 
+   * @return whether the hood has been zeroed
+   */
+  bool IsHoodZeroed();
+
+  /**
+   * Sets the hood to a given angle.
+   * 
+   * @param angle in degrees
+   */
+  void SetHoodAngle(double angle);
+
+  /**
+   * Returns the current angle of the hood.
+   * 
+   * @return the current angle of the hood
+   */
+  double GetHoodAngle();
+
+  /**
+   * Switches between Coast and Brake mode while 
+   * the hood is neutral.
+   */
+  void SwitchHoodNeutralMode();
+
+  /**
+   * Returns whether the hood is in Break mode while 
+   * the hood is neutral.
+   * 
+   * @return whether the hood is in Break mode 
+   */
+  bool IsHoodInBreakMode();
+
+  /**
+   * Sets how fast the hood will move.
+   * 
+   * @param speed percentage of max speed
+   */
+  void SetHoodMoveSpeed(double speed);
 
  private:
   // Our shooter motors
@@ -70,4 +140,12 @@ class Shooter : public frc2::SubsystemBase {
   WPI_TalonFX m_rightHoodMotor{ ShooterConstants::kHoodRightPort };
 
   frc::MotorControllerGroup m_hoodMotors{ m_leftHoodMotor, m_rightHoodMotor };
+
+  double m_shooterVelocity = 4000;
+  double m_maxShooterVelocity = 5600; //!: 5800 is the true max but we want make sure we dont go near that
+
+  double m_hoodAngle = 0;
+  double m_lowestHoodAngle = 90.0;
+
+  double m_hoodMoveSpeed = 0.2;
 };
