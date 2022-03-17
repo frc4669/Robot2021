@@ -142,7 +142,7 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 25, 25, 0.5));
 
   // time it takes for the motor to go from 0 to full power (in seconds) in an open/closed loop
-  motor.ConfigOpenloopRamp(1.4);
+  motor.ConfigOpenloopRamp(2);
   motor.ConfigClosedloopRamp(0);
 
   // when controller is neutral, set motor to break

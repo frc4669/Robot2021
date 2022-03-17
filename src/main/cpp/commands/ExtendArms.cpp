@@ -15,10 +15,12 @@ void ExtendArms::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ExtendArms::Execute() {
-  if(isRaising)
-    climber->RaiseExtendingArms();
-  else
-    climber->LowerExtendingArms();
+  if(climber->AreArmsZeroed()) {
+    if(isRaising)
+      climber->RaiseExtendingArms();
+    else
+      climber->LowerExtendingArms();
+  }
 }
 
 // Called once the command ends or is interrupted.

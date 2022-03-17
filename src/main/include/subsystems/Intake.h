@@ -48,7 +48,7 @@ class Intake : public frc2::SubsystemBase {
   /**
    * Run feeder motor
    */
-  void RunFeeder();
+  void RunFeeder(bool runReverse);
 
   /**
    * Stop feeder motor

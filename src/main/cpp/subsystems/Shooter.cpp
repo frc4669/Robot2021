@@ -7,8 +7,8 @@
 
 Shooter::Shooter() {
   // Invert motors if needed
-  m_masterShooterMotor.SetInverted(false);
-  m_slaveShooterMotor.SetInverted(false);
+  m_masterShooterMotor.SetInverted(true);
+  m_slaveShooterMotor.SetInverted(true);
 
   // Set slave motor to follow master motor
   m_slaveShooterMotor.Follow(m_masterShooterMotor, true);
@@ -18,7 +18,7 @@ Shooter::Shooter() {
   m_masterPIDController.SetFF(0.0002);  // kFF
 
   // Setup hood motors
-  m_leftHoodMotor.SetInverted(true);
+  m_rightHoodMotor.SetInverted(true);
   m_rightHoodMotor.Follow(m_leftHoodMotor); //follow left climb motor
 
   m_leftHoodMotor.ConfigNominalOutputForward(0);
@@ -56,11 +56,11 @@ double Shooter::GetSlaveShooterVelocity() {
 }
 
 void Shooter::MoveHoodForward() {
-  m_leftHoodMotor.Set( ControlMode::PercentOutput, 0.2 );
+  m_leftHoodMotor.Set( ControlMode::PercentOutput, -0.2 );
 }
 
 void Shooter::MoveHoodBackwawrd() {
-  m_leftHoodMotor.Set( ControlMode::PercentOutput, -0.2 );
+  m_leftHoodMotor.Set( ControlMode::PercentOutput, 0.2 );
 }
 
 void Shooter::StopHood() {

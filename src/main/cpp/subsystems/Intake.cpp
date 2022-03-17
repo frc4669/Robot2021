@@ -32,17 +32,20 @@ bool Intake::IsArmExtended() {
 
 void Intake::RunIntake(bool runReverse) {
   if (runReverse)
-    m_intakeMotor.Set(ControlMode::PercentOutput, -0.5);
+    m_intakeMotor.Set(ControlMode::PercentOutput, -0.8);
   else
-    m_intakeMotor.Set(ControlMode::PercentOutput, 0.5);
+    m_intakeMotor.Set(ControlMode::PercentOutput, 0.8);
 }
 
 void Intake::StopIntake() {
   m_intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 }
 
-void Intake::RunFeeder() {
-  m_feederMotor.Set(ControlMode::PercentOutput, 0.5);
+void Intake::RunFeeder(bool runReverse) {
+  if (runReverse)
+    m_feederMotor.Set(ControlMode::PercentOutput, -0.5);
+  else
+    m_feederMotor.Set(ControlMode::PercentOutput, 0.5);
 }
 
 void Intake::StopFeeder() {

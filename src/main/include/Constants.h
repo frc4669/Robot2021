@@ -95,8 +95,8 @@ namespace DriveConstants {
 } // namespace DriveConstants
 
 namespace ShooterConstants {
-  constexpr int kShooterMasterPort = 8;
-  constexpr int kShooterSlavePort = 9;
+  constexpr int kShooterMasterPort = 46;
+  constexpr int kShooterSlavePort = 47;
 
   constexpr int kHoodLeftPort = 30;
   constexpr int kHoodRightPort = 31; 

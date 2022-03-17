@@ -35,6 +35,14 @@ class Climber : public frc2::SubsystemBase {
    */
   void StopExtendingArms();
 
+  void ZeroArms();
+
+  bool IsRightLimitHit();
+
+  bool IsLeftLimitHit();
+
+  bool AreArmsZeroed();
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
@@ -42,4 +50,8 @@ class Climber : public frc2::SubsystemBase {
   WPI_TalonFX m_rightMotor{ ClimbConstants::kRightMotorPort };  // slave motor
 
   frc::MotorControllerGroup m_climbMotors{ m_leftMotor, m_rightMotor} ;
+
+  void ConfigureMotor(WPI_TalonFX &motor, bool inverted);
+
+  bool armsZeroed = false;
 };

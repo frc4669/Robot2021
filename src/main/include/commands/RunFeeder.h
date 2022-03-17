@@ -17,7 +17,7 @@ class RunFeeder : public frc2::CommandHelper<frc2::CommandBase, RunFeeder> {
    *
    * @param intake an Intake object pointer
    */
-  RunFeeder(Intake* intake);
+  RunFeeder(Intake* intake, bool runReverse);
 
   void Initialize() override;
 
@@ -29,4 +29,5 @@ class RunFeeder : public frc2::CommandHelper<frc2::CommandBase, RunFeeder> {
 
  private:
   Intake* intake;
+  bool runReverse;
 };

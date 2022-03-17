@@ -4,9 +4,10 @@
 
 #include "commands/RunFeeder.h"
 
-RunFeeder::RunFeeder(Intake* intake) {
+RunFeeder::RunFeeder(Intake* intake, bool runReverse) {
   AddRequirements( {intake} );
   this->intake = intake;  
+  this->runReverse = runReverse;
 }
 
 // Called when the command is initially scheduled.
@@ -14,7 +15,7 @@ void RunFeeder::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void RunFeeder::Execute() {
-  intake->RunFeeder();
+  intake->RunFeeder(runReverse);
 }
 
 // Called once the command ends or is interrupted.
