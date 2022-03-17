@@ -15,7 +15,7 @@ void ExtendArms::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ExtendArms::Execute() {
-  if(climber->AreArmsZeroed()) {
+  if(climber->AreArmsZeroed()) {  //?: to avoid moving the arms while they're zeroing.
     if(isRaising)
       climber->RaiseExtendingArms();
     else

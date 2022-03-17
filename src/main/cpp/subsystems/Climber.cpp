@@ -12,12 +12,12 @@ Climber::Climber() {
 
 // This method will be called once per scheduler run
 void Climber::Periodic() {
-  frc::SmartDashboard::PutNumber("right climb", abs(m_masterMotor.GetSensorCollection().GetIntegratedSensorPosition()));
-  frc::SmartDashboard::PutNumber("left climb", abs(m_slaveMotor.GetSensorCollection().GetIntegratedSensorPosition()));
+  frc::SmartDashboard::PutNumber("Right Climber Position", GetRightPostion());
+  frc::SmartDashboard::PutNumber("Left Climber Position", GetLeftPosition());
 
-  frc::SmartDashboard::PutBoolean("right switch", IsRightLimitHit());
-  frc::SmartDashboard::PutBoolean("left switch", IsLeftLimitHit());
-  frc::SmartDashboard::PutBoolean("arms zeroed", AreArmsZeroed());
+  frc::SmartDashboard::PutBoolean("Right Limit Switch", IsRightLimitHit());
+  frc::SmartDashboard::PutBoolean("Left Limit Switch", IsLeftLimitHit());
+  frc::SmartDashboard::PutBoolean("Arms Zeroed", AreArmsZeroed());
 
   if(AreArmsZeroed() == false)
     ZeroArms();
