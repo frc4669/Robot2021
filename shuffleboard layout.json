@@ -1,0 +1,319 @@
+{
+  "tabPane": [
+    {
+      "title": "SmartDashboard",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 18.0,
+        "vgap": 20.0,
+        "titleType": 0,
+        "tiles": {
+          "3,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Encoder",
+              "_title": "Left Encoder"
+            }
+          },
+          "2,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Encoder",
+              "_title": "Right Encoder"
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Shooter Data",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Master Shooter Active Velocity",
+                  "_title": "Master Shooter Active Velocity",
+                  "Range/Min": 0.0,
+                  "Range/Max": 5800.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Slave Shooter Active Velocity",
+                  "_title": "Slave Shooter Active Velocity",
+                  "Range/Min": 0.0,
+                  "Range/Max": 5800.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Shooter Set Velocity",
+                  "_title": "Shooter Set Velocity",
+                  "Range/Min": 0.0,
+                  "Range/Max": 5800.0,
+                  "Visuals/Show value": true
+                }
+              ]
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              5
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Hood Data",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Hood Current Angle",
+                  "_title": "Hood Current Angle",
+                  "Range/Min": 0.0,
+                  "Range/Max": 100.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Hood Active Velocity",
+                  "_title": "Hood Active Velocity",
+                  "Range/Min": -100.0,
+                  "Range/Max": 100.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Hood Move Speed Percentage",
+                  "_title": "Hood Move Speed Percentage",
+                  "Range/Min": 0.0,
+                  "Range/Max": 1.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Hood Neutral Brake Mode",
+                  "_title": "Hood Neutral Brake Mode",
+                  "Colors/Color when true": "#663366FF",
+                  "Colors/Color when false": "#334DB3FF"
+                }
+              ]
+            }
+          },
+          "6,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Intake Data",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Intake Active Motor Velocity",
+                  "_title": "Intake Active Motor Velocity",
+                  "Range/Min": -100.0,
+                  "Range/Max": 100.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Feeder Active Motor Velocity",
+                  "_title": "Feeder Active Motor Velocity",
+                  "Range/Min": -100.0,
+                  "Range/Max": 100.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Intake Arm Deployed",
+                  "_title": "Intake Arm Deployed",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
+            }
+          },
+          "0,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Basic Subsystem",
+              "_title": "Command Status"
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              5
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Climber Data",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Right Climber Position",
+                  "_title": "Right Climber Position",
+                  "Range/Min": 0.0,
+                  "Range/Max": 10000.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Right Limit Switch Triggered",
+                  "_title": "Right Limit Switch Triggered",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Left Climber Position",
+                  "_title": "Left Climber Position",
+                  "Range/Min": 0.0,
+                  "Range/Max": 10000.0,
+                  "Visuals/Show value": true
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Left Limit Switch Triggered",
+                  "_title": "Left Limit Switch Triggered",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Arms Zeroed",
+              "_title": "Arms Zeroed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Grid Layout",
+              "_title": "Drivetrain Data",
+              "Layout/Number of columns": 2,
+              "Layout/Number of rows": 3,
+              "Layout/Label position": "BOTTOM",
+              "_children": {
+                "0,0": {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Left Velocity",
+                  "_title": "Left Velocity",
+                  "Range/Min": -1000.0,
+                  "Range/Max": 1000.0,
+                  "Visuals/Show value": true
+                },
+                "1,0": {
+                  "_type": "Simple Dial",
+                  "_source0": "network_table:///SmartDashboard/Right Velocity",
+                  "_title": "Right Velocity",
+                  "Range/Min": -1000.0,
+                  "Range/Max": 1000.0,
+                  "Visuals/Show value": true
+                },
+                "0,1": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Can Turn In Place",
+                  "_title": "Can Turn In Place",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                "1,1": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/In High Gear",
+                  "_title": "In High Gear",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                "0,2": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Forward Towards Intake",
+                  "_title": "Forward Towards Intake",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              }
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Hood Zeroed",
+              "_title": "Hood Zeroed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,3": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Differential Drivebase",
+              "_title": "Drivebase Power",
+              "Wheels/Number of wheels": 4,
+              "Wheels/Wheel diameter": 80.0,
+              "Visuals/Show velocity vectors": true
+            }
+          },
+          "11,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Vision Data",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          }
+        }
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": -8.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1066.0
+  }
+}
