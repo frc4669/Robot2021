@@ -57,6 +57,10 @@ class Intake : public frc2::SubsystemBase {
    */
   void StopFeeder();
 
+  double GetIntakeVelocity();
+
+  double GetFeederVelocity();
+
  private:
   // Motor controller for main intake
   WPI_TalonSRX m_intakeMotor{ IntakeConstants::kIntakeMotorPort };

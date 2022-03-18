@@ -14,6 +14,8 @@ Intake::Intake() {
 // This method will be called once per scheduler run
 void Intake::Periodic() {
   frc::SmartDashboard::PutBoolean("Intake Arm Deployed", IsArmExtended());
+  frc::SmartDashboard::PutNumber("Intake Active Motor Velocity", GetIntakeVelocity());
+  frc::SmartDashboard::PutNumber("Feeder Active Motor Velocity", GetFeederVelocity());
 }
 
 void Intake::ManipulateArm() {
@@ -50,4 +52,12 @@ void Intake::RunFeeder(bool runReverse) {
 
 void Intake::StopFeeder() {
   m_feederMotor.Set(ControlMode::PercentOutput, 0.0);
+}
+
+double Intake::GetIntakeVelocity() {
+  return m_intakeMotor.GetSensorCollection().GetQuadratureVelocity();
+}
+
+double Intake::GetFeederVelocity() {
+  return m_feederMotor.GetSensorCollection().GetQuadratureVelocity();
 }
