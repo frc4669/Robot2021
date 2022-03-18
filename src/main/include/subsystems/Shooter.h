@@ -160,4 +160,6 @@ class Shooter : public frc2::SubsystemBase {
   double m_lowestHoodAngle = 90.0;
 
   double m_hoodMoveSpeed = 0.10;
+
+  bool m_hoodNeutralBrakeMode = false;
 };
