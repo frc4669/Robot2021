@@ -4,9 +4,10 @@
 
 #include "commands/AlignToTarget.h"
 
-AlignToTarget::AlignToTarget(Drivetrain* drivetrain) {
-  AddRequirements( {drivetrain} );
+AlignToTarget::AlignToTarget(Drivetrain* drivetrain, Vision* vision) {
+  AddRequirements( {drivetrain, vision} );
   this->drivetrain = drivetrain;
+  this->vision = vision;
 }
 
 // Called when the command is initially scheduled.

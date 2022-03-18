@@ -10,12 +10,12 @@ SwitchHoodNeutralMode::SwitchHoodNeutralMode(Shooter* shooter) {
 }
 
 // Called when the command is initially scheduled.
-void SwitchHoodNeutralMode::Initialize() {}
-
-// Called repeatedly when this Command is scheduled to run
-void SwitchHoodNeutralMode::Execute() {
+void SwitchHoodNeutralMode::Initialize() {
   shooter->SwitchHoodNeutralMode();
 }
+
+// Called repeatedly when this Command is scheduled to run
+void SwitchHoodNeutralMode::Execute() {}
 
 // Called once the command ends or is interrupted.
 void SwitchHoodNeutralMode::End(bool interrupted) {}

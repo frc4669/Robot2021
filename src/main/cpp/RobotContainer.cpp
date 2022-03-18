@@ -12,8 +12,13 @@
 #include <commands/InverseMode.h>
 #include <commands/ManipulateIntakeArm.h>
 #include <commands/RunFeeder.h>
-#include <commands/RunIntake.h>
 #include <commands/SetHoodAngle.h>
+
+#include <commands/IntakeCargo.h>
+#include <commands/AlignToTarget.h>
+#include <commands/SwitchHoodNeutralMode.h>
+#include <commands/IncrementShooterSetSpeed.h>
+
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -32,28 +37,31 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  //f310.greenButtonObject.WhenPressed( DriveForward(&m_drivetrain, 36.0) );  // Drive forward 36 inches when green button is pressed
-  //f310.blueButtonObject.WhenPressed( DriveForward(&m_drivetrain, 5.607) );
-  //f310.redButtonObject.WhenPressed( DriveForward(&m_drivetrain, 56.07) );
-  //f310.orangeButtonObject.WhenPressed( DriveForward(&m_drivetrain, .5607)); // Drive forward 12 inches when orange button is pressed
-  //f310.orangeButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );    // Shift when left shoulder is pressed
-  f310.leftJoyButtonObject.WhenPressed( ManipulateIntakeArm(&m_intake) );
-  f310.rightShoulderButtonObject.WhenHeld( RunIntake(&m_intake, false) );
-  f310.greenButtonObject.WhenHeld( RunFeeder(&m_intake, true) );
-  f310.orangeButtonObject.WhenHeld( RunFeeder(&m_intake, false) );
+  // Joystick buttons
+  f310.leftJoyButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );             // Shift gear up/down
+  f310.rightJoyButtonObject.WhenPressed( InverseMode(&m_drivetrain) );          // Inverse drive mode
 
+  // Top buttons
+  f310.leftShoulderButtonObject.WhenHeld( RunShooter(&m_shooter) );             // Run shooter
+  f310.rightShoulderButtonObject.WhenHeld( IntakeCargo(&m_intake) );            // Intake cargo (spin both intake and feeder)
 
+  // Misc Buttons
+  f310.backButtonObject.WhenPressed( AlignToTarget(&m_drivetrain, &m_vision) ); // Align to target
+  f310.startButtonObject.WhenPressed( SwitchHoodNeutralMode(&m_shooter) );      // Switch if hood is in brake mode for idle state
 
-  f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) ); // raise hood angle
-  f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) ); // lower hood angle
+  // Colour buttons
+  f310.orangeButtonObject.WhenHeld( ManipulateIntakeArm(&m_intake) );           // Move intake arm down/up
+  f310.greenButtonObject.WhenHeld( RunFeeder(&m_intake, true) );                // Reverse feeder
 
-  //f310.blueButtonObject.WhenHeld( ExtendArms(&m_climber, true) ); //raise
-  //f310.redButtonObject.WhenHeld( ExtendArms(&m_climber, false) ); //lower
+  f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle
+  f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) );             // lower hood angle
 
-  f310.rightJoyButtonObject.WhenPressed( InverseMode(&m_drivetrain) );
+  // POV buttons
+  f310.dpadUpButtonObject.WhenPressed( ExtendArms(&m_climber, true) );          // Extend arms
+  f310.dpadDownButtonObject.WhenPressed( ExtendArms(&m_climber, false) );       // Retract arms
 
-  f310.leftShoulderButtonObject.WhenHeld( RunShooter(&m_shooter) );
-  
+  f310.dpadRightButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );  // Increase shooter speed
+  f310.dpadLeftButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, -100) );  // Decrease shooter speed
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

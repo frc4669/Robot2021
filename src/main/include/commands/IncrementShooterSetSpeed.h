@@ -7,18 +7,12 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Drivetrain.h>
-#include <subsystems/Vision.h>
+#include <subsystems/Shooter.h>
 
 
-class AlignToTarget : public frc2::CommandHelper<frc2::CommandBase, AlignToTarget> {
+class IncrementShooterSetSpeed : public frc2::CommandHelper<frc2::CommandBase, IncrementShooterSetSpeed> {
  public:
-  /**
-   * Align to the hub if seen by targetting system.
-   * 
-   * @param drivetrain a Drivetrain object pointer
-   */
-  AlignToTarget(Drivetrain* drivetrain, Vision* vision);
+  IncrementShooterSetSpeed(Shooter* shooter, double increment);
 
   void Initialize() override;
 
@@ -29,6 +23,6 @@ class AlignToTarget : public frc2::CommandHelper<frc2::CommandBase, AlignToTarge
   bool IsFinished() override;
 
  private:
-  Drivetrain* drivetrain;
-  Vision* vision;
+  Shooter* shooter;
+  double increment;
 };

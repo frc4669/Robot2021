@@ -17,7 +17,7 @@ void DriveForward::Initialize() {
   drivetrain->ResetEncoders(); // Reset encoders so we don't finish early
   targetTicksDistance = drivetrain->GetTicksToTravel(targetInchesDistance);
 
-  frc::SmartDashboard::PutNumber("DriveForward ticks", targetTicksDistance); // display ticks needed for the command call
+  frc::SmartDashboard::PutNumber("Auto Drive Ticks", targetTicksDistance); // display ticks needed for the command call
   drivetrain->DriveForward(targetTicksDistance); // call motion magic with how many ticks we want to travel
 }
 
