@@ -142,6 +142,10 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   double GetRightVel();
 
+  bool CanTurnInPlace();
+
+  bool ForwardTowardIntake();
+
  private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFront };
@@ -163,6 +167,7 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::ADIS16470_IMU m_imu{ };
 
   bool m_curvatureDriveTurnInPlace = true; // whether we are able to turn in place
+  bool m_forwardTowardIntake = true;
 
   /**
    * Configure motor to desired settings
