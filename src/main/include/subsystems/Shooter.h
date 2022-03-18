@@ -74,6 +74,8 @@ class Shooter : public frc2::SubsystemBase {
    */
   void StopHood();
 
+  double GetHoodPosition();
+
   /**
    * Zero the hood to the largest angle. 
    * This is so both hood motors are synchronized.
@@ -147,5 +149,5 @@ class Shooter : public frc2::SubsystemBase {
   double m_hoodAngle = 0;
   double m_lowestHoodAngle = 90.0;
 
-  double m_hoodMoveSpeed = 0.2;
+  double m_hoodMoveSpeed = 0.10;
 };

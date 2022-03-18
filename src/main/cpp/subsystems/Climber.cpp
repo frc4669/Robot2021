@@ -12,15 +12,15 @@ Climber::Climber() {
 
 // This method will be called once per scheduler run
 void Climber::Periodic() {
-  frc::SmartDashboard::PutNumber("Right Climber Position", GetRightPostion());
+/*   frc::SmartDashboard::PutNumber("Right Climber Position", GetRightPostion());
   frc::SmartDashboard::PutNumber("Left Climber Position", GetLeftPosition());
 
   frc::SmartDashboard::PutBoolean("Right Limit Switch", IsRightLimitHit());
   frc::SmartDashboard::PutBoolean("Left Limit Switch", IsLeftLimitHit());
-  frc::SmartDashboard::PutBoolean("Arms Zeroed", AreArmsZeroed());
+  frc::SmartDashboard::PutBoolean("Arms Zeroed", AreArmsZeroed()); */
 
-  if(AreArmsZeroed() == false)
-    ZeroArms();
+  //if(AreArmsZeroed() == false)
+    //ZeroArms();
 }
 
 void Climber::RaiseExtendingArms() {
@@ -42,7 +42,7 @@ void Climber::ZeroArms() {
     m_slaveMotor.Set(ControlMode::PercentOutput, 0.8);
   
   // Lower master motor if not at base position once slave motor is at base position
-  if(IsLeftLimitHit() && !IsRightLimitHit())
+  if(!IsRightLimitHit())
     m_masterMotor.Set(ControlMode::PercentOutput, 0.8);
 
   // If both motors are at base position, stop the periodic loop, they have now been synchronized

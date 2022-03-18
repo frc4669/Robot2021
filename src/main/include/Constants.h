@@ -42,8 +42,8 @@ namespace IntakeConstants {
   constexpr int kIntakeMotorPort = 11;       // the primary intake
   constexpr int kFeederMotorPort = 10;       // vertical feeder
 
-  constexpr int kIntakeSolenoidForwardChannel = 0; // channel for extending intake arm
-  constexpr int kIntakeSolenoidReverseChannel = 1; // channel for retracting intake arm
+  constexpr int kIntakeSolenoidForwardChannel = 1; // channel for extending intake arm
+  constexpr int kIntakeSolenoidReverseChannel = 0; // channel for retracting intake arm
 } //namespace IntakeConstants
 
 namespace DriveConstants {

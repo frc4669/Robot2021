@@ -7,8 +7,7 @@
 
 Shooter::Shooter() {
   // Invert motors if needed
-  m_masterShooterMotor.SetInverted(true);
-  m_slaveShooterMotor.SetInverted(true);
+  m_masterShooterMotor.SetInverted(false);
 
   // Set slave motor to follow master motor
   m_slaveShooterMotor.Follow(m_masterShooterMotor, true);
@@ -18,6 +17,7 @@ Shooter::Shooter() {
   m_masterPIDController.SetFF(0.0002);  // kFF
 
   // Setup hood motors
+  //!: ClearPos on Forward limit should be set on Enabled 
   m_rightHoodMotor.SetInverted(true);
   m_rightHoodMotor.Follow(m_leftHoodMotor); //follow left climb motor
 
@@ -36,6 +36,9 @@ Shooter::Shooter() {
 void Shooter::Periodic() {
   frc::SmartDashboard::PutNumber("Master Shooter Velocity", GetMasterShooterVelocity());
   frc::SmartDashboard::PutNumber("Slave Shooter Velocity", GetSlaveShooterVelocity());
+
+  frc::SmartDashboard::PutNumber("Hood Pos", GetHoodPosition());
+  frc::SmartDashboard::PutNumber("Hood Angle", GetHoodAngle());
 }
 
 void Shooter::RunShooter() {
@@ -65,4 +68,13 @@ void Shooter::MoveHoodBackward() {
 
 void Shooter::StopHood() {
   m_leftHoodMotor.Set(ControlMode::PercentOutput, 0.0);
+}
+
+double Shooter::GetHoodPosition() {
+  return abs(m_leftHoodMotor.GetSensorCollection().GetIntegratedSensorPosition());
+}
+
+double Shooter::GetHoodAngle() {
+  double ticksPerAngle = ((2048 * 4) * 100) / 360;
+  return GetHoodPosition()/ticksPerAngle;
 }
