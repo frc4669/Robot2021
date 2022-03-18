@@ -135,6 +135,8 @@ class Shooter : public frc2::SubsystemBase {
 
   void IncrementHoodSetSpeed(double increment);
 
+  bool HoodLimitSwitchTriggered();
+
  private:
   // Our shooter motors
   rev::CANSparkMax m_masterShooterMotor{ ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless };
@@ -162,4 +164,6 @@ class Shooter : public frc2::SubsystemBase {
   double m_hoodMoveSpeed = 0.10;
 
   bool m_hoodNeutralBrakeMode = false;
+
+  bool m_hoodZeroed = false;
 };

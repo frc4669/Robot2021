@@ -19,7 +19,6 @@ Shooter::Shooter() {
   // Setup hood motors
   //!: ClearPos on Forward limit should be set on Enabled 
   m_rightHoodMotor.SetInverted(true);
-  m_rightHoodMotor.Follow(m_leftHoodMotor); //follow left climb motor
 
   m_leftHoodMotor.ConfigNominalOutputForward(0);
   m_leftHoodMotor.ConfigNominalOutputReverse(0);
@@ -43,6 +42,10 @@ void Shooter::Periodic() {
   frc::SmartDashboard::PutNumber("Hood Active Velocity", GetHoodActiveVelocity());
   frc::SmartDashboard::PutNumber("Hood Move Speed Percentage", GetHoodSetMoveSpeed());
   frc::SmartDashboard::PutBoolean("Hood Neutral Brake Mode", IsHoodInBreakMode());
+  frc::SmartDashboard::PutBoolean("Hood Zeroed", IsHoodZeroed());
+
+  //if(IsHoodZeroed() == false)
+    //ZeroHood();
 }
 
 void Shooter::RunShooter() {
@@ -119,4 +122,25 @@ void Shooter::SwitchHoodNeutralMode() {
 
 bool Shooter::IsHoodInBreakMode() {
   return m_hoodNeutralBrakeMode;
+}
+
+bool Shooter::HoodLimitSwitchTriggered() {
+  return m_leftHoodMotor.GetSensorCollection().IsFwdLimitSwitchClosed();
+}
+
+void Shooter::ZeroHood() {
+  if(!HoodLimitSwitchTriggered()) {
+    m_rightHoodMotor.Set(ControlMode::PercentOutput, -0.2);
+    m_leftHoodMotor.Set(ControlMode::PercentOutput, -0.2);
+  }
+
+  if(HoodLimitSwitchTriggered()) {
+    m_hoodZeroed = true;
+    StopHood();
+    m_rightHoodMotor.Follow(m_leftHoodMotor); //follow left climb motor
+  }
+}
+
+bool Shooter::IsHoodZeroed() {
+  return m_hoodZeroed;
 }
