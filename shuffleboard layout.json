@@ -303,7 +303,37 @@
               "_type": "Subsystem Layout",
               "_title": "Vision Data",
               "Layout/Label position": "BOTTOM",
-              "_children": []
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Intake Cam Has Targets",
+                  "_title": "Intake Cam Has Targets",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Shooter Cam Has Targets",
+                  "_title": "Shooter Cam Has Targets",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Shooter Target Estimated Distance",
+                  "_title": "Shooter Target Estimated Distance"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Estimated Exit Velocity Needed",
+                  "_title": "Estimated Exit Velocity Needed"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Estimated Exit Angle Needed",
+                  "_title": "Estimated Exit Angle Needed"
+                }
+              ]
             }
           }
         }
