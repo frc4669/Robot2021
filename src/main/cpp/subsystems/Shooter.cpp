@@ -34,11 +34,14 @@ Shooter::Shooter() {
 
 // This method will be called once per scheduler run
 void Shooter::Periodic() {
-  frc::SmartDashboard::PutNumber("Master Shooter Velocity", GetMasterShooterVelocity());
-  frc::SmartDashboard::PutNumber("Slave Shooter Velocity", GetSlaveShooterVelocity());
+  frc::SmartDashboard::PutNumber("Master Shooter Active Velocity", GetMasterShooterVelocity());
+  frc::SmartDashboard::PutNumber("Slave Shooter Active Velocity", GetSlaveShooterVelocity());
+  frc::SmartDashboard::PutNumber("Shooter Set Velocity", GetShooterSetSpeed());
 
-  frc::SmartDashboard::PutNumber("Hood Pos", GetHoodPosition());
-  frc::SmartDashboard::PutNumber("Hood Angle", GetHoodAngle());
+  //frc::SmartDashboard::PutNumber("Hood Current Position", GetHoodPosition()); //!: Comment out for comp
+  frc::SmartDashboard::PutNumber("Hood Current Angle", GetHoodAngle());
+  frc::SmartDashboard::PutNumber("Hood Active Velocity", GetHoodActiveVelocity());
+  frc::SmartDashboard::PutNumber("Hood Set Move Speed", GetHoodSetMoveSpeed());
 }
 
 void Shooter::RunShooter() {
@@ -77,4 +80,28 @@ double Shooter::GetHoodPosition() {
 double Shooter::GetHoodAngle() {
   double ticksPerAngle = ((2048 * 4) * 100) / 360;
   return GetHoodPosition()/ticksPerAngle;
+}
+
+double Shooter::GetHoodSetMoveSpeed() {
+  return m_hoodMoveSpeed;
+}
+
+double Shooter::GetHoodActiveVelocity() {
+  return m_leftHoodMotor.GetSensorCollection().GetIntegratedSensorVelocity();
+}
+
+void Shooter::SetHoodMoveSpeed(double speed) {
+  m_hoodMoveSpeed = speed;
+}
+
+double Shooter::GetShooterSetSpeed() {
+  return m_shooterVelocity;
+}
+
+void Shooter::IncrementShooterSetSpeed(double increment) {
+  m_shooterVelocity += increment;
+}
+
+void Shooter::IncrementHoodSetSpeed(double increment) {
+  m_hoodMoveSpeed += increment;
 }

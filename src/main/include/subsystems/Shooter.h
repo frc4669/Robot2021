@@ -124,6 +124,16 @@ class Shooter : public frc2::SubsystemBase {
    * @param speed percentage of max speed
    */
   void SetHoodMoveSpeed(double speed);
+  
+  double GetHoodSetMoveSpeed();
+
+  double GetHoodActiveVelocity();
+
+  double GetShooterSetSpeed();
+
+  void IncrementShooterSetSpeed(double increment);
+
+  void IncrementHoodSetSpeed(double increment);
 
  private:
   // Our shooter motors
