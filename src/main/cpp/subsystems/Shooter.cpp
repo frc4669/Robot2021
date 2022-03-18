@@ -29,7 +29,7 @@ Shooter::Shooter() {
   m_leftHoodMotor.ConfigMotionCruiseVelocity(1500);
   m_leftHoodMotor.ConfigMotionAcceleration(1500);
 
-  m_leftHoodMotor.SetNeutralMode(NeutralMode::Brake);
+  m_leftHoodMotor.SetNeutralMode(NeutralMode::Coast);
 }
 
 // This method will be called once per scheduler run
@@ -41,7 +41,8 @@ void Shooter::Periodic() {
   //frc::SmartDashboard::PutNumber("Hood Current Position", GetHoodPosition()); //!: Comment out for comp
   frc::SmartDashboard::PutNumber("Hood Current Angle", GetHoodAngle());
   frc::SmartDashboard::PutNumber("Hood Active Velocity", GetHoodActiveVelocity());
-  frc::SmartDashboard::PutNumber("Hood Set Move Speed", GetHoodSetMoveSpeed());
+  frc::SmartDashboard::PutNumber("Hood Move Speed Percentage", GetHoodSetMoveSpeed());
+  frc::SmartDashboard::PutBoolean("Hood Neutral Brake Mode", IsHoodInBreakMode());
 }
 
 void Shooter::RunShooter() {
@@ -104,4 +105,18 @@ void Shooter::IncrementShooterSetSpeed(double increment) {
 
 void Shooter::IncrementHoodSetSpeed(double increment) {
   m_hoodMoveSpeed += increment;
+}
+
+void Shooter::SwitchHoodNeutralMode() {
+  if (IsHoodInBreakMode()) {
+    m_leftHoodMotor.SetNeutralMode(NeutralMode::Coast);
+    m_hoodNeutralBrakeMode = false;
+  } else {
+    m_leftHoodMotor.SetNeutralMode(NeutralMode::Brake);
+    m_hoodNeutralBrakeMode = true;
+  }
+}
+
+bool Shooter::IsHoodInBreakMode() {
+  return m_hoodNeutralBrakeMode;
 }
