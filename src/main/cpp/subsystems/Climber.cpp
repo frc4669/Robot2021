@@ -9,7 +9,7 @@
 Climber::Climber() {
   ConfigureMotor(m_masterMotor, true);
   ConfigureMotor(m_slaveMotor, false);
-};
+}
 
 // This method will be called once per scheduler run
 void Climber::Periodic() {

@@ -22,6 +22,13 @@
 
 #include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/ParallelDeadlineGroup.h>
+#include <frc2/command/ParallelRaceGroup.h>
+
+#include <units/time.h>
+#include <commands/TimedFeeder.h>
+#include <commands/TimedIntake.h>
+#include <commands/TimedShooter.h>
 
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -42,40 +49,40 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Joystick buttons
-  f310.leftJoyButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );             // Shift gear up/down
-  f310.rightJoyButtonObject.WhenPressed( InverseMode(&m_drivetrain) );          // Inverse drive mode
+  f310.leftJoyButtonObject.WhenPressed( ShiftGear(&m_drivetrain) );             // Shift gear up/down //?: left joy button
+  f310.rightJoyButtonObject.WhenPressed( InverseMode(&m_drivetrain) );          // Inverse drive mode //?: right joy button
 
   // Top buttons
-  f310.leftShoulderButtonObject.WhenHeld( RunFeeder(&m_intake, true) );         // Reverse feeder
-  f310.rightShoulderButtonObject.WhenHeld( IntakeCargo(&m_intake) );            // Intake cargo (spin both intake and feeder)
+  f310.leftShoulderButtonObject.WhenHeld( RunFeeder(&m_intake, true) );         // Reverse feeder //?: left shoulder
+  f310.rightShoulderButtonObject.WhenHeld( IntakeCargo(&m_intake) );            // Intake cargo   //?: right shoulder
 
   // Misc Buttons
-  f310.backButtonObject.WhenPressed( AlignToTarget(&m_drivetrain, &m_vision) ); // Align to target
-  f310.startButtonObject.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );      // Switch if hood is in brake mode for idle state
+  f310.backButtonObject.WhenPressed( AlignToTarget(&m_drivetrain, &m_vision) ); // Align to target  //?: back button
+  f310.startButtonObject.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );    // Switch front     //?: start button
 
   // Colour buttons
-  f310.orangeButtonObject.WhenHeld( ManipulateIntakeArm(&m_intake) );           // Move intake arm down/up
-  //f310.greenButtonObject.WhenHeld( );
+  f310.orangeButtonObject.WhenHeld( ManipulateIntakeArm(&m_intake) );           // deploy intake //?: orange button
+  f310.greenButtonObject.WhenHeld( RunShooter(&m_shooter) );                    // Run shooter   //?: green button
 
-  f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle
-  f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) );             // lower hood angle
+  f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle  //?: red button
+  f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) );           // lower hood angle  //?: blue button
 
   // POV buttons
-  f310.dpadUpButtonObject.WhenHeld( ExtendArms(&m_climber, true) );          // Extend arms
-  f310.dpadDownButtonObject.WhenHeld( ExtendArms(&m_climber, false) );       // Retract arms
+  f310.dpadUpButtonObject.WhenHeld( ExtendArms(&m_climber, true) );           // Extend arms    //?: dpad up
+  f310.dpadDownButtonObject.WhenHeld( ExtendArms(&m_climber, false) );        // Retract arms   //?: dpad down
 
-  f310.dpadRightButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );  // Increase shooter speed
-  f310.dpadLeftButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, -100) );  // Decrease shooter speed
+  f310.dpadRightButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );  // Increase shooter speed //?: dpad right
+  f310.dpadLeftButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, -100) );  // Decrease shooter speed //?: dpad left
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return new frc2::SequentialCommandGroup{ 
-    frc2::ParallelCommandGroup{
-      DriveForward(&m_drivetrain, 60.0),
-      IntakeCargo(&m_intake)
+  return new frc2::SequentialCommandGroup { 
+    frc2::ParallelRaceGroup  {
+      DriveForward(&m_drivetrain, 60.0),  // Drive forward to ball
+      IntakeCargo(&m_intake)              // While intaking, as soon as we reach ball, we'll stop intake
     },
-    RunShooter(&m_shooter),
-    DriveForward(&m_drivetrain, -60.0),
+    DriveForward(&m_drivetrain, -60.0),   // Drive back to the wall
+    RunShooter(&m_shooter)                
   };
 }
