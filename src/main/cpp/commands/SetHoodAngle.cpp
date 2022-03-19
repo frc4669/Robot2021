@@ -24,7 +24,6 @@ void SetHoodAngle::Execute() {
 }
 
 // Called once the command ends or is interrupted.
-
 void SetHoodAngle::End(bool interrupted) {
   shooter->StopHood();
 }

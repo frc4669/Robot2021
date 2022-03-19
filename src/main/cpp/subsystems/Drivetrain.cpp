@@ -45,7 +45,11 @@ void Drivetrain::Periodic() {
 
 void Drivetrain::CurvatureDrive(double fwd, double rot) {
   //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
-  m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace);
+  if (m_forwardTowardIntake) 
+    m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace);
+  else
+    m_drive.CurvatureDrive(fwd, -rot, m_curvatureDriveTurnInPlace);
+
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
@@ -127,11 +131,19 @@ bool Drivetrain::IsShiftedToHighGear() {
 
 void Drivetrain::ReverseRelativeFront() {
   // basically gets the inverted status and adds "!" to it which inverts it
-  m_leftMaster.SetInverted(!m_leftMaster.GetInverted());
-  m_leftSlave.SetInverted(!m_leftSlave.GetInverted());
+  if(m_forwardTowardIntake) {
+    ConfigureMotor(m_leftMaster, false);
+    ConfigureMotor(m_leftSlave, false);
 
-  m_rightMaster.SetInverted(!m_rightMaster.GetInverted());
-  m_rightSlave.SetInverted(!m_rightSlave.GetInverted());
+    ConfigureMotor(m_rightMaster, true);
+    ConfigureMotor(m_rightSlave, true);
+  } else {
+    ConfigureMotor(m_leftMaster, true);
+    ConfigureMotor(m_leftSlave, true);
+
+    ConfigureMotor(m_rightMaster, false);
+    ConfigureMotor(m_rightSlave, false);
+  } 
 
   m_forwardTowardIntake = !m_forwardTowardIntake;
 }
@@ -139,14 +151,14 @@ void Drivetrain::ReverseRelativeFront() {
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   // set the max velocity and acceleration for motion magic
   motor.ConfigMotionCruiseVelocity(20000);
-  motor.ConfigMotionAcceleration(6000);
+  motor.ConfigMotionAcceleration(7000);
 
   // set the current limit for the supply/output current
   motor.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 25, 25, 0.5));
   motor.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 25, 25, 0.5));
 
   // time it takes for the motor to go from 0 to full power (in seconds) in an open/closed loop
-  motor.ConfigOpenloopRamp(2);
+  motor.ConfigOpenloopRamp(1.5);
   motor.ConfigClosedloopRamp(0);
 
   // when controller is neutral, set motor to break

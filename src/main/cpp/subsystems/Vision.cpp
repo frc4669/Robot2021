@@ -12,12 +12,12 @@ Vision::Vision() {
 
 // This method will be called once per scheduler run
 void Vision::Periodic() {
-	frc::SmartDashboard::PutBoolean("Intake Cam Has Targets", m_intakeCamera.GetLatestResult().HasTargets());
+/* 	frc::SmartDashboard::PutBoolean("Intake Cam Has Targets", m_intakeCamera.GetLatestResult().HasTargets());
 	frc::SmartDashboard::PutBoolean("Shooter Cam Has Targets", m_shooterCamera.GetLatestResult().HasTargets());
 
 	frc::SmartDashboard::PutNumber("Shooter Target Estimated Distance", 0.00);
 	frc::SmartDashboard::PutNumber("Estimated Exit Angle Needed", 0.00);
-	frc::SmartDashboard::PutNumber("Estimated Exit Velocity Needed", 0.00);
+	frc::SmartDashboard::PutNumber("Estimated Exit Velocity Needed", 0.00); */
 }
 
 photonlib::PhotonPipelineResult Vision::GetShooterCamData() {

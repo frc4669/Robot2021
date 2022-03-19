@@ -44,8 +44,8 @@ void Shooter::Periodic() {
   frc::SmartDashboard::PutBoolean("Hood Neutral Brake Mode", IsHoodInBreakMode());
   frc::SmartDashboard::PutBoolean("Hood Zeroed", IsHoodZeroed());
 
-  //if(IsHoodZeroed() == false)
-    //ZeroHood();
+  if(IsHoodZeroed() == false)
+    ZeroHood();
 }
 
 void Shooter::RunShooter() {
@@ -130,8 +130,8 @@ bool Shooter::HoodLimitSwitchTriggered() {
 
 void Shooter::ZeroHood() {
   if(!HoodLimitSwitchTriggered()) {
-    m_rightHoodMotor.Set(ControlMode::PercentOutput, -0.2);
-    m_leftHoodMotor.Set(ControlMode::PercentOutput, -0.2);
+    m_rightHoodMotor.Set(ControlMode::PercentOutput, 0.2);
+    m_leftHoodMotor.Set(ControlMode::PercentOutput, 0.2);
   }
 
   if(HoodLimitSwitchTriggered()) {

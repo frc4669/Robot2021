@@ -19,6 +19,7 @@
     "*.tcc": "cpp",
     "optional": "cpp",
     "*.inc": "cpp",
-    "limits": "cpp"
+    "limits": "cpp",
+    "new": "cpp"
   }
 }

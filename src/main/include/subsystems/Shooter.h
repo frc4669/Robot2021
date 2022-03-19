@@ -155,13 +155,13 @@ class Shooter : public frc2::SubsystemBase {
 
   frc::MotorControllerGroup m_hoodMotors{ m_leftHoodMotor, m_rightHoodMotor };
 
-  double m_shooterVelocity = 4000;
+  double m_shooterVelocity = 2000;
   double m_maxShooterVelocity = 5600; //!: 5800 is the true max but we want make sure we dont go near that
 
   double m_hoodAngle = 0;
   double m_lowestHoodAngle = 90.0;
 
-  double m_hoodMoveSpeed = 0.10;
+  double m_hoodMoveSpeed = 0.20;
 
   bool m_hoodNeutralBrakeMode = false;
 

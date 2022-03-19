@@ -18,7 +18,7 @@ double F310::getLeftXCubed() {
 }
 
 double F310::getLeftY() {
-  return -deadzone(1);  // Negates the Y axis of the joystick so that up is positive and down is negative
+  return -f310joystick.GetRawAxis(1);  // Negates the Y axis of the joystick so that up is positive and down is negative
 }
 
 double F310::getLeftYCubed() { 
@@ -26,15 +26,15 @@ double F310::getLeftYCubed() {
 }
 
 double F310::getLeftTrigger() { 
-  return deadzone(2); 
+  return f310joystick.GetRawAxis(2); 
 }
 
 double F310::getRightTrigger() { 
-  return deadzone(3); 
+  return f310joystick.GetRawAxis(3); 
 }
 
 double F310::getRightX() { 
-  return deadzone(4); 
+  return f310joystick.GetRawAxis(4); 
 }
 
 double F310::getRightXCubed() { 
