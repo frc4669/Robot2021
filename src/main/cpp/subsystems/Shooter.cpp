@@ -129,16 +129,16 @@ bool Shooter::HoodLimitSwitchTriggered() {
 }
 
 void Shooter::ZeroHood() {
-  if(!HoodLimitSwitchTriggered()) {
+/*   if(!HoodLimitSwitchTriggered()) {
     m_rightHoodMotor.Set(ControlMode::PercentOutput, 0.2);
     m_leftHoodMotor.Set(ControlMode::PercentOutput, 0.2);
   }
 
-  if(HoodLimitSwitchTriggered()) {
+  if(HoodLimitSwitchTriggered()) { */
     m_hoodZeroed = true;
     StopHood();
     m_rightHoodMotor.Follow(m_leftHoodMotor); //follow left climb motor
-  }
+  //}
 }
 
 bool Shooter::IsHoodZeroed() {

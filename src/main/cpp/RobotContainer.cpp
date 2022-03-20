@@ -64,25 +64,24 @@ void RobotContainer::ConfigureButtonBindings() {
   f310.orangeButtonObject.WhenHeld( ManipulateIntakeArm(&m_intake) );           // deploy intake //?: orange button
   f310.greenButtonObject.WhenHeld( RunShooter(&m_shooter) );                    // Run shooter   //?: green button
 
-  f310.redButtonObject.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle  //?: red button
-  f310.blueButtonObject.WhenHeld( SetHoodAngle(&m_shooter, false) );           // lower hood angle  //?: blue button
+  f310.mainSix.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle  //?: red button
+  f310.mainSeven.WhenHeld( SetHoodAngle(&m_shooter, false) );           // lower hood angle  //?: blue button
 
   // POV buttons
-  f310.dpadUpButtonObject.WhenHeld( ExtendArms(&m_climber, true) );           // Extend arms    //?: dpad up
-  f310.dpadDownButtonObject.WhenHeld( ExtendArms(&m_climber, false) );        // Retract arms   //?: dpad down
+  f310.middleTopJoyButton.WhenHeld( ExtendArms(&m_climber, true) );           // Extend arms    //?: dpad up
+  f310.middleBottomJoyButton.WhenHeld( ExtendArms(&m_climber, false) );        // Retract arms   //?: dpad down
 
-  f310.dpadRightButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );  // Increase shooter speed //?: dpad right
-  f310.dpadLeftButtonObject.WhenPressed( IncrementShooterSetSpeed(&m_shooter, -100) );  // Decrease shooter speed //?: dpad left
+  f310.mainFive.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );  // Increase shooter speed //?: dpad right
+  f310.mainFour.WhenPressed( IncrementShooterSetSpeed(&m_shooter, -100) );  // Decrease shooter speed //?: dpad left
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return new frc2::SequentialCommandGroup { 
-    frc2::ParallelRaceGroup  {
-      DriveForward(&m_drivetrain, 60.0),  // Drive forward to ball
-      IntakeCargo(&m_intake)              // While intaking, as soon as we reach ball, we'll stop intake
-    },
-    DriveForward(&m_drivetrain, -60.0),   // Drive back to the wall
-    RunShooter(&m_shooter)                
+    frc2::ParallelCommandGroup  {
+      RunShooter(&m_shooter),             // start shooter
+      IntakeCargo(&m_intake),             // run feeder
+      DriveForward(&m_drivetrain, 60.0)   // drive forward
+    },   
   };
 }

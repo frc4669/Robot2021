@@ -31,8 +31,8 @@ Drivetrain::Drivetrain() {
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {
   // setup smartdashboard to show our drivetrain values
-  frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
-  frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
+  //frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
+  //frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
 
   frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVel());
   frc::SmartDashboard::PutNumber("Right Velocity", GetRightVel());
@@ -99,7 +99,7 @@ void Drivetrain::ResetEncoders() {
 }
 
 double Drivetrain::GetLeftEncoderDistance() {
-  return -m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition();
+  return m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition();
 }
 
 double Drivetrain::GetRightEncoderDistance() {

@@ -63,4 +63,22 @@ class F310 {
   frc2::POVButton dpadLeftButtonObject{&f310joystick, 270};
   frc2::POVButton dpadUpperLeftButtonObject{&f310joystick, 315};
   frc2::POVButton dpadCenteredButtonObject{&f310joystick, -1};
+
+  frc::Joystick secondaryJoystick{1};
+  const int topMiddleJoyButton = 3;
+  const int bottomMiddleJoyButton = 2;
+  const int buttonFour = 4;
+  const int buttonFive = 5;
+
+  frc2::JoystickButton middleTopJoyButton{&secondaryJoystick, topMiddleJoyButton};
+  frc2::JoystickButton middleBottomJoyButton{&secondaryJoystick, bottomMiddleJoyButton};
+
+  frc2::JoystickButton mainFour{&secondaryJoystick, buttonFour};
+  frc2::JoystickButton mainFive{&secondaryJoystick, buttonFive};
+
+  frc2::JoystickButton mainSix{&secondaryJoystick, 6};
+  frc2::JoystickButton mainSeven{&secondaryJoystick, 7};
+
+
+
 };

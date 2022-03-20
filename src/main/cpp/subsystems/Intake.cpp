@@ -16,6 +16,8 @@ void Intake::Periodic() {
   frc::SmartDashboard::PutBoolean("Intake Arm Deployed", IsArmExtended());
   frc::SmartDashboard::PutNumber("Intake Active Motor Velocity", GetIntakeVelocity());
   frc::SmartDashboard::PutNumber("Feeder Active Motor Velocity", GetFeederVelocity());
+
+  //frc::SmartDashboard::PutNumber("feeder ticks", GetFeederTicks());
 }
 
 void Intake::ManipulateArm() {
@@ -60,4 +62,12 @@ double Intake::GetIntakeVelocity() {
 
 double Intake::GetFeederVelocity() {
   return m_feederMotor.GetSensorCollection().GetQuadratureVelocity();
+}
+
+double Intake::GetFeederTicks() {
+  return m_feederMotor.GetSensorCollection().GetQuadraturePosition();
+}
+
+void Intake::ResetFeederTicks() {
+  m_feederMotor.GetSensorCollection().SetQuadraturePosition(0);
 }
