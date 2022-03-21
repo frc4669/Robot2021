@@ -81,7 +81,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     frc2::ParallelCommandGroup  {
       RunShooter(&m_shooter),             // start shooter
       IntakeCargo(&m_intake),             // run feeder
-      DriveForward(&m_drivetrain, 60.0)   // drive forward
+      DriveForward(&m_drivetrain, 75.0)   // drive forward
     },   
   };
 }
