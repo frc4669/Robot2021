@@ -76,6 +76,14 @@ class GamepadF310 {
   frc2::POVButton dpadCenteredButton{ &f310Controller, -1 };
 
  private:
+  // Deadzone thresholds
+  const double leftJoyXDeadzone = 0.0;
+  const double leftJoyYDeadzone = 0.0;
+  const double rightJoyXDeadzone = 0.0;
+  const double rightJoyYDeadzone = 0.0;
+  const double leftTriggerDeadzone = 0.0;
+  const double rightTriggerDeadzone = 0.0;
+
   /**
    * Get value of a given axis after applying a deadzone.
    * 

@@ -59,6 +59,11 @@ class Attack3Joystick {
   frc2::JoystickButton centerRightButton{ &attack3Controller, 9 };
 
  private:
+  // Deadzone thresholds
+  const double joyYDeadzone = 0.0;
+  const double joyXDeadzone = 0.0;
+  const double sliderDeadzone = 0.0;
+
   /**
    * Get value of a given axis after applying a deadzone.
    * 

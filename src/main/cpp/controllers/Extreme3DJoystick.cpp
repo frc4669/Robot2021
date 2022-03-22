@@ -9,19 +9,19 @@
 Extreme3DJoystick::Extreme3DJoystick() {}
 
 double Extreme3DJoystick::getJoyX() {
-  return extremeJoystick.GetRawAxis(0);
+  return deadzone(0, joyXDeadzone);
 }
 
 double Extreme3DJoystick::getJoyY() {
-  return extremeJoystick.GetRawAxis(1);
+  return deadzone(1, joyYDeadzone);
 }
 
 double Extreme3DJoystick::getJoyZ() {
-  return extremeJoystick.GetRawAxis(2);
+  return deadzone(2, joyZDeadzone);
 }
 
 double Extreme3DJoystick::getSlider() {
-  return extremeJoystick.GetRawAxis(3);
+  return deadzone(3, sliderDeadzone);
 }
 
 

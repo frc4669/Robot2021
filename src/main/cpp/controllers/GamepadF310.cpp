@@ -9,29 +9,29 @@
 GamepadF310::GamepadF310() {}
 
 double GamepadF310::getLeftJoyY() {
-  return f310Controller.GetRawAxis(1);
+  return deadzone(1, leftJoyXDeadzone);
 }
 
 double GamepadF310::getLeftJoyX() {
-  return f310Controller.GetRawAxis(0);
-};
+  return deadzone(0, leftJoyYDeadzone);
+}
 
 
 double GamepadF310::getRightJoyY() {
-  return f310Controller.GetRawAxis(5);
+  return deadzone(5, rightJoyYDeadzone);
 }
 
 double GamepadF310::getRightJoyX(){
-  return f310Controller.GetRawAxis(4);
+  return deadzone(4, rightJoyXDeadzone);
 }
 
 
 double GamepadF310::getLeftTrigger() { 
-  return f310Controller.GetRawAxis(2); 
+  return deadzone(2, leftTriggerDeadzone); 
 }
 
 double GamepadF310::getRightTrigger() { 
-  return f310Controller.GetRawAxis(3); 
+  return deadzone(3, rightTriggerDeadzone); 
 }
 
 

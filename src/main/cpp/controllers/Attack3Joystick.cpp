@@ -9,15 +9,15 @@
 Attack3Joystick::Attack3Joystick() {}
 
 double Attack3Joystick::getJoyX() {
-  return attack3Controller.GetRawAxis(0);
+  return deadzone(0, joyYDeadzone);
 }
 
 double Attack3Joystick::getJoyY() {
-  return attack3Controller.GetRawAxis(1);
+  return deadzone(1, joyYDeadzone);
 }
 
 double Attack3Joystick::getSlider(){
-  return attack3Controller.GetRawAxis(2);
+  return deadzone(2, sliderDeadzone);
 }
 
 
