@@ -11,6 +11,7 @@
 #include <units/angle.h>
 #include <units/angular_velocity.h>
 //#include <units/length.h>
+#include <units/constants.h>
 
 
 /**
@@ -65,10 +66,9 @@ namespace DriveConstants {
   constexpr auto kMaxSpeed = 3_mps;
   constexpr auto kMaxAcceleration = 3_mps_sq;
 
-  constexpr double kWheelDiameter = 6;                  // Wheel diameter; dont change unless using different wheels
-  constexpr double kPi = 3.14159265359;                 // Value of PI; dont change unless bending rules of mathematics
-  constexpr double kTicksPerRev = 2048;                 // Ticks per revolution; dont change
-  constexpr double kWheelCirc = kWheelDiameter * kPi;   // Wheel circumference; dont change unless bending rules of mathematics
+  constexpr double kWheelDiameter = 6;                  // Wheel diameter; dont change unless using different wheel base
+  constexpr double kTicksPerRev = 2048;                 // Ticks per revolution; specific to Falcon FXs
+  constexpr double kWheelCirc = kWheelDiameter * units::constants::pi;   // Wheel circumference; dont change unless bending rules of mathematics
 
   // Gear ratios prior to shifter portion
   constexpr double kFirstGearRatio = (double) 30/11;    // 30 teeth driven by 11; dont change unless using diff gearbox
