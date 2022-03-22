@@ -10,6 +10,9 @@
  * 
  * !: Please make sure that the controller mode is not on. 
  * To check, look at the controller, near the Logitech logo there is a LED, if on, press the MODE button.
+ * 
+ * !: The F310 controller does not have rumble. 
+ * Do not use the rumble feature. It will not work.
  */
 
 #pragma once
@@ -38,10 +41,10 @@ class GamepadF310 {
    * !: Make sure the USB order ID is correct. 
    * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
    * 
-   * For example, this ID is 0. https://i.imgur.com/FQLCKvp.png 
-   * For example, this ID is 3. https://i.imgur.com/Wx1oiFb.png
+   * For example, this ID is 0. https://i.imgur.com/8G8JkBM.png 
+   * For example, this ID is 3. https://i.imgur.com/daCHBMz.png
    */
-  frc::Joystick f310Controller{ OperatorConstants::kF310 };
+  frc::Joystick f310Controller{ OperatorConstants::kF310ControllerID };
 
   // Colour buttons
   frc2::JoystickButton greenButton{ &f310joystick, 1 };
