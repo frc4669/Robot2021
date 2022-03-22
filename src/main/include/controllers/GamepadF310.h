@@ -88,12 +88,12 @@ class GamepadF310 {
 
  private:
   // Deadzone thresholds
-  double leftJoyXDeadzone = 0.0;
-  double leftJoyYDeadzone = 0.0;
-  double rightJoyXDeadzone = 0.0;
-  double rightJoyYDeadzone = 0.0;
-  double leftTriggerDeadzone = 0.0;
-  double rightTriggerDeadzone = 0.0;
+  double leftJoyXDeadzone;
+  double leftJoyYDeadzone;
+  double rightJoyXDeadzone;
+  double rightJoyYDeadzone;
+  double leftTriggerDeadzone;
+  double rightTriggerDeadzone;
 
   /**
    * Get value of a given axis after applying a deadzone.
