@@ -103,5 +103,5 @@ namespace ShooterConstants {
 } // namespace ShooterConstants
 
 namespace OperatorConstants {
-  constexpr auto kF310 = 0;
+  constexpr auto kF310ControllerID = 0;
 } // namespace IO constants
