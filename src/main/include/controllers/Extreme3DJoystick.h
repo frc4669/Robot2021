@@ -17,10 +17,10 @@
 class Extreme3DJoystick {
  public:
   Extreme3DJoystick();
-  // Forward/backward
+  // Side to side
   double getJoyX();
 
-  // Side to side
+  // Forward/backward
   double getJoyY();
 
   // Yaw (twist)
@@ -46,6 +46,7 @@ class Extreme3DJoystick {
 
   frc2::JoystickButton topLeftJoyButton{ &extremeJoystick, 5 };
   frc2::JoystickButton bottomLeftJoyButton{ &extremeJoystick, 3 };
+
   frc2::JoystickButton topRightJoyButton{ &extremeJoystick, 6 };
   frc2::JoystickButton bottomRightJoyButton{ &extremeJoystick, 4 };
 
