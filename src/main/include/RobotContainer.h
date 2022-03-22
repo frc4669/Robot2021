@@ -15,7 +15,11 @@
 #include <subsystems/Shooter.h>
 #include <subsystems/Vision.h>
 
-#include <F310.h>
+#include <controllers/GamepadF310.h>
+#include <controllers/Attack3Joystick.h>
+#include <controllers/Extreme3DJoystick.h>
+
+#include "Constants.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -48,5 +52,7 @@ class RobotContainer {
   Vision m_vision;
   
   // Controllers
-  F310 f310;
+  GamepadF310 i_f310{ OperatorConstants::kF310ControllerID };
+  Attack3Joystick i_attack3{ OperatorConstants::kAttack3JoystickID };
+  Extreme3DJoystick i_extreme3{ OperatorConstants::kExtreme3DJoystickID };
 };
