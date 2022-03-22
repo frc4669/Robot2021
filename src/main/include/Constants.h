@@ -87,11 +87,6 @@ namespace DriveConstants {
   // If shifted at 2 (using high gear)
   constexpr double kInchesPerTicksHighGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
   constexpr double kTicksPerInchesHighGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio) / kWheelCirc;
-
-  // Misc stuff
-  constexpr auto kTurnTolerance = 5_deg;                // start with 5; aim for 2?
-  constexpr auto kTurnRateTolerance = 10_deg_per_s; 
-  constexpr bool kGyroReversed = false; 
 } // namespace DriveConstants
 
 namespace ShooterConstants {
