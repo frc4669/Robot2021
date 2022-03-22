@@ -25,7 +25,25 @@
 
 class GamepadF310 {
  public:
-  GamepadF310();
+  /**
+   * Actual controller object.
+   * 
+   * !: Make sure the USB order ID is correct. 
+   * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
+   * 
+   * For example, this ID is 0. https://i.imgur.com/8G8JkBM.png 
+   * For example, this ID is 3. https://i.imgur.com/daCHBMz.png
+   * 
+   * @param controllerID USB order ID of the controller.
+   * @param leftJoyYDeadzone The deadzone for the left joystick Y axis. Default is 0.0.
+   * @param leftJoyXDeadzone The deadzone for the left joystick X axis. Default is 0.0.
+   * @param rightJoyYDeadzone The deadzone for the right joystick Y axis. Default is 0.0.
+   * @param rightJoyXDeadzone The deadzone for the right joystick X axis. Default is 0.0.
+   * @param leftTriggerDeadzone The deadzone for the left trigger. Default is 0.0.
+   * @param rightTriggerDeadzone The deadzone for the right trigger. Default is 0.0.
+   */
+  GamepadF310(int controllerID, double leftJoyXDeadzone=0.0, double leftJoyYDeadzone=0.0, double rightJoyXDeadzone=0.0, double rightJoyYDeadzone=0.0, double leftTriggerDeadzone=0.0, double rightTriggerDeadzone=0.0);
+
   double getLeftJoyY();
   double getLeftJoyX();
 
@@ -35,16 +53,9 @@ class GamepadF310 {
   double getLeftTrigger();
   double getRightTrigger();
 
-  /**
-   * Actual controller object. Takes the USB order ID as a parameter.
-   * 
-   * !: Make sure the USB order ID is correct. 
-   * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
-   * 
-   * For example, this ID is 0. https://i.imgur.com/8G8JkBM.png 
-   * For example, this ID is 3. https://i.imgur.com/daCHBMz.png
-   */
-  frc::Joystick f310Controller{ OperatorConstants::kF310ControllerID };
+  
+  //*: Objects 
+  frc::Joystick f310Controller;
 
   // Colour buttons
   frc2::JoystickButton greenButton{ &f310Controller, 1 };
@@ -77,12 +88,12 @@ class GamepadF310 {
 
  private:
   // Deadzone thresholds
-  const double leftJoyXDeadzone = 0.0;
-  const double leftJoyYDeadzone = 0.0;
-  const double rightJoyXDeadzone = 0.0;
-  const double rightJoyYDeadzone = 0.0;
-  const double leftTriggerDeadzone = 0.0;
-  const double rightTriggerDeadzone = 0.0;
+  double leftJoyXDeadzone = 0.0;
+  double leftJoyYDeadzone = 0.0;
+  double rightJoyXDeadzone = 0.0;
+  double rightJoyYDeadzone = 0.0;
+  double leftTriggerDeadzone = 0.0;
+  double rightTriggerDeadzone = 0.0;
 
   /**
    * Get value of a given axis after applying a deadzone.

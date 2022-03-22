@@ -16,7 +16,22 @@
 
 class Attack3Joystick {
  public:
-  Attack3Joystick();
+  /**
+   * Actual controller object.
+   * 
+   * !: Make sure the USB order ID is correct. 
+   * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
+   * 
+   * For example, this ID is 0. https://i.imgur.com/lleN1Ot.png
+   * For example, this ID is 3. https://i.imgur.com/Ex4Lodt.png
+   * 
+   * @param controllerID USB order ID of the controller.
+   * @param joyYDeadzone The deadzone for the joystick Y axis. Default is 0.0.
+   * @param joyXDeadzone The deadzone for the joystick X axis. Default is 0.0.
+   * @param sliderDeadzone The deadzone for the slider. Default is 0.0.
+   */
+  Attack3Joystick(int controllerID, double joyYDeadzone=0.0, double joyXDeadzone=0.0, double sliderDeadzone=0.0);
+
   // Side to side
   double getJoyX();
 
@@ -26,16 +41,9 @@ class Attack3Joystick {
   // Little slider on the joystick
   double getSlider();
 
-  /**
-   * Actual controller object. Takes the USB order ID as a parameter.
-   * 
-   * !: Make sure the USB order ID is correct. 
-   * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
-   * 
-   * For example, this ID is 0. https://i.imgur.com/lleN1Ot.png
-   * For example, this ID is 3. https://i.imgur.com/Ex4Lodt.png
-   */
-  frc::Joystick attack3Controller{ OperatorConstants::kAttack3JoystickID };
+
+  //*: Objects 
+  frc::Joystick attack3Controller;
 
   // Buttons on joystick handle
   frc2::JoystickButton triggerButton{ &attack3Controller, 1 };
@@ -60,9 +68,9 @@ class Attack3Joystick {
 
  private:
   // Deadzone thresholds
-  const double joyYDeadzone = 0.0;
-  const double joyXDeadzone = 0.0;
-  const double sliderDeadzone = 0.0;
+  double joyYDeadzone;
+  double joyXDeadzone;
+  double sliderDeadzone;
 
   /**
    * Get value of a given axis after applying a deadzone.

@@ -6,7 +6,11 @@
 
 #include <controllers/Attack3Joystick.h>
 
-Attack3Joystick::Attack3Joystick() {}
+Attack3Joystick::Attack3Joystick(int controllerID, double joyYDeadzone, double joyXDeadzone, double sliderDeadzone) : attack3Controller{controllerID} {
+  this->joyYDeadzone = joyYDeadzone;
+  this->joyXDeadzone = joyXDeadzone;
+  this->sliderDeadzone = sliderDeadzone;
+}
 
 double Attack3Joystick::getJoyX() {
   return deadzone(0, joyYDeadzone);

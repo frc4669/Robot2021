@@ -6,7 +6,12 @@
 
 #include <controllers/Extreme3DJoystick.h>
 
-Extreme3DJoystick::Extreme3DJoystick() {}
+Extreme3DJoystick::Extreme3DJoystick(int controllerID, double joyYDeadzone, double joyXDeadzone, double joyZDeadzone, double sliderDeadzone) : extremeJoystick{controllerID} {
+  this->joyYDeadzone = joyYDeadzone;
+  this->joyXDeadzone = joyXDeadzone;
+  this->joyZDeadzone = joyZDeadzone;
+  this->sliderDeadzone = sliderDeadzone;
+}
 
 double Extreme3DJoystick::getJoyX() {
   return deadzone(0, joyXDeadzone);

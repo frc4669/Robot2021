@@ -6,7 +6,16 @@
 
 #include <controllers/GamepadF310.h>
 
-GamepadF310::GamepadF310() {}
+GamepadF310::GamepadF310(int controllerID, double leftJoyXDeadzone, double leftJoyYDeadzone, double rightJoyXDeadzone, double rightJoyYDeadzone, double leftTriggerDeadzone, double rightTriggerDeadzone) : f310Controller{controllerID} {
+  this->leftJoyXDeadzone = leftJoyXDeadzone;
+  this->leftJoyYDeadzone = leftJoyYDeadzone;
+
+  this->rightJoyXDeadzone = rightJoyXDeadzone;
+  this->rightJoyYDeadzone = rightJoyYDeadzone;
+
+  this->leftTriggerDeadzone = leftTriggerDeadzone;
+  this->rightTriggerDeadzone = rightTriggerDeadzone;
+}
 
 double GamepadF310::getLeftJoyY() {
   return deadzone(1, leftJoyXDeadzone);
