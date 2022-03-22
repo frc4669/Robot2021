@@ -25,19 +25,13 @@ double Extreme3DJoystick::getSlider() {
 }
 
 
-double Extreme3DJoystick::deadzone(int joyID) {
-  double joystickValue = f310Controller.GetRawAxis(joyID);
-  double joystickOffset = 0.075;
+double Extreme3DJoystick::deadzone(int axisID, double threshold) {
+  double joystickValue = extremeJoystick.GetRawAxis(axisID);
+  double joystickDeadzone = threshold;
   double absJoystickValue = abs(joystickValue);
 
-  if (absJoystickValue > joystickOffset) {
-    double speed = absJoystickValue;
-    speed = (speed * speed) + joystickOffset;
-
-    if (joystickValue > 0)
-      return speed;
-    else
-      return -speed;
-  } else
-    return 0;
+  if(absJoystickValue > joystickDeadzone)
+    return joystickValue;
+  else
+    return 0.0; // joystick value is within deadzone, return 0
 }

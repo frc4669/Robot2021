@@ -47,40 +47,41 @@ class GamepadF310 {
   frc::Joystick f310Controller{ OperatorConstants::kF310ControllerID };
 
   // Colour buttons
-  frc2::JoystickButton greenButton{ &f310joystick, 1 };
-  frc2::JoystickButton redButton{ &f310joystick, 2 };
-  frc2::JoystickButton blueButton{ &f310joystick, 3 };
-  frc2::JoystickButton orangeButton{ &f310joystick, 4 };
+  frc2::JoystickButton greenButton{ &f310Controller, 1 };
+  frc2::JoystickButton redButton{ &f310Controller, 2 };
+  frc2::JoystickButton blueButton{ &f310Controller, 3 };
+  frc2::JoystickButton orangeButton{ &f310Controller, 4 };
 
   // Shoulder buttons
-  frc2::JoystickButton leftShoulderButton{ &f310joystick, 5 };
-  frc2::JoystickButton rightShoulderButton{ &f310joystick, 6 };
+  frc2::JoystickButton leftShoulderButton{ &f310Controller, 5 };
+  frc2::JoystickButton rightShoulderButton{ &f310Controller, 6 };
 
   // Misc buttons
-  frc2::JoystickButton backButton{ &f310joystick, 7 };
-  frc2::JoystickButton startButton{ &f310joystick, 8 };
+  frc2::JoystickButton backButton{ &f310Controller, 7 };
+  frc2::JoystickButton startButton{ &f310Controller, 8 };
 
   // Joystick buttons (joysticks can be pressed down)
-  frc2::JoystickButton leftJoyButton{ &f310joystick, 9 };
-  frc2::JoystickButton rightJoyButton{ &f310joystick, 10 };
+  frc2::JoystickButton leftJoyButton{ &f310Controller, 9 };
+  frc2::JoystickButton rightJoyButton{ &f310Controller, 10 };
 
   // POV Buttons (the D-Pad buttons that are on the left side of the controller, opposite of the colour buttons)
-  frc2::POVButton dpadUpButton{ &f310joystick, 0 };
-  frc2::POVButton dpadUpperRightButton{ &f310joystick, 45 };
-  frc2::POVButton dpadRightButton{ &f310joystick, 90 };
-  frc2::POVButton dpadLowerRightButton{ &f310joystick, 135 };
-  frc2::POVButton dpadDownButton{ &f310joystick, 180 };
-  frc2::POVButton dpadLowerLeftButton{ &f310joystick, 225 };
-  frc2::POVButton dpadLeftButton{ &f310joystick, 270 };
-  frc2::POVButton dpadUpperLeftButton{ &f310joystick, 315 };
-  frc2::POVButton dpadCenteredButton{ &f310joystick, -1 };
+  frc2::POVButton dpadUpButton{ &f310Controller, 0 };
+  frc2::POVButton dpadUpperRightButton{ &f310Controller, 45 };
+  frc2::POVButton dpadRightButton{ &f310Controller, 90 };
+  frc2::POVButton dpadLowerRightButton{ &f310Controller, 135 };
+  frc2::POVButton dpadDownButton{ &f310Controller, 180 };
+  frc2::POVButton dpadLowerLeftButton{ &f310Controller, 225 };
+  frc2::POVButton dpadLeftButton{ &f310Controller, 270 };
+  frc2::POVButton dpadUpperLeftButton{ &f310Controller, 315 };
+  frc2::POVButton dpadCenteredButton{ &f310Controller, -1 };
 
  private:
-   /**
-    * Get value of a given axis after applying a deadzone.
-    * 
-    * @param joyID 
-    * @return value of the axis after applying the deadzone 
-    */
-   double deadzone(int joyID);
+  /**
+   * Get value of a given axis after applying a deadzone.
+   * 
+   * @param axisID ID of the axis to get the value of.
+   * @param threshold The deadzone threshold.
+   * @return value of axis, if it's above the threshold (deadzone), 0.0 otherwise
+   */
+  double deadzone(int axisID, double threshold);
 };

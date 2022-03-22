@@ -59,11 +59,12 @@ class Attack3Joystick {
   frc2::JoystickButton centerRightButton{ &attack3Controller, 9 };
 
  private:
-   /**
-    * Get value of a given axis after applying a deadzone.
-    * 
-    * @param joyID 
-    * @return value of the axis after applying the deadzone 
-    */
-   double deadzone(int joyID);
+  /**
+   * Get value of a given axis after applying a deadzone.
+   * 
+   * @param axisID ID of the axis to get the value of.
+   * @param threshold The deadzone threshold.
+   * @return value of axis, if it's above the threshold (deadzone), 0.0 otherwise
+   */
+  double deadzone(int axisID, double threshold);
 };
