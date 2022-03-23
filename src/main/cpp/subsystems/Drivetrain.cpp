@@ -10,7 +10,7 @@ Drivetrain::Drivetrain() {
   // Disable safety on the drivetrain motors
   m_drive.SetSafetyEnabled(false);
 
-  _orchestra.AddInstrument(m_leftMaster);
+  m_orchestra.AddInstrument(m_leftMaster);
 
   // Configure the drivetrain motors (for now)
   ConfigureMotor(m_leftMaster, true);
@@ -166,6 +166,6 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
 }
 
 void Drivetrain::PlayTheBestSong() {
-  _orchestra.LoadMusic("FATU_NA_TOTO.chrp");
-  _orchestra.Play();
+  m_orchestra.LoadMusic("FATU_NA_TOTO.chrp");
+  m_orchestra.Play();
 }
