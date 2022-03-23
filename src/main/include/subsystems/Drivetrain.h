@@ -132,7 +132,7 @@ class Drivetrain : public frc2::SubsystemBase {
   WPI_TalonFX m_rightMaster{DriveConstants::kRightFront};
   WPI_TalonFX m_rightSlave{DriveConstants::kRightBack};
 
-  Orchestra _orchestra;
+  Orchestra m_orchestra;
 
   // Link motor controllers together (since we have two on each gearbox)
   frc::MotorControllerGroup m_leftMotors{m_leftMaster, m_leftSlave};
