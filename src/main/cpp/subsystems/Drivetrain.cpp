@@ -26,6 +26,11 @@ Drivetrain::Drivetrain() {
   m_shifter.Set(frc::DoubleSolenoid::kReverse);
 
   //frc::Shuffleboard::GetTab("IMU Gyro").Add(m_imu); //!: Come back to this
+
+  m_orchestra.AddInstrument(m_leftMaster);
+  m_orchestra.AddInstrument(m_rightMaster);
+  m_orchestra.LoadMusic("FATU_NA_TOTO.chrp");
+  m_orchestra.Play();
 }
 
 // This method will be called once per scheduler run

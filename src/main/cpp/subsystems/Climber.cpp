@@ -20,8 +20,8 @@ void Climber::Periodic() {
   frc::SmartDashboard::PutBoolean("Left Limit Switch Triggered", IsLeftLimitHit());
   frc::SmartDashboard::PutBoolean("Arms Zeroed", AreArmsZeroed());
 
-  if(AreArmsZeroed() == false)
-    ZeroArms();
+  //if(AreArmsZeroed() == false)
+    //ZeroArms();
 }
 
 void Climber::RaiseExtendingArms() {
