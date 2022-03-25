@@ -7,7 +7,7 @@
 
 Shooter::Shooter() {
   // Invert motors if needed
-  m_masterShooterMotor.SetInverted(false);
+  m_masterShooterMotor.SetInverted(true);
 
   // Set slave motor to follow master motor
   m_slaveShooterMotor.Follow(m_masterShooterMotor, true);
@@ -28,7 +28,7 @@ Shooter::Shooter() {
   m_leftHoodMotor.ConfigMotionCruiseVelocity(1500);
   m_leftHoodMotor.ConfigMotionAcceleration(1500);
 
-  m_leftHoodMotor.SetNeutralMode(NeutralMode::Coast);
+  m_leftHoodMotor.SetNeutralMode(NeutralMode::Brake);
 }
 
 // This method will be called once per scheduler run
