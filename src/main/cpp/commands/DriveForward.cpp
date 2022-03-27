@@ -29,8 +29,8 @@ void DriveForward::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool DriveForward::IsFinished() {
-  double leftVelocity = drivetrain->GetLeftVel();
-  double rightVelocity = drivetrain->GetRightVel();
+  double leftVelocity = drivetrain->GetLeftVelocity();
+  double rightVelocity = drivetrain->GetRightVelocity();
 
   // Check if we've stopped moving
   return ( abs(10-leftVelocity) < 10 ) && ( abs(10-rightVelocity) < 10 );
