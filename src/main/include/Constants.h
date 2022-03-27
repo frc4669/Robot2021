@@ -84,13 +84,13 @@ namespace DriveConstants {
   constexpr double kInchesPerTicksLowGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
   constexpr double kTicksPerInchesLowGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio) / kWheelCirc;
   constexpr double kTicksPerRevLowGear = kTicksPerRev * (kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
-  constexpr double kLowGearing = kTicksPerRevLowGear / kTicksPerRev;
+  constexpr double kLowGearing = kTicksPerRevLowGear / kTicksPerRev; //16.80672268907563094
 
   // If shifted at 2 (using high gear)
   constexpr double kInchesPerTicksHighGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
   constexpr double kTicksPerInchesHighGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio) / kWheelCirc;
   constexpr double kTicksPerRevHighGear = kTicksPerRev * (kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
-  constexpr double kHighGearing = kTicksPerRevHighGear / kTicksPerRev;
+  constexpr double kHighGearing = kTicksPerRevHighGear / kTicksPerRev; //10.35294117647058698
 } // namespace DriveConstants
 
 namespace ShooterConstants {
