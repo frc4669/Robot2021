@@ -18,7 +18,7 @@ GamepadF310::GamepadF310(int controllerID, double leftJoyXDeadzone, double leftJ
 }
 
 double GamepadF310::getLeftJoyY() {
-  return deadzone(1, leftJoyXDeadzone);
+  return -deadzone(1, leftJoyXDeadzone);
 }
 
 double GamepadF310::getLeftJoyX() {
@@ -27,7 +27,7 @@ double GamepadF310::getLeftJoyX() {
 
 
 double GamepadF310::getRightJoyY() {
-  return deadzone(5, rightJoyYDeadzone);
+  return -deadzone(5, rightJoyYDeadzone);
 }
 
 double GamepadF310::getRightJoyX(){
