@@ -39,40 +39,41 @@ void Drivetrain::Periodic() {
   //frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
   //frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
 
-  frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVel());
-  frc::SmartDashboard::PutNumber("Right Velocity", GetRightVel());
+  frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVelocity());
+  frc::SmartDashboard::PutNumber("Right Velocity", GetRightVelocity());
 
   frc::SmartDashboard::PutBoolean("In High Gear", IsShiftedToHighGear());
 
-  frc::SmartDashboard::PutBoolean("Can Turn In Place", CanTurnInPlace());
-  frc::SmartDashboard::PutBoolean("Forward Towards Intake", ForwardTowardIntake());
+  frc::SmartDashboard::PutBoolean("Can Turn In Place", IsCurvatureDriveEnabled());
+  frc::SmartDashboard::PutBoolean("Forward Towards Intake", IsForwardTowardIntake());
 }
 
 void Drivetrain::CurvatureDrive(double fwd, double rot) {
-  //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
-  if (m_forwardTowardIntake) 
-    m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace);
-  else
-    m_drive.CurvatureDrive(fwd, -rot, m_curvatureDriveTurnInPlace);
+  //?: If forward towards intake, use normal turning, if not, inverse turning
+  rot = m_forwardTowardIntake ? rot : -rot;
 
+  //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
+  m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace);
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
   m_curvatureDriveTurnInPlace = !m_curvatureDriveTurnInPlace;
 }
 
-bool Drivetrain::GetCurvatureTurnInPlaceStatus() {
+bool Drivetrain::IsCurvatureDriveEnabled() {
   return m_curvatureDriveTurnInPlace;
 }
 
 double Drivetrain::GetTicksToTravel(double inches) {
-  if (m_shiftedToHighGear)
-    return (inches * DriveConstants::kTicksPerInchesHighGear);
-  else
-    return (inches * DriveConstants::kTicksPerInchesLowGear);
+  //?: If shifted to high gear, use the high gear ticks per inch, otherwise use the low gear one
+  double ticksPerInches = m_shiftedToHighGear ? DriveConstants::kTicksPerInchesHighGear : DriveConstants::kTicksPerInchesLowGear;
+  
+  return (inches * ticksPerInches);
 }
 
 void Drivetrain::DriveForward(double ticksToTravel) {
+  //?: Set master motors to move using motion magic, slave motors not called (they are following the master)
+
   m_leftMaster.Set(ControlMode::MotionMagic, ticksToTravel);
   m_rightMaster.Set(ControlMode::MotionMagic, ticksToTravel);
 }
@@ -90,11 +91,11 @@ void Drivetrain::ResetRightEncoder() {
   m_rightMaster.GetSensorCollection().SetIntegratedSensorPosition(0);
 }
 
-double Drivetrain::GetLeftVel() {
+double Drivetrain::GetLeftVelocity() {
   return m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity();
 }
 
-double Drivetrain::GetRightVel() {
+double Drivetrain::GetRightVelocity() {
   return m_rightMaster.GetSensorCollection().GetIntegratedSensorVelocity();
 }
 
@@ -153,6 +154,10 @@ void Drivetrain::ReverseRelativeFront() {
   m_forwardTowardIntake = !m_forwardTowardIntake;
 }
 
+bool Drivetrain::IsForwardTowardIntake() {
+  return m_forwardTowardIntake;
+}
+
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   // set the max velocity and acceleration for motion magic
   motor.ConfigMotionCruiseVelocity(20000);
@@ -184,10 +189,3 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.Config_kF(0, 0.05); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
 
-bool Drivetrain::CanTurnInPlace() {
-  return m_curvatureDriveTurnInPlace;
-}
-
-bool Drivetrain::ForwardTowardIntake() {
-  return m_forwardTowardIntake;
-}

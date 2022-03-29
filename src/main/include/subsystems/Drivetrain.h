@@ -42,7 +42,7 @@ class Drivetrain : public frc2::SubsystemBase {
    * 
    * @return true if we can turn in place, false otherwise
    */
-  bool GetCurvatureTurnInPlaceStatus();
+  bool IsCurvatureDriveEnabled();
 
   /**
    * Get ticks needed to travel given distance in inches
@@ -129,22 +129,25 @@ class Drivetrain : public frc2::SubsystemBase {
   void ReverseRelativeFront();
 
   /**
+   * Returns if the robot's forward is torwards intake
+   * 
+   * @return whether the robot's forward is torwards intake
+   */
+  bool IsForwardTowardIntake();
+
+  /**
    * Gets the left gearbox's velocity
    * 
    * @return left gearbox's velocity
    */
-  double GetLeftVel();
+  double GetLeftVelocity();
 
   /**
    * Gets the right gearbox's velocity
    * 
    * @return right gearbox's velocity
    */
-  double GetRightVel();
-
-  bool CanTurnInPlace();
-
-  bool ForwardTowardIntake();
+  double GetRightVelocity();
 
  private:
   // Motor controllers
@@ -161,6 +164,9 @@ class Drivetrain : public frc2::SubsystemBase {
 
   // Robot's main drive object
   frc::DifferentialDrive m_drive{ m_leftMotors, m_rightMotors };
+
+  // Kinematics
+  frc::DifferentialDriveKinematics m_kinematics{ DriveConstants::kTrackWidth };
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel };
