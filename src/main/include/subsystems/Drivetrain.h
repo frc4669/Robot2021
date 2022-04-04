@@ -9,6 +9,8 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc2/command/RamseteCommand.h>
+#include <frc/kinematics/DifferentialDriveOdometry.h>
 
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
@@ -150,13 +152,21 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   double GetRightVelocity();
 
-  void SetOdometryAngle(double angle);
+  /**
+   * @benjamin can u add the return type?
+   * 
+   * 
+   * 
+  */
+  frc::Trajectory GetAutoTrajectory();
+
+  void SetOdometryAngle(units::degree_t angle);
 
   frc::Rotation2d GetRotation();
 
-  frc::RamseteController GetRamseteController();
+  frc::RamseteController& GetRamseteController();
 
-  frc::DifferentialDriveKinematics GetKinematics();
+  frc::DifferentialDriveKinematics& GetKinematics();
 
   units::meter_t GetLeftDistanceMeters();
   units::meter_t GetRightDistanceMeters();
@@ -192,7 +202,7 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::DifferentialDriveKinematics m_driveKinematics{ DriveConstants::kTrackWidth };
   frc::RamseteController m_ramseteController;
   frc::DifferentialDriveOdometry m_odometry{ frc::Rotation2d(), frc::Pose2d() };
-  frc::SimpleMotorFeedforward m_feedforward{ DriveConstants::ks, DriveConstants::kv, DriveConstants:ka };
+  frc::SimpleMotorFeedforward m_feedforward{ DriveConstants::ks, DriveConstants::kv, DriveConstants::ka };
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearFwdChannel, DriveConstants::kGearRevChannel };

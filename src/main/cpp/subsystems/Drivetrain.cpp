@@ -58,7 +58,7 @@ void Drivetrain::CurvatureDrive(double fwd, double rot) {
 
 frc::Trajectory Drivetrain::GetAutoTrajectory() {
   PathPlannerTrajectory autonomousPath = PathPlanner::loadPath("New Path", 4_mps, 4_mps_sq);
-  return autonomousPath.asWPILibTrajectory;
+  return autonomousPath.asWPILibTrajectory; // do we need a function call here?
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
@@ -124,7 +124,7 @@ units::degree_t Drivetrain::GetHeading() {
 }
 
 frc::Rotation2d Drivetrain::GetRotation() {
-  return frc::Rotation2d(m_imu.GetAngle())
+  return frc::Rotation2d(m_imu.GetAngle());
 }
 
 frc::RamseteController& Drivetrain::GetRamseteController() {
@@ -231,6 +231,7 @@ units::meter_t Drivetrain::GetRightDistanceMeters() {
 units::meters_per_second_t Drivetrain::GetLeftVelMetersPerSecond() {
   double ticksPerSecond = m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
   return units::meters_per_second_t(
+    
     units::inches_per_second_t(
       ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear)
     )
