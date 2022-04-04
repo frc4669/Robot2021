@@ -9,15 +9,15 @@ FollowAutoPath::FollowAutoPath(Drivetrain* drivetrain) {
   AddRequirements( {climber} );
   this->drivetrain = drivetrain;
   this->command = new frc2::RamseteCommand(
-      drivetrain.GetAutoTrajectory(),
-      [this] () { return drivetrain.GetCurrentPose(); },
+      drivetrain.GetAutoTrajectory(), //Gets the trajectory from pathplannnerlib
+      [this] () { return drivetrain.GetCurrentPose(); }, //Allows the command to repeatedly retrieve the pose from the odometry
       drivetrain.GetRamseteController(),
       drivetrain.GetFeedforward(),
       drivetrain.GetKinematics(),
-      [this] () { return drivetrain.GetWheelSpeeds() },
-      frc2::PIDController(DriveConstants::kp, 0, 0),
-      frc2::PIDController(DriveConstants::kp, 0, 0),
-      [this] (auto left, auto right) {
+      [this] () { return drivetrain.GetWheelSpeeds(); }, //Allows the command to repeatedly get the speeds of the wheels
+      frc2::PIDController(DriveConstants::kp, 0, 0), //PID controller (confirm kp is right)
+      frc2::PIDController(DriveConstants::kp, 0, 0), //PID controller (confirm kp is right)
+      [this] (auto left, auto right) { //Sets voltage of motors based on command output
           drivetrain.SetLeftVoltage(left);
           drivetrain.SetRightVoltage(right);
       },

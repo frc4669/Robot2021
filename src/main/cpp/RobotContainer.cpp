@@ -81,7 +81,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   };*/
   return new frc2::SequentialCommandGroup {
     frc2::ParallelCommandGroup {
-      Follow
+      FollowAutoPath(&drivetrain)
     }
-  }
+  };
 }
