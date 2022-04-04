@@ -58,7 +58,7 @@ void Drivetrain::CurvatureDrive(double fwd, double rot) {
 
 frc::Trajectory Drivetrain::GetAutoTrajectory() {
   PathPlannerTrajectory autonomousPath = PathPlanner::loadPath("New Path", 4_mps, 4_mps_sq);
-  return autonomousPath.asWPILibTrajectory; // do we need a function call here?
+  return autonomousPath.asWPILibTrajectory();
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
