@@ -118,7 +118,7 @@ class Drivetrain : public frc2::SubsystemBase {
   /**
    * Returns whether the robot is in high gear
    *
-   * @return true if the robot is in high gear, true otherwise
+   * @return true if the robot is in high gear, false otherwise
    */
   bool IsShiftedToHighGear();
 

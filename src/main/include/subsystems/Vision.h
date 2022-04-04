@@ -36,20 +36,20 @@ class Vision : public frc2::SubsystemBase {
   photonlib::PhotonPipelineResult GetIntakeCamData();
 
   /**
-   * Has targets in result.
+   * Get the distance from the target hub to the camera.
    * 
-   * @param result PhotonPipelineResult object (pointer) to check.
-   * @return True or false if there are targets in the result.
+   * @return distance to the target from the shooter camera in inches.
+   * @param result PhotonPipelineResult object containing the frame information.
    */
-  bool HasTargets(photonlib::PhotonPipelineResult* result);
+  double GetHubTargetDistance(photonlib::PhotonPipelineResult* result);
 
   /**
-   * Get best target from result.
+   * Get the angle offset from the target hub to the camera.
    * 
-   * @param result PhotonPipelineResult object (pointer) to check.
-   * @return best target from result.
+   * @return angle offset to the target from the shooter camera in degrees.
+   * @param result PhotonPipelineResult object containing the frame information.
    */
-  photonlib::PhotonTrackedTarget GetBestTarget(photonlib::PhotonPipelineResult* result);
+  double GetHubTargetAngle(photonlib::PhotonPipelineResult* result);
 
  private:
   photonlib::PhotonCamera m_shooterCamera{"Shooter Cam"};
