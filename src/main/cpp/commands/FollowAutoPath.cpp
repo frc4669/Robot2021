@@ -6,7 +6,7 @@
 #include <Constants.h>
 
 FollowAutoPath::FollowAutoPath(Drivetrain* drivetrain) {
-  AddRequirements( {climber} );
+  AddRequirements( {drivetrain} );
   this->drivetrain = drivetrain;
   this->command = new frc2::RamseteCommand(
       drivetrain.GetAutoTrajectory(), //Gets the trajectory from pathplannnerlib
