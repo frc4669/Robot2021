@@ -40,7 +40,7 @@ double Shooter::GetMasterShooterVelocity() {
 }
 
 double Shooter::GetSlaveShooterVelocity() {
-  return m_slaveEncoder.GetVelocity();
+  return abs(m_slaveEncoder.GetVelocity());
 }
 
 
@@ -51,3 +51,5 @@ double Shooter::GetShooterSetSpeed() {
 void Shooter::IncrementShooterSetSpeed(double increment) {
   kShooterVelocity += increment;
 }
+
+//!: CTRE Tuner, Software Limit Switches, Forward Limit Switch Enable = True

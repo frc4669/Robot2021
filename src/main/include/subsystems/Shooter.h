@@ -153,6 +153,6 @@ class Shooter : public frc2::SubsystemBase {
   WPI_TalonSRX m_hoodMotor{ ShooterConstants::kHoodMotorCAN };
 
 
-  double kShooterVelocity = 5000;
+  double kShooterVelocity = 4500;
   double kMaxShooterVelocity = 5800;
 };
