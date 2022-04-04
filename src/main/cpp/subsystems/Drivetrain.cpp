@@ -26,11 +26,6 @@ Drivetrain::Drivetrain() {
   m_shifter.Set(frc::DoubleSolenoid::kReverse);
 
   //frc::Shuffleboard::GetTab("IMU Gyro").Add(m_imu); //!: Come back to this
-
-  m_orchestra.AddInstrument(m_leftMaster);
-  m_orchestra.AddInstrument(m_rightMaster);
-  m_orchestra.LoadMusic("FATU_NA_TOTO.chrp");
-  m_orchestra.Play();
 }
 
 // This method will be called once per scheduler run
@@ -50,25 +45,25 @@ void Drivetrain::Periodic() {
 
 void Drivetrain::CurvatureDrive(double fwd, double rot) {
   //?: If forward towards intake, use normal turning, if not, inverse turning
-  rot = m_forwardTowardIntake ? rot : -rot;
+  rot = kForwardTowardIntake ? rot : -rot;
 
   //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
-  m_drive.CurvatureDrive(fwd, rot, m_curvatureDriveTurnInPlace);
+  m_drive.CurvatureDrive(fwd, rot, kTurnInPlaceEnabled);
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
-  m_curvatureDriveTurnInPlace = !m_curvatureDriveTurnInPlace;
+  kTurnInPlaceEnabled = !kTurnInPlaceEnabled;
 }
 
 bool Drivetrain::IsCurvatureDriveEnabled() {
-  return m_curvatureDriveTurnInPlace;
+  return kTurnInPlaceEnabled;
 }
 
 double Drivetrain::GetTicksToTravel(double inches) {
   //?: If shifted to high gear, use the high gear ticks per inch, otherwise use the low gear one
-  double ticksPerInches = m_shiftedToHighGear ? DriveConstants::kTicksPerInchesHighGear : DriveConstants::kTicksPerInchesLowGear;
+  double ticksPerInch = kShiftedToHighGear ? DriveGearingConstants::kTicksPerInch_HighGear : DriveGearingConstants::kTicksPerInch_LowGear;
   
-  return (inches * ticksPerInches);
+  return (inches * ticksPerInch);
 }
 
 void Drivetrain::DriveForward(double ticksToTravel) {
@@ -124,20 +119,20 @@ frc::ADIS16470_IMU& Drivetrain::GetIMU() {
 void Drivetrain::ShiftGear() {
   if (IsShiftedToHighGear()) { // check if in high gear
     m_shifter.Set(frc::DoubleSolenoid::kReverse); // shift to low gear
-    m_shiftedToHighGear = false;
+    kShiftedToHighGear = false;
   } else {
     m_shifter.Set(frc::DoubleSolenoid::kForward); // shift to high gear
-    m_shiftedToHighGear = true;
+    kShiftedToHighGear = true;
   }
 }
 
 bool Drivetrain::IsShiftedToHighGear() {
-  return m_shiftedToHighGear;
+  return kShiftedToHighGear;
 }
 
 void Drivetrain::ReverseRelativeFront() {
   // basically gets the inverted status and adds "!" to it which inverts it
-  if(m_forwardTowardIntake) {
+  if(kForwardTowardIntake) {
     ConfigureMotor(m_leftMaster, false);
     ConfigureMotor(m_leftSlave, false);
 
@@ -151,11 +146,11 @@ void Drivetrain::ReverseRelativeFront() {
     ConfigureMotor(m_rightSlave, false);
   } 
 
-  m_forwardTowardIntake = !m_forwardTowardIntake;
+  kForwardTowardIntake = !kForwardTowardIntake;
 }
 
 bool Drivetrain::IsForwardTowardIntake() {
-  return m_forwardTowardIntake;
+  return kForwardTowardIntake;
 }
 
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {

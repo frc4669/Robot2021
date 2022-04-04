@@ -151,10 +151,10 @@ class Drivetrain : public frc2::SubsystemBase {
 
  private:
   // Motor controllers
-  WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFront };
-  WPI_TalonFX m_leftSlave{ DriveConstants::kLeftBack };
-  WPI_TalonFX m_rightMaster{ DriveConstants::kRightFront };
-  WPI_TalonFX m_rightSlave{ DriveConstants::kRightBack };
+  WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFrontCAN };
+  WPI_TalonFX m_leftSlave{ DriveConstants::kLeftBackCAN };
+  WPI_TalonFX m_rightMaster{ DriveConstants::kRightFrontCAN };
+  WPI_TalonFX m_rightSlave{ DriveConstants::kRightBackCAN };
 
   Orchestra m_orchestra;
 
@@ -166,16 +166,16 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::DifferentialDrive m_drive{ m_leftMotors, m_rightMotors };
 
   // Kinematics
-  frc::DifferentialDriveKinematics m_kinematics{ DriveConstants::kTrackWidth };
+  //frc::DifferentialDriveKinematics m_kinematics{ DriveConstants::kTrackWidth };
 
   // Shifter for gearboxes (solenoid)
-  frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearShifterForwardChannel, DriveConstants::kGearShifterReverseChannel };
-  bool m_shiftedToHighGear = false; // whether we are in low gear or not
+  frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearFwdChannel, DriveConstants::kGearRevChannel };
+  bool kShiftedToHighGear = false; // whether we are in low gear or not
 
   frc::ADIS16470_IMU m_imu{ };
 
-  bool m_curvatureDriveTurnInPlace = true; // whether we are able to turn in place
-  bool m_forwardTowardIntake = true;
+  bool kTurnInPlaceEnabled = true; // whether we are able to turn in place
+  bool kForwardTowardIntake = true;
 
   /**
    * Configure motor to desired settings

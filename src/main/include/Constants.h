@@ -4,6 +4,7 @@
 
 #pragma once
 
+//!: Don't import all of <units>, it slows compile time
 #include <units/voltage.h>
 #include <units/time.h>
 #include <units/velocity.h>
@@ -13,49 +14,53 @@
 //#include <units/length.h>
 #include <units/constants.h>
 
-
-/**
- * The Constants header provides a convenient place for teams to hold robot-wide
- * numerical or boolean constants.  This should not be used for any other
- * purpose.
- *
- * It is generally a good idea to place constants into subsystem- or
- * command-specific namespaces within this header, which can then be used where
- * they are needed.
- */
+//?: If you're asking why we use constexpr, it's because constexpr computes at compile time instead of run time, making it faster.
 
 namespace VisionContants {
   constexpr units::meter_t kCameraHeight = 0_in;
   constexpr units::meter_t kHubHeight = 0_in;
 
-  constexpr units::radian_t kCameraAngle = 0_deg;
+  constexpr units::radian_t kCameraAngle = 45_deg;
+  //constexpr auto kInchesHubHeight 10_in;
 } // namespace VisionContants
 
+namespace ShooterConstants {
+  constexpr int kLeftMotorCAN = 46;
+  constexpr int kRightMotorCAN = 47;
+
+
+} // namespace ShooterConstants
 
 namespace ClimbConstants {
-  constexpr int kLeftMotorPort = 20;
-  constexpr int kRightMotorPort = 21;
+  // Static climbing motor CAN IDs (Falcon FXs)
+  constexpr int kStaticLeftCAN = 20;
+  constexpr int kStaticRightCAN = 21;
 
-  //constexpr auto kInchesHubHeight 10_in;
+  // Pivot climbing motor CAN IDs (Talon FXs)
+  constexpr int kPivotLeftCAN = 30;
+  constexpr int kPivotRightCAN = 31; 
 } //namespace ClimbConstants
 
 namespace IntakeConstants {
-  constexpr int kIntakeMotorPort = 11;       // the primary intake
-  constexpr int kFeederMotorPort = 10;       // vertical feeder
+  // Intake Talon SRX CAN IDs
+  constexpr int kIntakeCAN = 11;       // the primary intake
+  constexpr int kFeederCAN = 10;       // vertical feeder
 
-  constexpr int kIntakeSolenoidForwardChannel = 1; // channel for extending intake arm
-  constexpr int kIntakeSolenoidReverseChannel = 0; // channel for retracting intake arm
+  constexpr int kArmFwdChannel = 1;   // channel for extending intake arm
+  constexpr int kArmRevChannel = 0;   // channel for retracting intake arm
 } //namespace IntakeConstants
 
 namespace DriveConstants {
-  constexpr int kLeftFront = 50;
-  constexpr int kLeftBack = 51;
+  // Drivetrain Talon FX CAN IDs
+  constexpr int kLeftFrontCAN = 50;    // Leading left motor
+  constexpr int kLeftBackCAN = 51;     // Following left motor
 
-  constexpr int kRightFront = 52;
-  constexpr int kRightBack = 53;
+  constexpr int kRightFrontCAN = 52;   // Leading right motor
+  constexpr int kRightBackCAN = 53;    // Following right motor
 
-  constexpr int kGearShifterForwardChannel = 2;     // red tape blue tube
-  constexpr int kGearShifterReverseChannel = 3;     // non tape blue tube
+  // Drivetrain solenoid shifter pneumatic channels
+  constexpr int kGearFwdChannel = 2;     // striped blue channel
+  constexpr int kGearRevChannel = 3;     // unstriped blue channel
   
   constexpr auto ks = 1_V;
   constexpr auto kv = 0.8_V * 1_s / 1_m;
@@ -66,43 +71,35 @@ namespace DriveConstants {
   constexpr auto kMaxSpeed = 3_mps;
   constexpr auto kMaxAcceleration = 3_mps_sq;
 
-  constexpr double kWheelDiameter = 6;                  // Wheel diameter; dont change unless using different wheel base
-  constexpr double kTicksPerRev = 2048;                 // Ticks per revolution; specific to Falcon FXs
-  constexpr double kWheelCirc = kWheelDiameter * units::constants::pi;   // Wheel circumference; dont change unless bending rules of mathematics
-
-  // Gear ratios prior to shifter portion
-  constexpr double kFirstGearRatio = (double) 30/11;    // 30 teeth driven by 11; dont change unless using diff gearbox
-  constexpr double kSecondGearRatio = (double) 44/30;   // 44 teeth driven by 30; dont change unless using diff gearbox
-
-  // Shifter Rations with previous ratios
-  constexpr double kLowGearRatio = (double) 50/14;      // 50 teeth driven by 14; dont change unless using diff gearbox
-  constexpr double kHighGearRatio = (double) 44/20;     // 44 teeth driven by 20; dont change unless using diff gearbox
-
-  constexpr double kLastGearRatio = (double) 40/34;     // 40 teeth driven by 34; dont change unless using diff gearbox
-
-  // If shifted at 1 (using low gear)
-  constexpr double kInchesPerTicksLowGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
-  constexpr double kTicksPerInchesLowGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio) / kWheelCirc;
-  constexpr double kTicksPerRevLowGear = kTicksPerRev * (kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
-  constexpr double kLowGearing = kTicksPerRevLowGear / kTicksPerRev; //16.80
-
-  // If shifted at 2 (using high gear)
-  constexpr double kInchesPerTicksHighGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
-  constexpr double kTicksPerInchesHighGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio) / kWheelCirc;
-  constexpr double kTicksPerRevHighGear = kTicksPerRev * (kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
-  constexpr double kHighGearing = kTicksPerRevHighGear / kTicksPerRev; //10.35
+  constexpr double kTrackWidth = 18.0;      // Distance between left and right wheels in inches
 } // namespace DriveConstants
 
-namespace ShooterConstants {
-  constexpr int kShooterMasterPort = 46;
-  constexpr int kShooterSlavePort = 47;
+namespace DriveGearingConstants {
+  constexpr double kWheelDiameter = 6;                  // Wheel diameter in inches
+  constexpr double kTicksPerRev = 2048;                 // Ticks per revolution //?: specific to Falcon 500s
+  constexpr double kWheelCirc = kWheelDiameter * units::constants::pi;   // Wheel circumference
 
-  constexpr int kHoodLeftPort = 30;
-  constexpr int kHoodRightPort = 31; 
-} // namespace ShooterConstants
+  // Gear ratios; formula is (driven gear teeth / driving gear teeth) = gear ratio
+  constexpr double kPrimaryRatio = (double) 30/11;      // 30 teeth driven by 11
+  constexpr double kSecondaryRatio = (double) 44/30;    // 44 teeth driven by 30
+  constexpr double kPreShiftRatio = kPrimaryRatio * kSecondaryRatio;
 
-namespace OperatorConstants {
-  constexpr int kF310ControllerID = 0;
-  constexpr int kExtreme3DJoystickID = 1;
-  constexpr int kAttack3JoystickID = 2;
-} // namespace IO constants
+  // Shifter Rations with previous ratios
+  constexpr double kShifterLowRatio = (double) 50/14;     // 50 teeth driven by 14
+  constexpr double kShifterHighRatio = (double) 44/20;    // 44 teeth driven by 20
+  constexpr double kLastRatio = (double) 40/34;    // 40 teeth driven by 34
+
+  // Full ratios
+  constexpr double kLowGearRato = kPreShiftRatio * kShifterLowRatio * kLastRatio;     // 16.80
+  constexpr double kHighGearRatio = kPreShiftRatio * kShifterHighRatio * kLastRatio;  // 10.35
+
+  // Low gear values (higher torque, lower speed) //?: can tell low gear bc more ticks per rev
+  constexpr double kInchesPerTick_LowGear = kWheelCirc / (kTicksPerRev * kLowGearRato);
+  constexpr double kTicksPerInches_LowGear = (kTicksPerRev * kLowGearRato) / kWheelCirc;  // 1826.04
+  constexpr double kTicksPerRev_LowGear = kTicksPerRev * kLowGearRato; // 34420.16
+ 
+  // High gear values (lower torque, higher speed) //?: can tell high gear bc less ticks per rev
+  constexpr double kInchesPerTick_HighGear = kWheelCirc / (kTicksPerRev * kHighGearRatio);
+  constexpr double kTicksPerInch_HighGear = (kTicksPerRev * kHighGearRatio) / kWheelCirc; // 1124.84
+  constexpr double kTicksPerRev_HighGear = kTicksPerRev * kHighGearRatio; // 21202.82
+} // namespace DriveGearingConstants

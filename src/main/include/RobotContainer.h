@@ -51,8 +51,8 @@ class RobotContainer {
   Climber m_climber;
   Vision m_vision;
   
-  // Controllers
-  GamepadF310 i_f310{ OperatorConstants::kF310ControllerID };
-  Attack3Joystick i_attack3{ OperatorConstants::kAttack3JoystickID };
-  Extreme3DJoystick i_extreme3{ OperatorConstants::kExtreme3DJoystickID };
+  // Controllers (takes USB port order as seen on FRC Driver Station and optionally axis deadzones)
+  GamepadF310 i_f310{ 0 };
+  Attack3Joystick i_attack3{ 1 };
+  Extreme3DJoystick i_extreme3{ 2 };
 };
