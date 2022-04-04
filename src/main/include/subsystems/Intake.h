@@ -67,4 +67,7 @@ class Intake : public frc2::SubsystemBase {
   // Intake arm
   frc::DoubleSolenoid m_intakeArm{ frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kArmFwdChannel, IntakeConstants::kArmRevChannel };
   bool kIntakeArmExtended = false; //start with intake arm retracted
+
+  double kIntakeSpeedPercentage = 0.8;
+  double kFeederSpeedPercentage = 0.5;
 };

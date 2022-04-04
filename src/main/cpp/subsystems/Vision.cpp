@@ -12,26 +12,26 @@ Vision::Vision() {
 
 // This method will be called once per scheduler run
 void Vision::Periodic() {
-/* 	frc::SmartDashboard::PutBoolean("Intake Cam Has Targets", m_intakeCamera.GetLatestResult().HasTargets());
-	frc::SmartDashboard::PutBoolean("Shooter Cam Has Targets", m_shooterCamera.GetLatestResult().HasTargets());
+/* frc::SmartDashboard::PutBoolean("Intake Cam Has Targets", m_intakeCamera.GetLatestResult().HasTargets());
+  frc::SmartDashboard::PutBoolean("Shooter Cam Has Targets", m_shooterCamera.GetLatestResult().HasTargets());
 
-	frc::SmartDashboard::PutNumber("Shooter Target Estimated Distance", 0.00);
-	frc::SmartDashboard::PutNumber("Estimated Exit Angle Needed", 0.00);
-	frc::SmartDashboard::PutNumber("Estimated Exit Velocity Needed", 0.00); */
+  frc::SmartDashboard::PutNumber("Shooter Target Estimated Distance", 0.00);
+  frc::SmartDashboard::PutNumber("Estimated Exit Angle Needed", 0.00);
+  frc::SmartDashboard::PutNumber("Estimated Exit Velocity Needed", 0.00); */
 }
 
 photonlib::PhotonPipelineResult Vision::GetShooterCamData() {
-	return m_shooterCamera.GetLatestResult();
+  return m_shooterCamera.GetLatestResult();
 }
 
 photonlib::PhotonPipelineResult Vision::GetIntakeCamData() {
-	return m_intakeCamera.GetLatestResult();
+  return m_intakeCamera.GetLatestResult();
 }
 
-bool Vision::HasTargets(photonlib::PhotonPipelineResult* result) {
-	return result->HasTargets();
+double Vision::GetHubTargetDistance(photonlib::PhotonPipelineResult* result) {
+  return 0.00;
 }
 
-photonlib::PhotonTrackedTarget Vision::GetBestTarget(photonlib::PhotonPipelineResult* result) {
-	return result->GetBestTarget();
+double Vision::GetHubTargetAngle(photonlib::PhotonPipelineResult* result) {
+  return 0.00;
 }

@@ -19,7 +19,7 @@ void RunShooter::Execute() {
 
 // Called once the command ends or is interrupted.
 void RunShooter::End(bool interrupted) {
-  shooter->StopShooter();
+  shooter->RunShooter(true);
 }
 
 // Returns true when the command should end.
