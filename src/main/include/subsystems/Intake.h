@@ -67,12 +67,12 @@ class Intake : public frc2::SubsystemBase {
 
  private:
   // Motor controller for main intake
-  WPI_TalonSRX m_intakeMotor{ IntakeConstants::kIntakeMotorPort };
+  WPI_TalonSRX m_intakeMotor{ IntakeConstants::kIntakeCAN };
 
   // Motor controller for vertical feeder
-  WPI_TalonSRX m_feederMotor{ IntakeConstants::kFeederMotorPort };
+  WPI_TalonSRX m_feederMotor{ IntakeConstants::kFeederCAN };
 
   // Intake arm
-  frc::DoubleSolenoid m_intakeArm{ frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kIntakeSolenoidForwardChannel, IntakeConstants::kIntakeSolenoidReverseChannel };
-  bool m_intakeArmExtended = false; //start with intake arm retracted
+  frc::DoubleSolenoid m_intakeArm{ frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kArmFwdChannel, IntakeConstants::kArmRevChannel };
+  bool kIntakeArmExtended = false; //start with intake arm retracted
 };

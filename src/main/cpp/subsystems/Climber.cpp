@@ -7,8 +7,8 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 Climber::Climber() {
-  ConfigureMotor(m_masterMotor, true);
-  ConfigureMotor(m_slaveMotor, false);
+  ConfigureMotor(m_staticRight, true);
+  ConfigureMotor(m_staticLeft, false);
 }
 
 // This method will be called once per scheduler run
@@ -25,54 +25,54 @@ void Climber::Periodic() {
 }
 
 void Climber::RaiseExtendingArms() {
-  m_masterMotor.Set(ControlMode::PercentOutput, -0.8);
+  m_staticRight.Set(ControlMode::PercentOutput, -0.8);
 }
 
 void Climber::LowerExtendingArms() {
-  m_masterMotor.Set(ControlMode::PercentOutput, 0.8);
+  m_staticRight.Set(ControlMode::PercentOutput, 0.8);
 }
 
 void Climber::StopExtendingArms() {
-  m_masterMotor.Set(ControlMode::PercentOutput, 0.0);
+  m_staticRight.Set(ControlMode::PercentOutput, 0.0);
 }
 
 void Climber::ZeroArms() {
   // Lower slave motor if not at base position
   //?: slave motor lowered first because if the master hits the limit switch, the slave will not be able to move
   if(!IsLeftLimitHit())
-    m_slaveMotor.Set(ControlMode::PercentOutput, 0.1);
+    m_staticLeft.Set(ControlMode::PercentOutput, 0.1);
   
   // Lower master motor if not at base position once slave motor is at base position
   if(!IsRightLimitHit())
-    m_masterMotor.Set(ControlMode::PercentOutput, 0.1);
+    m_staticRight.Set(ControlMode::PercentOutput, 0.1);
 
   // If both motors are at base position, stop the periodic loop, they have now been synchronized
   if(IsLeftLimitHit() && IsRightLimitHit()) {
-    m_armsZeroed = true;
-    m_slaveMotor.Follow(m_masterMotor);
+    kArmsZeroed = true;
+    m_staticLeft.Follow(m_staticRight);
     StopExtendingArms();
   }
 }
 
 bool Climber::AreArmsZeroed() {
-  return m_armsZeroed;
+  return kArmsZeroed;
 }
 
 bool Climber::IsRightLimitHit() {
-  return m_masterMotor.GetSensorCollection().IsFwdLimitSwitchClosed();
+  return m_staticRight.GetSensorCollection().IsFwdLimitSwitchClosed();
 }
 
 bool Climber::IsLeftLimitHit() {
-  return m_slaveMotor.GetSensorCollection().IsFwdLimitSwitchClosed();
+  return m_staticLeft.GetSensorCollection().IsFwdLimitSwitchClosed();
 }
 
 double Climber::GetRightPostion() {
-  return m_masterMotor.GetSensorCollection().GetIntegratedSensorPosition();
+  return m_staticRight.GetSensorCollection().GetIntegratedSensorPosition();
 }
 
 double Climber::GetLeftPosition() {
   //?: invert is needed because the slave motor is inverted
-  return -m_slaveMotor.GetSensorCollection().GetIntegratedSensorPosition();
+  return -m_staticLeft.GetSensorCollection().GetIntegratedSensorPosition();
 }
 
 void Climber::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {

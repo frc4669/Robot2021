@@ -25,10 +25,12 @@ namespace VisionContants {
 } // namespace VisionContants
 
 namespace ShooterConstants {
+  // Shooter motor CAN IDs (NEOs)
   constexpr int kLeftMotorCAN = 46;
   constexpr int kRightMotorCAN = 47;
 
-
+  // Shooter hood motor CAN ID (775Pro connected to a Talon SRX) 
+  constexpr int kHoodMotorCAN = 7;
 } // namespace ShooterConstants
 
 namespace ClimbConstants {
@@ -37,8 +39,8 @@ namespace ClimbConstants {
   constexpr int kStaticRightCAN = 21;
 
   // Pivot climbing motor CAN IDs (Talon FXs)
-  constexpr int kPivotLeftCAN = 30;
-  constexpr int kPivotRightCAN = 31; 
+  constexpr int kPivotLeftCAN = 31;
+  constexpr int kPivotRightCAN = 30; 
 } //namespace ClimbConstants
 
 namespace IntakeConstants {
@@ -95,7 +97,7 @@ namespace DriveGearingConstants {
 
   // Low gear values (higher torque, lower speed) //?: can tell low gear bc more ticks per rev
   constexpr double kInchesPerTick_LowGear = kWheelCirc / (kTicksPerRev * kLowGearRato);
-  constexpr double kTicksPerInches_LowGear = (kTicksPerRev * kLowGearRato) / kWheelCirc;  // 1826.04
+  constexpr double kTicksPerInch_LowGear = (kTicksPerRev * kLowGearRato) / kWheelCirc;  // 1826.04
   constexpr double kTicksPerRev_LowGear = kTicksPerRev * kLowGearRato; // 34420.16
  
   // High gear values (lower torque, higher speed) //?: can tell high gear bc less ticks per rev

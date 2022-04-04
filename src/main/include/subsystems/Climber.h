@@ -78,12 +78,15 @@ class Climber : public frc2::SubsystemBase {
   bool AreArmsZeroed();
 
  private:
-  WPI_TalonFX m_masterMotor{ ClimbConstants::kRightMotorPort };  // Leading motor, right side
-  WPI_TalonFX m_slaveMotor{ ClimbConstants::kLeftMotorPort };    // Following Motor, left side
+  WPI_TalonFX m_staticRight{ ClimbConstants::kStaticRightCAN };  // Leading motor, right side
+  WPI_TalonFX m_staticLeft{ ClimbConstants::kStaticLeftCAN };    // Following Motor, left side
+  frc::MotorControllerGroup m_staticArms{ m_staticRight, m_staticLeft };
 
-  frc::MotorControllerGroup m_climbMotors{ m_slaveMotor, m_masterMotor };
+  WPI_TalonFX m_pivotRight{ ClimbConstants::kPivotRightCAN };   // Leading motor, right side
+  WPI_TalonFX m_pivotLeft{ ClimbConstants::kPivotLeftCAN };     // Following motor, left side
+  frc::MotorControllerGroup m_pivotArms{ m_pivotRight, m_pivotLeft };
 
-  bool m_armsZeroed = false;  // Whether the arms have been zeroed and are in sync
+  bool kArmsZeroed = false;  // Whether the arms have been zeroed and are in sync
 
   /**
    * Configure motor to desired settings

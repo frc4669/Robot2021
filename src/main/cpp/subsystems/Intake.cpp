@@ -17,21 +17,21 @@ void Intake::Periodic() {
   frc::SmartDashboard::PutNumber("Intake Active Motor Velocity", GetIntakeVelocity());
   frc::SmartDashboard::PutNumber("Feeder Active Motor Velocity", GetFeederVelocity());
 
-  //frc::SmartDashboard::PutNumber("feeder ticks", GetFeederTicks());
+  frc::SmartDashboard::PutNumber("feeder ticks", GetFeederTicks());
 }
 
 void Intake::ManipulateArm() {
   if (IsArmExtended()) {
     m_intakeArm.Set(frc::DoubleSolenoid::kReverse);
-    m_intakeArmExtended = false;
+    kIntakeArmExtended = false;
   } else {
     m_intakeArm.Set(frc::DoubleSolenoid::kForward);
-    m_intakeArmExtended = true;
+    kIntakeArmExtended = true;
   }
 }
 
 bool Intake::IsArmExtended() {
-  return m_intakeArmExtended;
+  return kIntakeArmExtended;
 }
 
 void Intake::RunIntake(bool runReverse) {

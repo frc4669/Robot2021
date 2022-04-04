@@ -12,11 +12,9 @@
 #include <commands/InverseMode.h>
 #include <commands/ManipulateIntakeArm.h>
 #include <commands/RunFeeder.h>
-#include <commands/SetHoodAngle.h>
 
 #include <commands/IntakeCargo.h>
 #include <commands/AlignToTarget.h>
-#include <commands/SwitchHoodNeutralMode.h>
 #include <commands/IncrementShooterSetSpeed.h>
 #include <commands/CurvatureDriveToggle.h>
 
@@ -24,11 +22,6 @@
 #include <frc2/command/ParallelCommandGroup.h>
 #include <frc2/command/ParallelDeadlineGroup.h>
 #include <frc2/command/ParallelRaceGroup.h>
-
-#include <units/time.h>
-#include <commands/TimedFeeder.h>
-#include <commands/TimedIntake.h>
-#include <commands/TimedShooter.h>
 
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
@@ -64,8 +57,8 @@ void RobotContainer::ConfigureButtonBindings() {
   i_f310.orangeButton.WhenHeld( ManipulateIntakeArm(&m_intake) );           // deploy intake //?: orange button
   i_f310.greenButton.WhenHeld( RunShooter(&m_shooter) );                    // Run shooter   //?: green button
 
-  i_attack3.topLeftButton.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle  //?: red button
-  i_attack3.bottomLeftButton.WhenHeld( SetHoodAngle(&m_shooter, false) );           // lower hood angle  //?: blue button
+  //i_attack3.topLeftButton.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle  //?: red button
+  //i_attack3.bottomLeftButton.WhenHeld( SetHoodAngle(&m_shooter, false) );           // lower hood angle  //?: blue button
 
   // POV buttons
   i_attack3.topJoyButton.WhenHeld( ExtendArms(&m_climber, true) );           // Extend arms    //?: dpad up

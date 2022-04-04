@@ -8,7 +8,7 @@
 #include <frc/motorcontrol/MotorControllerGroup.h>
 
 #include <rev/CANSparkMax.h>
-#include <ctre/Phoenix.h>       // talon
+#include <ctre/Phoenix.h>       // for hood motor
 
 #include <Constants.h>
 
@@ -139,31 +139,20 @@ class Shooter : public frc2::SubsystemBase {
 
  private:
   // Our shooter motors
-  rev::CANSparkMax m_masterShooterMotor{ ShooterConstants::kShooterMasterPort, rev::CANSparkMax::MotorType::kBrushless };
-  rev::CANSparkMax m_slaveShooterMotor{ ShooterConstants::kShooterSlavePort, rev::CANSparkMax::MotorType::kBrushless };
+  rev::CANSparkMax m_leftShooterMotor{ ShooterConstants::kLeftMotorCAN, rev::CANSparkMax::MotorType::kBrushless };
+  rev::CANSparkMax m_rightShooterMotor{ ShooterConstants::kRightMotorCAN, rev::CANSparkMax::MotorType::kBrushless };
 
   // PID controllers so we can slowly ramp up the shooter to a given speed
-  rev::SparkMaxPIDController m_masterPIDController{ m_masterShooterMotor.GetPIDController() };
-  rev::SparkMaxPIDController m_slavePIDController{ m_slaveShooterMotor.GetPIDController() };
+  rev::SparkMaxPIDController m_masterPIDController{ m_leftShooterMotor.GetPIDController() };
+  rev::SparkMaxPIDController m_slavePIDController{ m_rightShooterMotor.GetPIDController() };
 
   // Motor encoders
-  rev::SparkMaxRelativeEncoder m_masterEncoder{ m_masterShooterMotor.GetEncoder() };
-  rev::SparkMaxRelativeEncoder m_slaveEncoder{ m_slaveShooterMotor.GetEncoder() };
+  rev::SparkMaxRelativeEncoder m_masterEncoder{ m_leftShooterMotor.GetEncoder() };
+  rev::SparkMaxRelativeEncoder m_slaveEncoder{ m_rightShooterMotor.GetEncoder() };
 
-  WPI_TalonFX m_leftHoodMotor{ ShooterConstants::kHoodLeftPort };
-  WPI_TalonFX m_rightHoodMotor{ ShooterConstants::kHoodRightPort };
+  WPI_TalonSRX m_hoodMotor{ ShooterConstants::kHoodMotorCAN };
 
-  frc::MotorControllerGroup m_hoodMotors{ m_leftHoodMotor, m_rightHoodMotor };
 
-  double m_shooterVelocity = 5000;
-  double m_maxShooterVelocity = 5800;
-
-  double m_hoodAngle = 0;
-  double m_lowestHoodAngle = 90.0;
-
-  double m_hoodMoveSpeed = 0.20;
-
-  bool m_hoodNeutralBrakeMode = false;
-
-  bool m_hoodZeroed = false;
+  double kShooterVelocity = 5000;
+  double kMaxShooterVelocity = 5800;
 };
