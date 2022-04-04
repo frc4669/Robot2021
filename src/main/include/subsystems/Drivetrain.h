@@ -8,6 +8,7 @@
 #include <frc/SpeedController.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc/kinematics/DifferentialDriveKinematics.h>
 
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
@@ -118,7 +119,7 @@ class Drivetrain : public frc2::SubsystemBase {
   /**
    * Returns whether the robot is in high gear
    *
-   * @return true if the robot is in high gear, true otherwise
+   * @return true if the robot is in high gear, false otherwise
    */
   bool IsShiftedToHighGear();
 
@@ -149,6 +150,29 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   double GetRightVelocity();
 
+  void SetOdometryAngle(double angle);
+
+  frc::Rotation2d GetRotation();
+
+  frc::RamseteController GetRamseteController();
+
+  frc::DifferentialDriveKinematics GetKinematics();
+
+  units::meter_t GetLeftDistanceMeters();
+  units::meter_t GetRightDistanceMeters();
+
+  units::meters_per_second_t GetLeftVelMetersPerSecond();
+  units::meters_per_second_t GetRightVelMetersPerSecond();
+
+  frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
+
+  frc::Pose2d GetCurrentPose();
+
+  void SetLeftVoltage(units::volt_t voltage);
+  void SetRightVoltage(units::volt_t voltage);
+
+  frc::SimpleMotorFeedforward Drivetrain::GetFeedforward();
+
  private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFrontCAN };
@@ -165,8 +189,10 @@ class Drivetrain : public frc2::SubsystemBase {
   // Robot's main drive object
   frc::DifferentialDrive m_drive{ m_leftMotors, m_rightMotors };
 
-  // Kinematics
-  //frc::DifferentialDriveKinematics m_kinematics{ DriveConstants::kTrackWidth };
+  frc::DifferentialDriveKinematics m_driveKinematics{ DriveConstants::kTrackWidth };
+  frc::RamseteController m_ramseteController;
+  frc::DifferentialDriveOdometry m_odometry{ frc::Rotation2d(), frc::Pose2d() };
+  frc::SimpleMotorFeedforward m_feedforward{ DriveConstants::ks, DriveConstants::kv, DriveConstants:ka };
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearFwdChannel, DriveConstants::kGearRevChannel };

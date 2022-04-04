@@ -73,7 +73,29 @@ namespace DriveConstants {
   constexpr auto kMaxSpeed = 3_mps;
   constexpr auto kMaxAcceleration = 3_mps_sq;
 
-  constexpr double kTrackWidth = 18.0;      // Distance between left and right wheels in inches
+  constexpr auto kTrackWidth = 18_in;
+
+  constexpr double kWheelDiameter = 6;                  // Wheel diameter; dont change unless using different wheel base
+  constexpr double kTicksPerRev = 2048;                 // Ticks per revolution; specific to Falcon FXs
+  constexpr double kWheelCirc = kWheelDiameter * units::constants::pi;   // Wheel circumference; dont change unless bending rules of mathematics
+
+  // Gear ratios prior to shifter portion
+  constexpr double kFirstGearRatio = (double) 30/11;    // 30 teeth driven by 11; dont change unless using diff gearbox
+  constexpr double kSecondGearRatio = (double) 44/30;   // 44 teeth driven by 30; dont change unless using diff gearbox
+
+  // Shifter Rations with previous ratios
+  constexpr double kLowGearRatio = (double) 50/14;      // 50 teeth driven by 14; dont change unless using diff gearbox
+  constexpr double kHighGearRatio = (double) 44/20;     // 44 teeth driven by 20; dont change unless using diff gearbox
+
+  constexpr double kLastGearRatio = (double) 40/34;     // 40 teeth driven by 34; dont change unless using diff gearbox
+
+  // If shifted at 1 (using low gear)
+  constexpr double kInchesPerTicksLowGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio);
+  constexpr double kTicksPerInchesLowGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kLowGearRatio * kLastGearRatio) / kWheelCirc;
+
+  // If shifted at 2 (using high gear)
+  constexpr double kInchesPerTicksHighGear = kWheelCirc / (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio);
+  constexpr double kTicksPerInchesHighGear = (kTicksPerRev * kFirstGearRatio * kSecondGearRatio * kHighGearRatio * kLastGearRatio) / kWheelCirc;
 } // namespace DriveConstants
 
 namespace DriveGearingConstants {
