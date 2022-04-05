@@ -38,14 +38,14 @@ void Intake::RunIntake(bool runReverse, bool stopIntake) {
   double setSpeed = runReverse ? -kIntakeSpeedPercentage : kIntakeSpeedPercentage;  // if runReverse, reverse intake
   setSpeed = stopIntake ? 0 : setSpeed; // if stopIntake, set speed to 0
 
-  m_intakeMotor.Set(ControlMode::PercentOutput, kIntakeSpeedPercentage);
+  m_intakeMotor.Set(ControlMode::PercentOutput, setSpeed);
 }
 
 void Intake::RunFeeder(bool runReverse, bool stopFeeder) {
   double setSpeed = runReverse ? -kFeederSpeedPercentage : kFeederSpeedPercentage;  // if runReverse, reverse feeder
   setSpeed = stopFeeder ? 0 : setSpeed; // if stopFeeder, set speed to 0
 
-  m_feederMotor.Set(ControlMode::PercentOutput, kFeederSpeedPercentage);
+  m_feederMotor.Set(ControlMode::PercentOutput, setSpeed);
 }
 
 double Intake::GetIntakeVelocity() {
