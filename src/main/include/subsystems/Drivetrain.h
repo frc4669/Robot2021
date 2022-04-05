@@ -181,7 +181,7 @@ class Drivetrain : public frc2::SubsystemBase {
   void SetLeftVoltage(units::volt_t voltage);
   void SetRightVoltage(units::volt_t voltage);
 
-  frc::SimpleMotorFeedforward Drivetrain::GetFeedforward();
+  frc::SimpleMotorFeedforward<units::meters> Drivetrain::GetFeedforward();
 
  private:
   // Motor controllers
@@ -202,7 +202,7 @@ class Drivetrain : public frc2::SubsystemBase {
   frc::DifferentialDriveKinematics m_driveKinematics{ DriveConstants::kTrackWidth };
   frc::RamseteController m_ramseteController;
   frc::DifferentialDriveOdometry m_odometry{ frc::Rotation2d(), frc::Pose2d() };
-  frc::SimpleMotorFeedforward m_feedforward{ DriveConstants::ks, DriveConstants::kv, DriveConstants::ka };
+  frc::SimpleMotorFeedforward<units::meters> m_feedforward{ DriveConstants::ks, DriveConstants::kv, DriveConstants::ka };
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearFwdChannel, DriveConstants::kGearRevChannel };

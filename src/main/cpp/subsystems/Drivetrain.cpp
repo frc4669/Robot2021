@@ -232,18 +232,17 @@ units::meters_per_second_t Drivetrain::GetLeftVelMetersPerSecond() {
   double ticksPerSecond = m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
   return units::meters_per_second_t(
     
-    units::inches_per_second_t(
-      ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear)
-    )
+    // units::inches_per_second_t( // type cast since there's no inches per second t in the lib
+      ticksPerSecond * (IsShiftedToHighGear() ? (units::meter_t) DriveConstants::kInchesPerTicksHighGear : (units::meter_t) DriveConstants::kInchesPerTicksLowGear)    // )
   );
 }
 
 units::meters_per_second_t Drivetrain::GetRightVelMetersPerSecond() {
   double ticksPerSecond = m_rightMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
   return units::meters_per_second_t(
-    units::inches_per_second_t(
-      ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear)
-    )
+    // units::inches_per_second_t(
+      ticksPerSecond * (IsShiftedToHighGear() ? (units::meter_t) DriveConstants::kInchesPerTicksHighGear : (units::meter_t) DriveConstants::kInchesPerTicksLowGear)
+    // )
   );
 }
 
@@ -266,6 +265,6 @@ void Drivetrain::SetRightVoltage(units::volt_t voltage) {
   m_rightMaster.SetVoltage(output);
 }
 
-frc::SimpleMotorFeedforward Drivetrain::GetFeedforward() {
+frc::SimpleMotorFeedforward <units::meters> Drivetrain::GetFeedforward() {
   return m_feedforward;
 }
