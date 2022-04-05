@@ -12,10 +12,7 @@ IncrementShooterSetSpeed::IncrementShooterSetSpeed(Shooter* shooter, double incr
 
 // Called when the command is initially scheduled.
 void IncrementShooterSetSpeed::Initialize() {
-  double currentSetSpeed = shooter->GetShooterSetSpeed();
-
-  if(currentSetSpeed + increment < 5800 && currentSetSpeed + increment > 0)
-    shooter->IncrementShooterSetSpeed(increment);
+  shooter->IncrementShooterSetSpeed(increment);
 }
 
 // Called repeatedly when this Command is scheduled to run

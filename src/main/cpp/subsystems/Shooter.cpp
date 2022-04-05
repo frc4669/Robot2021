@@ -9,7 +9,7 @@ Shooter::Shooter() {
   // Invert motors if needed
   m_leftShooterMotor.SetInverted(true);
 
-  // Set slave motor to follow master motor
+  // Set slave motor to follow master motor, but inverted
   m_rightShooterMotor.Follow(m_leftShooterMotor, true);
 
   m_masterPIDController.SetP(0.00);     // kP
@@ -26,13 +26,11 @@ void Shooter::Periodic() {
   frc::SmartDashboard::PutNumber("Shooter Set Velocity", GetShooterSetSpeed());
 }
 
-void Shooter::RunShooter() {
-  m_masterPIDController.SetReference(kShooterVelocity, rev::ControlType::kVelocity);
-  //?: Slave shooter motor not set because it's already following the master motor
-}
+void Shooter::RunShooter(bool stopShooter) {
+  double setVelocity = stopShooter ? 0 : kShooterVelocity;
 
-void Shooter::StopShooter() {
-  m_masterPIDController.SetReference(0.0, rev::ControlType::kVelocity);
+  m_masterPIDController.SetReference(setVelocity, rev::ControlType::kVelocity);
+  //?: Slave shooter motor not set because it's already following the master motor
 }
 
 double Shooter::GetMasterShooterVelocity() {
@@ -40,14 +38,16 @@ double Shooter::GetMasterShooterVelocity() {
 }
 
 double Shooter::GetSlaveShooterVelocity() {
-  return m_slaveEncoder.GetVelocity();
+  return abs(m_slaveEncoder.GetVelocity());
 }
-
 
 double Shooter::GetShooterSetSpeed() {
   return kShooterVelocity;
 }
 
 void Shooter::IncrementShooterSetSpeed(double increment) {
-  kShooterVelocity += increment;
+  if(kShooterVelocity + increment < kMaxShooterVelocity && kShooterVelocity + increment > 0)
+    kShooterVelocity += increment;
 }
+
+//!: CTRE Tuner, Software Limit Switches, Forward Limit Switch Enable = True

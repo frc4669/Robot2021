@@ -20,8 +20,8 @@ void IntakeCargo::Execute() {
 
 // Called once the command ends or is interrupted.
 void IntakeCargo::End(bool interrupted) {
-  intake->StopIntake();
-  intake->StopFeeder();
+  intake->RunIntake(false, true);
+  intake->RunIntake(false, true);
 }
 
 // Returns true when the command should end.

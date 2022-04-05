@@ -37,25 +37,17 @@ class Intake : public frc2::SubsystemBase {
    * Run intake motor
    * 
    * @param runReverse whether to reverse the intake
+   * @param stopIntake whether to stop the intake (defaults to false)
    */
-  void RunIntake(bool runReverse);
-
-  /**
-   * Stop intake motor
-   */
-  void StopIntake();
+  void RunIntake(bool runReverse, bool stopIntake = false);
 
   /**
    * Run feeder motor
    * 
    * @param runReverse whether to reverse the feeder
+   * @param stopFeeder whether to stop the feeder (defaults to false)
    */
-  void RunFeeder(bool runReverse);
-
-  /**
-   * Stop feeder motor
-   */
-  void StopFeeder();
+  void RunFeeder(bool runReverse, bool stopFeeder = false);
 
   double GetIntakeVelocity();
 
@@ -75,4 +67,7 @@ class Intake : public frc2::SubsystemBase {
   // Intake arm
   frc::DoubleSolenoid m_intakeArm{ frc::PneumaticsModuleType::CTREPCM, IntakeConstants::kArmFwdChannel, IntakeConstants::kArmRevChannel };
   bool kIntakeArmExtended = false; //start with intake arm retracted
+
+  double kIntakeSpeedPercentage = 0.8;
+  double kFeederSpeedPercentage = 0.5;
 };

@@ -34,30 +34,22 @@ bool Intake::IsArmExtended() {
   return kIntakeArmExtended;
 }
 
-void Intake::RunIntake(bool runReverse) {
-  if (runReverse)
-    m_intakeMotor.Set(ControlMode::PercentOutput, -0.8);
-  else
-    m_intakeMotor.Set(ControlMode::PercentOutput, 0.8);
+void Intake::RunIntake(bool runReverse, bool stopIntake) {
+  double setSpeed = runReverse ? -kIntakeSpeedPercentage : kIntakeSpeedPercentage;  // if runReverse, reverse intake
+  setSpeed = stopIntake ? 0 : setSpeed; // if stopIntake, set speed to 0
+
+  m_intakeMotor.Set(ControlMode::PercentOutput, kIntakeSpeedPercentage);
 }
 
-void Intake::StopIntake() {
-  m_intakeMotor.Set(ControlMode::PercentOutput, 0.0);
-}
+void Intake::RunFeeder(bool runReverse, bool stopFeeder) {
+  double setSpeed = runReverse ? -kFeederSpeedPercentage : kFeederSpeedPercentage;  // if runReverse, reverse feeder
+  setSpeed = stopFeeder ? 0 : setSpeed; // if stopFeeder, set speed to 0
 
-void Intake::RunFeeder(bool runReverse) {
-  if (runReverse)
-    m_feederMotor.Set(ControlMode::PercentOutput, -0.5);
-  else
-    m_feederMotor.Set(ControlMode::PercentOutput, 0.5);
-}
-
-void Intake::StopFeeder() {
-  m_feederMotor.Set(ControlMode::PercentOutput, 0.0);
+  m_feederMotor.Set(ControlMode::PercentOutput, kFeederSpeedPercentage);
 }
 
 double Intake::GetIntakeVelocity() {
-  return m_intakeMotor.GetSensorCollection().GetQuadratureVelocity();
+  return m_intakeMotor.GetSensorCollection().GetQuadratureVelocity(); 
 }
 
 double Intake::GetFeederVelocity() {

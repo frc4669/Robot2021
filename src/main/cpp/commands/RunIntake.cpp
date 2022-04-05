@@ -20,7 +20,7 @@ void RunIntake::Execute() {
 
 // Called once the command ends or is interrupted.
 void RunIntake::End(bool interrupted) {
-  intake->StopIntake();
+  intake->RunIntake(runReverse, true);
 }
 
 // Returns true when the command should end.

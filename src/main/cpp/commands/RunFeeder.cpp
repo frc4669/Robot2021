@@ -20,7 +20,7 @@ void RunFeeder::Execute() {
 
 // Called once the command ends or is interrupted.
 void RunFeeder::End(bool interrupted) {
-  intake->StopFeeder();
+  intake->RunIntake(runReverse, true);
 }
 
 // Returns true when the command should end.
