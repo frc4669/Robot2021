@@ -181,7 +181,7 @@ class Drivetrain : public frc2::SubsystemBase {
   void SetLeftVoltage(units::volt_t voltage);
   void SetRightVoltage(units::volt_t voltage);
 
-  frc::SimpleMotorFeedforward<units::meters> Drivetrain::GetFeedforward();
+  frc::SimpleMotorFeedforward<units::meters> GetFeedforward();
 
  private:
   // Motor controllers
