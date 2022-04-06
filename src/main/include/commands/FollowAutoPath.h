@@ -23,5 +23,5 @@ class FollowAutoPath : public frc2::CommandHelper<frc2::CommandBase, FollowAutoP
 
  private:
   Drivetrain* drivetrain;
-  // Command* command;
+  frc2::RamseteCommand* command;
 };
