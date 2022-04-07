@@ -30,7 +30,7 @@ double GamepadF310::getRightJoyY() {
   return -deadzone(5, rightJoyYDeadzone);
 }
 
-double GamepadF310::getRightJoyX(){
+double GamepadF310::getRightJoyX() {
   return deadzone(4, rightJoyXDeadzone);
 }
 

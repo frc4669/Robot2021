@@ -17,6 +17,10 @@ Shooter::Shooter() {
   m_masterPIDController.SetFF(0.0002);  // kFF
 
   // Setup hood motors
+  m_hoodMotor.SetInverted(true);
+  m_hoodMotor.ConfigReverseSoftLimitEnable(true);
+  m_hoodMotor.ConfigForwardSoftLimitEnable(false);
+  m_hoodMotor.GetSensorCollection().SetQuadraturePosition(0);
 }
 
 // This method will be called once per scheduler run
@@ -24,13 +28,15 @@ void Shooter::Periodic() {
   frc::SmartDashboard::PutNumber("Master Shooter Active Velocity", GetMasterShooterVelocity());
   frc::SmartDashboard::PutNumber("Slave Shooter Active Velocity", GetSlaveShooterVelocity());
   frc::SmartDashboard::PutNumber("Shooter Set Velocity", GetShooterSetSpeed());
+  frc::SmartDashboard::PutNumber("Hood Ticks", m_hoodMotor.GetSensorCollection().GetQuadraturePosition());
+  frc::SmartDashboard::PutNumber("Hood Angle", GetHoodAngle());
 }
 
 void Shooter::RunShooter(bool stopShooter) {
   double setVelocity = stopShooter ? 0 : kShooterVelocity;
 
   m_masterPIDController.SetReference(setVelocity, rev::ControlType::kVelocity);
-  //?: Slave shooter motor not set because it's already following the master motor
+  //?: Slave shooter motor not set because it's already following the master motor m
 }
 
 double Shooter::GetMasterShooterVelocity() {
@@ -48,6 +54,19 @@ double Shooter::GetShooterSetSpeed() {
 void Shooter::IncrementShooterSetSpeed(double increment) {
   if(kShooterVelocity + increment < kMaxShooterVelocity && kShooterVelocity + increment > 0)
     kShooterVelocity += increment;
+}
+
+void Shooter::MoveHood(double percentage) {
+  m_hoodMotor.Set(ControlMode::PercentOutput, percentage);
+}
+
+double Shooter::GetHoodAngle() {
+  double ticksToNinetyDeg = 2700;
+  double ticksPerDeg = 90/ticksToNinetyDeg;
+  double currTicks = -m_hoodMotor.GetSensorCollection().GetQuadraturePosition();
+
+
+  return currTicks * ticksPerDeg;
 }
 
 //!: CTRE Tuner, Software Limit Switches, Forward Limit Switch Enable = True
