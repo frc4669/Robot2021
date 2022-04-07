@@ -7,40 +7,46 @@
 
 FollowAutoPath::FollowAutoPath(Drivetrain* drivetrain) {
   AddRequirements( {drivetrain} );
+
+  std::function<frc::Pose2d()> getPose = [this] () { return this->drivetrain->GetCurrentPose(); };
+  std::function<frc::DifferentialDriveWheelSpeeds()> getWheelSpeeds = [this] () { return this->drivetrain->GetWheelSpeeds(); };
+  std::function<void(units::volt_t, units::volt_t)> setVoltages = [this] (auto left, auto right) {
+      this->drivetrain->SetLeftVoltage(left);
+      this->drivetrain->SetRightVoltage(right);
+  };
+
   this->drivetrain = drivetrain;
   this->command = new frc2::RamseteCommand(
       drivetrain->GetAutoTrajectory(), //Gets the trajectory from pathplannnerlib
-      [this] () { return drivetrain->GetCurrentPose(); }, //Allows the command to repeatedly retrieve the pose from the odometry
+      getPose, //Allows the command to repeatedly retrieve the pose from the odometry
       drivetrain->GetRamseteController(),
       drivetrain->GetFeedforward(),
       drivetrain->GetKinematics(),
-      [this] () { return drivetrain->GetWheelSpeeds(); }, //Allows the command to repeatedly get the speeds of the wheels
+      getWheelSpeeds, //Allows the command to repeatedly get the speeds of the wheels
       frc2::PIDController(DriveConstants::kp, 0, 0), //PID controller (confirm kp is right)
       frc2::PIDController(DriveConstants::kp, 0, 0), //PID controller (confirm kp is right)
-      [this] (auto left, auto right) { //Sets voltage of motors based on command output
-          drivetrain.SetLeftVoltage(left);
-          drivetrain.SetRightVoltage(right);
-      },
-      { &drivetrain }
+      setVoltages, //Sets voltage of motors based on command output
+      // wpi::span<Drivetrain>{ &drivetrain }
+      {drivetrain}
   );
 }
 
 // Called when the command is initially scheduled.
 void FollowAutoPath::Initialize() {
-    return command.Initialize();
+    return command->Initialize();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void FollowAutoPath::Execute() {
-    return command.Execute();
+    return command->Execute();
 }
 
 // Called once the command ends or is interrupted.
 void FollowAutoPath::End(bool interrupted) {
-    return command.End(interrupted);
+    return command->End(interrupted);
 }
 
 // Returns true when the command should end.
 bool FollowAutoPath::IsFinished() {
-  return command.IsFinished();
+  return command->IsFinished();
 }

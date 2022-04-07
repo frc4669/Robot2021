@@ -230,19 +230,19 @@ units::meter_t Drivetrain::GetRightDistanceMeters() {
 
 units::meters_per_second_t Drivetrain::GetLeftVelMetersPerSecond() {
   double ticksPerSecond = m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
+  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear);
+
   return units::meters_per_second_t(
-    
-    // units::inches_per_second_t( // type cast since there's no inches per second t in the lib
-      ticksPerSecond * (IsShiftedToHighGear() ? (units::meter_t) DriveConstants::kInchesPerTicksHighGear : (units::meter_t) DriveConstants::kInchesPerTicksLowGear)    // )
+    units::meter_t(units::inch_t(velMpS)).value()
   );
 }
 
 units::meters_per_second_t Drivetrain::GetRightVelMetersPerSecond() {
   double ticksPerSecond = m_rightMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
+  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear);
+
   return units::meters_per_second_t(
-    // units::inches_per_second_t(
-      ticksPerSecond * (IsShiftedToHighGear() ? (units::meter_t) DriveConstants::kInchesPerTicksHighGear : (units::meter_t) DriveConstants::kInchesPerTicksLowGear)
-    // )
+    units::meter_t(units::inch_t(velMpS)).value()
   );
 }
 
@@ -258,11 +258,11 @@ frc::Pose2d Drivetrain::GetCurrentPose() {
 }
 
 void Drivetrain::SetLeftVoltage(units::volt_t voltage) {
-  m_leftMaster.SetVoltage(output);
+  m_leftMaster.SetVoltage(voltage);
 }
 
 void Drivetrain::SetRightVoltage(units::volt_t voltage) {
-  m_rightMaster.SetVoltage(output);
+  m_rightMaster.SetVoltage(voltage);
 }
 
 frc::SimpleMotorFeedforward <units::meters> Drivetrain::GetFeedforward() {

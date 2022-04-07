@@ -14,7 +14,6 @@
 #include <commands/RunFeeder.h>
 
 #include <commands/IntakeCargo.h>
-#include <commands/AlignToTarget.h>
 #include <commands/IncrementShooterSetSpeed.h>
 #include <commands/CurvatureDriveToggle.h>
 
@@ -50,7 +49,7 @@ void RobotContainer::ConfigureButtonBindings() {
   i_f310.rightShoulderButton.WhenHeld( IntakeCargo(&m_intake) );            // Intake cargo   //?: right shoulder
 
   // Misc Buttons
-  i_f310.backButton.WhenPressed( AlignToTarget(&m_drivetrain, &m_vision) ); // Align to target  //?: back button
+  //i_f310.backButton.WhenPressed( AlignToTarget(&m_drivetrain, &m_vision) ); // Align to target  //?: back button
   i_f310.startButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );    // Switch front     //?: start button
 
   // Colour buttons
@@ -79,7 +78,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   };*/
   return new frc2::SequentialCommandGroup {
     frc2::ParallelCommandGroup {
-      FollowAutoPath(&drivetrain)
+      FollowAutoPath(&m_drivetrain)
     }
   };
 }
