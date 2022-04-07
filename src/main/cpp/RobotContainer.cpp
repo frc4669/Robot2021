@@ -19,6 +19,7 @@
 
 #include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/ParallelCommandGroup.h>
+#include <commands/MoveHood.h>
 
 #include <commands/FollowAutoPath.h>
 
@@ -30,11 +31,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   ConfigureButtonBindings();
 
   // Setup F310 joystick bindings
-  m_drivetrain.SetDefaultCommand(frc2::RunCommand(
+/*   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] 
       {  m_drivetrain.CurvatureDrive(i_f310.getLeftJoyY(), i_f310.getRightJoyX()*joyMultiplier); },
       {  &m_drivetrain  }
-  ));
+  )); */
 
   m_drivetrain.ResetEncoders();
 }
@@ -55,6 +56,10 @@ void RobotContainer::ConfigureButtonBindings() {
   // Colour buttons
   i_f310.orangeButton.WhenHeld( ManipulateIntakeArm(&m_intake) );           // deploy intake //?: orange button
   i_f310.greenButton.WhenHeld( RunShooter(&m_shooter) );                    // Run shooter   //?: green button
+
+  i_f310.blueButton.WhenHeld( MoveHood(&m_shooter, 0.10) );
+  i_f310.redButton.WhenHeld( MoveHood(&m_shooter, -0.10) );
+
 
   //i_attack3.topLeftButton.WhenHeld( SetHoodAngle(&m_shooter, true) );             // raise hood angle  //?: red button
   //i_attack3.bottomLeftButton.WhenHeld( SetHoodAngle(&m_shooter, false) );           // lower hood angle  //?: blue button
