@@ -46,11 +46,6 @@ double GamepadF310::getRightTrigger() {
 
 double GamepadF310::deadzone(int axisID, double threshold) {
   double joystickValue = f310Controller.GetRawAxis(axisID);
-  double joystickDeadzone = threshold;
-  double absJoystickValue = abs(joystickValue);
 
-  if(absJoystickValue > joystickDeadzone)
-    return joystickValue;
-  else
-    return 0.0; // joystick value is within deadzone, return 0
+  return joystickValue; // joystick value is within deadzone, return 0
 }

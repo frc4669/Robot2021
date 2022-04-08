@@ -31,6 +31,9 @@ namespace ShooterConstants {
 
   // Shooter hood motor CAN ID (775Pro connected to a Talon SRX) 
   constexpr int kHoodMotorCAN = 7;
+  
+  // Speeds for hood
+  constexpr double kHoodSpeed = 0.2;  // Percentage of movement speed, where 1.0 = 100% motor throttle
 } // namespace ShooterConstants
 
 namespace ClimbConstants {
@@ -41,6 +44,13 @@ namespace ClimbConstants {
   // Pivot climbing motor CAN IDs (Talon FXs)
   constexpr int kPivotLeftCAN = 31;
   constexpr int kPivotRightCAN = 30; 
+
+  // Speeds for climber
+  constexpr double kStaticUpSpeed = -0.8;    // Percentage of movement speed, where 1.0 = 100% motor throttle
+  constexpr double kStaticDownSpeed = 0.8;  // Percentage of movement speed, where 1.0 = 100% motor throttle
+
+  constexpr double kPivotForwardSpeed = 0.10;   // Percentage of movement speed, where 1.0 = 100% motor throttle
+  constexpr double kPivotBackwardSpeed = -0.10;  // Percentage of movement speed, where 1.0 = 100% motor throttle
 } //namespace ClimbConstants
 
 namespace IntakeConstants {
@@ -48,8 +58,8 @@ namespace IntakeConstants {
   constexpr int kIntakeCAN = 11;       // the primary intake
   constexpr int kFeederCAN = 10;       // vertical feeder
 
-  constexpr int kArmFwdChannel = 1;   // channel for extending intake arm
-  constexpr int kArmRevChannel = 0;   // channel for retracting intake arm
+  constexpr int kArmFwdChannel = 2;   // channel for extending intake arm
+  constexpr int kArmRevChannel = 3;   // channel for retracting intake arm
 } //namespace IntakeConstants
 
 namespace DriveConstants {
@@ -61,8 +71,8 @@ namespace DriveConstants {
   constexpr int kRightBackCAN = 53;    // Following right motor
 
   // Drivetrain solenoid shifter pneumatic channels
-  constexpr int kGearFwdChannel = 2;     // striped blue channel
-  constexpr int kGearRevChannel = 3;     // unstriped blue channel
+  constexpr int kGearFwdChannel = 0;     // striped blue channel
+  constexpr int kGearRevChannel = 1;     // unstriped blue channel
   
   constexpr auto ks = 1_V;
   constexpr auto kv = 0.8_V * 1_s / 1_m;

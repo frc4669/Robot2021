@@ -30,7 +30,7 @@ class Drivetrain : public frc2::SubsystemBase {
    * @param fwd Forward/backward value
    * @param rot Rotation value
    */
-  void CurvatureDrive(double fwd, double rot);
+  void CurvatureDrive(double fwd, double rot, bool fromController = false);
 
   /**
    * Toggle if we should be in ArcadeDrive or CurvatureDrive mode.
@@ -149,6 +149,10 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   double GetRightVelocity();
 
+  void ChangeControllerAccess(bool changeTo);
+
+  bool DoesControllerHaveMovementRights();
+
  private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFrontCAN };
@@ -176,6 +180,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   bool kTurnInPlaceEnabled = true; // whether we are able to turn in place
   bool kForwardTowardIntake = true;
+  bool kcontrollerMoveEnabled = true;
 
   /**
    * Configure motor to desired settings

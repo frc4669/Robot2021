@@ -2,24 +2,26 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/AlignToTarget.h"
+#include "commands/SetHoodAngle.h"
 
-AlignToTarget::AlignToTarget(Drivetrain* drivetrain, Vision* vision) {
-  AddRequirements( {drivetrain, vision} );
-  this->drivetrain = drivetrain;
-  this->vision = vision;
+SetHoodAngle::SetHoodAngle(Shooter* shooter, double angle) {
+  AddRequirements({ shooter });
+  this->shooter = shooter;
+  this->angle = angle;  
 }
 
 // Called when the command is initially scheduled.
-void AlignToTarget::Initialize() {}
+void SetHoodAngle::Initialize() {
+  shooter->SetHoodAngle(angle);
+}
 
 // Called repeatedly when this Command is scheduled to run
-void AlignToTarget::Execute() {}
+void SetHoodAngle::Execute() {}
 
 // Called once the command ends or is interrupted.
-void AlignToTarget::End(bool interrupted) {}
+void SetHoodAngle::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool AlignToTarget::IsFinished() {
-  return false;
+bool SetHoodAngle::IsFinished() {
+  return true;
 }

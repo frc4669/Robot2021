@@ -43,9 +43,10 @@ void Drivetrain::Periodic() {
   frc::SmartDashboard::PutBoolean("Forward Towards Intake", IsForwardTowardIntake());
 }
 
-void Drivetrain::CurvatureDrive(double fwd, double rot) {
+void Drivetrain::CurvatureDrive(double fwd, double rot, bool fromController) {
   //?: If forward towards intake, use normal turning, if not, inverse turning
   rot = kForwardTowardIntake ? rot : -rot;
+  rot = kcontrollerMoveEnabled ? rot : 0;
 
   //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
   m_drive.CurvatureDrive(fwd, rot, kTurnInPlaceEnabled);
@@ -120,9 +121,13 @@ void Drivetrain::ShiftGear() {
   if (IsShiftedToHighGear()) { // check if in high gear
     m_shifter.Set(frc::DoubleSolenoid::kReverse); // shift to low gear
     kShiftedToHighGear = false;
+    m_rightMaster.ConfigOpenloopRamp(0.2);
+    m_leftMaster.ConfigOpenloopRamp(0.2);
   } else {
     m_shifter.Set(frc::DoubleSolenoid::kForward); // shift to high gear
     kShiftedToHighGear = true;
+    m_rightMaster.ConfigOpenloopRamp(0.4);
+    m_leftMaster.ConfigOpenloopRamp(0.4);
   }
 }
 
@@ -151,6 +156,14 @@ void Drivetrain::ReverseRelativeFront() {
 
 bool Drivetrain::IsForwardTowardIntake() {
   return kForwardTowardIntake;
+}
+
+void Drivetrain::ChangeControllerAccess(bool changeTo) {
+  kcontrollerMoveEnabled = changeTo;
+}
+
+bool Drivetrain::DoesControllerHaveMovementRights() {
+  return kcontrollerMoveEnabled;
 }
 
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {

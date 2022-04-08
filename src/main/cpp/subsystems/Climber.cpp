@@ -9,6 +9,9 @@
 Climber::Climber() {
   ConfigureMotor(m_staticRight, true);
   ConfigureMotor(m_staticLeft, false);
+
+  ConfigureMotor(m_pivotRight, true);
+  ConfigureMotor(m_pivotLeft, false);
 }
 
 // This method will be called once per scheduler run
@@ -20,20 +23,26 @@ void Climber::Periodic() {
   frc::SmartDashboard::PutBoolean("Left Limit Switch Triggered", IsLeftLimitHit());
   frc::SmartDashboard::PutBoolean("Arms Zeroed", AreArmsZeroed());
 
+  frc::SmartDashboard::PutNumber("Right Pivot Position", GetRightTicks());
+  frc::SmartDashboard::PutNumber("Left Pivot Position", GetLeftTicks());
+
   //if(AreArmsZeroed() == false)
     //ZeroArms();
 }
 
 void Climber::RaiseExtendingArms() {
-  m_staticRight.Set(ControlMode::PercentOutput, -0.8);
+  m_staticRight.Set(ControlMode::PercentOutput, ClimbConstants::kStaticUpSpeed);
+  m_staticLeft.Set(ControlMode::PercentOutput, ClimbConstants::kStaticUpSpeed);
 }
 
 void Climber::LowerExtendingArms() {
-  m_staticRight.Set(ControlMode::PercentOutput, 0.8);
+  m_staticRight.Set(ControlMode::PercentOutput, ClimbConstants::kStaticDownSpeed);
+  m_staticLeft.Set(ControlMode::PercentOutput, ClimbConstants::kStaticDownSpeed);
 }
 
 void Climber::StopExtendingArms() {
   m_staticRight.Set(ControlMode::PercentOutput, 0.0);
+  m_staticLeft.Set(ControlMode::PercentOutput, 0.0);
 }
 
 void Climber::ZeroArms() {
@@ -73,6 +82,30 @@ double Climber::GetRightPostion() {
 double Climber::GetLeftPosition() {
   //?: invert is needed because the slave motor is inverted
   return -m_staticLeft.GetSensorCollection().GetIntegratedSensorPosition();
+}
+
+
+void Climber::PivotBackwards() {
+  m_pivotRight.Set(ControlMode::PercentOutput, ClimbConstants::kPivotBackwardSpeed);
+  m_pivotLeft.Set(ControlMode::PercentOutput, ClimbConstants::kPivotBackwardSpeed);
+}
+
+void Climber::PivotForwards() {
+  m_pivotRight.Set(ControlMode::PercentOutput, ClimbConstants::kPivotForwardSpeed);
+  m_pivotLeft.Set(ControlMode::PercentOutput, ClimbConstants::kPivotForwardSpeed);
+}
+
+void Climber::StopPivot() {
+  m_pivotRight.Set(ControlMode::PercentOutput, 0.0);
+  m_pivotLeft.Set(ControlMode::PercentOutput, 0.0);
+}
+
+double Climber::GetRightTicks() {
+  return m_pivotRight.GetSensorCollection().GetIntegratedSensorPosition();
+}
+
+double Climber::GetLeftTicks() {
+  return -m_pivotLeft.GetSensorCollection().GetIntegratedSensorPosition();
 }
 
 void Climber::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {

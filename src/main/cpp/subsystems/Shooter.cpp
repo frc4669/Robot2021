@@ -65,8 +65,14 @@ double Shooter::GetHoodAngle() {
   double ticksPerDeg = 90/ticksToNinetyDeg;
   double currTicks = -m_hoodMotor.GetSensorCollection().GetQuadraturePosition();
 
-
   return currTicks * ticksPerDeg;
+}
+
+void Shooter::SetHoodAngle(double angle) {
+  double ticksToNinetyDeg = 2700;
+  double ticksPerDeg = 90/ticksToNinetyDeg;
+
+  m_hoodMotor.Set(ControlMode::MotionMagic, -ticksPerDeg * angle);
 }
 
 //!: CTRE Tuner, Software Limit Switches, Forward Limit Switch Enable = True

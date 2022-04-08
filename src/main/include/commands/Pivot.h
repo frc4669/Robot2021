@@ -7,18 +7,19 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Drivetrain.h>
-#include <subsystems/Vision.h>
+#include <subsystems/Climber.h>
 
-
-class AlignToTarget : public frc2::CommandHelper<frc2::CommandBase, AlignToTarget> {
+/**
+ * An example command.
+ *
+ * <p>Note that this extends CommandHelper, rather extending CommandBase
+ * directly; this is crucially important, or else the decorator functions in
+ * Command will *not* work!
+ */
+class Pivot
+    : public frc2::CommandHelper<frc2::CommandBase, Pivot> {
  public:
-  /**
-   * Align to the hub if seen by targetting system.
-   * 
-   * @param drivetrain a Drivetrain object pointer
-   */
-  AlignToTarget(Drivetrain* drivetrain, Vision* vision);
+  Pivot(Climber* climber, bool pivotForward);
 
   void Initialize() override;
 
@@ -29,6 +30,6 @@ class AlignToTarget : public frc2::CommandHelper<frc2::CommandBase, AlignToTarge
   bool IsFinished() override;
 
  private:
-  Drivetrain* drivetrain;
-  Vision* vision;
+  Climber* climber;
+  bool pivotForward;
 };
