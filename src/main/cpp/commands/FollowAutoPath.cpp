@@ -16,6 +16,9 @@ FollowAutoPath::FollowAutoPath(Drivetrain* drivetrain) {
   };
 
   this->drivetrain = drivetrain;
+
+  drivetrain->ResetOdometry(drivetrain->GetAutoInitialPose(), drivetrain->GetAutoInitialRotation());
+
   this->command = new frc2::RamseteCommand(
       drivetrain->GetAutoTrajectory(), //Gets the trajectory from pathplannnerlib
       getPose, //Allows the command to repeatedly retrieve the pose from the odometry

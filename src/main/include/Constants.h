@@ -14,6 +14,8 @@
 //#include <units/length.h>
 #include <units/constants.h>
 
+#define AUTO_TRAJECTORY "PathTest1"
+
 //?: If you're asking why we use constexpr, it's because constexpr computes at compile time instead of run time, making it faster.
 
 namespace VisionContants {

@@ -5,8 +5,11 @@
 #include "subsystems/Drivetrain.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/shuffleboard/Shuffleboard.h>
-#include <pathplanner/lib/PathPlanner.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc/trajectory/Trajectory.h>
+
+#include <pathplanner/lib/PathPlanner.h>
+#include <pathplanner/lib/PathPlannerTrajectory.h>
 
 using namespace pathplanner;
 
@@ -57,8 +60,19 @@ void Drivetrain::CurvatureDrive(double fwd, double rot) {
 }
 
 frc::Trajectory Drivetrain::GetAutoTrajectory() {
-  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath("New Path", 4_mps, 4_mps_sq);
-  return autonomousPath.asWPILibTrajectory();
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  frc::Trajectory trajectory = autonomousPath.asWPILibTrajectory();
+  return trajectory;
+}
+
+frc::Pose2d Drivetrain::GetAutoInitialPose() {
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  return autonomousPath.getInitialState()->pose;
+}
+
+frc::Rotation2d Drivetrain::GetAutoInitialRotation() {
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  return autonomousPath.getInitialState()->pose.Rotation();
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
@@ -207,9 +221,9 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.Config_kF(0, 0.00); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
 
-void Drivetrain::SetOdometryAngle(units::degree_t angle) {
+void Drivetrain::ResetOdometry(frc::Pose2d pose, frc::Rotation2d angle) {
   ResetEncoders();
-  m_odometry.ResetPosition(m_odometry.GetPose(), frc::Rotation2d(angle));
+  m_odometry.ResetPosition(pose, angle);
 }
 
 units::meter_t Drivetrain::GetLeftDistanceMeters() {

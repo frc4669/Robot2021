@@ -16,7 +16,12 @@
 #include <frc/ADIS16470_IMU.h>  // imu
 #include <frc/DoubleSolenoid.h> // gear shifter solenoid
 
+#include <pathplanner/lib/PathPlanner.h>
+#include <pathplanner/lib/PathPlannerTrajectory.h>
+
 #include <Constants.h>
+
+using namespace pathplanner;
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -160,9 +165,12 @@ class Drivetrain : public frc2::SubsystemBase {
   */
   frc::Trajectory GetAutoTrajectory();
 
-  void SetOdometryAngle(units::degree_t angle);
+  void ResetOdometry(frc::Pose2d pose, frc::Rotation2d angle);
 
   frc::Rotation2d GetRotation();
+
+  frc::Rotation2d GetAutoInitialRotation();
+  frc::Pose2d GetAutoInitialPose();
 
   frc::RamseteController& GetRamseteController();
 
