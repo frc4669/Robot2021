@@ -16,7 +16,6 @@
 #include <subsystems/Vision.h>
 
 #include <controllers/GamepadF310.h>
-#include <controllers/Attack3Joystick.h>
 #include <controllers/Extreme3DJoystick.h>
 
 #include "Constants.h"
@@ -53,6 +52,5 @@ class RobotContainer {
   
   // Controllers (takes USB port order as seen on FRC Driver Station and optionally axis deadzones)
   GamepadF310 i_f310{ 0 };
-  Attack3Joystick i_attack3{ 1 };
-  Extreme3DJoystick i_extreme3{ 2 };
+  Extreme3DJoystick i_extreme3{ 1 };
 };

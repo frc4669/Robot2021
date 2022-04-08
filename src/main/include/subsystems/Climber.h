@@ -77,6 +77,16 @@ class Climber : public frc2::SubsystemBase {
    */
   bool AreArmsZeroed();
 
+  void PivotBackwards();
+
+  void PivotForwards();
+
+  void StopPivot();
+
+  double GetRightTicks();
+
+  double GetLeftTicks();
+
  private:
   WPI_TalonFX m_staticRight{ ClimbConstants::kStaticRightCAN };  // Leading motor, right side
   WPI_TalonFX m_staticLeft{ ClimbConstants::kStaticLeftCAN };    // Following Motor, left side

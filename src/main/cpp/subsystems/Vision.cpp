@@ -5,6 +5,7 @@
 #include "subsystems/Vision.h"
 
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <photonlib/PhotonUtils.h>
 
 Vision::Vision() {
 
@@ -28,10 +29,14 @@ photonlib::PhotonPipelineResult Vision::GetIntakeCamData() {
   return m_intakeCamera.GetLatestResult();
 }
 
-double Vision::GetHubTargetDistance(photonlib::PhotonPipelineResult* result) {
-  return 0.00;
+double Vision::GetHubTargetDistance(photonlib::PhotonTrackedTarget* result) {
+  units::meter_t dist =  photonlib::PhotonUtils::CalculateDistanceToTarget( VisionContants::kCameraHeight, 
+                                                                            VisionContants::kHubHeight, 
+                                                                            VisionContants::kCameraAngle, 
+                                                                            units::degree_t{ result->GetPitch() } );
+  return dist.value();
 }
 
-double Vision::GetHubTargetAngle(photonlib::PhotonPipelineResult* result) {
-  return 0.00;
+bool Vision::ShooterHasTarget() {
+  return GetShooterCamData().HasTargets();
 }

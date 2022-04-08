@@ -41,7 +41,7 @@ class Vision : public frc2::SubsystemBase {
    * @return distance to the target from the shooter camera in inches.
    * @param result PhotonPipelineResult object containing the frame information.
    */
-  double GetHubTargetDistance(photonlib::PhotonPipelineResult* result);
+  double GetHubTargetDistance(photonlib::PhotonTrackedTarget* result);
 
   /**
    * Get the angle offset from the target hub to the camera.
@@ -49,7 +49,9 @@ class Vision : public frc2::SubsystemBase {
    * @return angle offset to the target from the shooter camera in degrees.
    * @param result PhotonPipelineResult object containing the frame information.
    */
-  double GetHubTargetAngle(photonlib::PhotonPipelineResult* result);
+  double GetHubTargetAngle(photonlib::PhotonTrackedTarget* result);
+
+  bool ShooterHasTarget();
 
  private:
   photonlib::PhotonCamera m_shooterCamera{"Shooter Cam"};

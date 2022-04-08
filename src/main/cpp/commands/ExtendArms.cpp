@@ -17,7 +17,7 @@ void ExtendArms::Initialize() {}
 void ExtendArms::Execute() {
   double ticksToFullExtend = 445000;
 
-  if(climber->AreArmsZeroed()) {  //?: to avoid moving the arms while they're zeroing.
+  //if(climber->AreArmsZeroed()) {  //?: to avoid moving the arms while they're zeroing.
     if(isRaising)
       if(climber->GetLeftPosition() < ticksToFullExtend && climber->GetRightPostion() < ticksToFullExtend)
         climber->RaiseExtendingArms();
@@ -25,7 +25,7 @@ void ExtendArms::Execute() {
         End(true);
     else
       climber->LowerExtendingArms();
-  }
+  //}
 }
 
 // Called once the command ends or is interrupted.

@@ -7,7 +7,7 @@
 
 Intake::Intake() {
   // Start robot with intake retracted
-  m_intakeArm.Set(frc::DoubleSolenoid::kReverse);
+  m_intakeArm.Set(frc::DoubleSolenoid::kForward);
   m_intakeMotor.SetInverted(true);
 }
 
@@ -24,9 +24,13 @@ void Intake::ManipulateArm() {
   if (IsArmExtended()) {
     m_intakeArm.Set(frc::DoubleSolenoid::kReverse);
     kIntakeArmExtended = false;
+    RunIntake(false, true);
+    RunIntake(false, true);
   } else {
     m_intakeArm.Set(frc::DoubleSolenoid::kForward);
     kIntakeArmExtended = true;
+    RunIntake(false);
+    RunFeeder(false);
   }
 }
 
