@@ -15,16 +15,13 @@ void ExtendArms::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ExtendArms::Execute() {
-  double ticksToFullExtend = 445000;
+  double ticksToFullExtend = 535000;
 
   //if(climber->AreArmsZeroed()) {  //?: to avoid moving the arms while they're zeroing.
-    if(isRaising)
-      if(climber->GetLeftPosition() < ticksToFullExtend && climber->GetRightPostion() < ticksToFullExtend)
-        climber->RaiseExtendingArms();
-      else  
-        End(true);
-    else
-      climber->LowerExtendingArms();
+  if(isRaising)
+      climber->RaiseExtendingArms();
+  else
+    climber->LowerExtendingArms();
   //}
 }
 

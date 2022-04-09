@@ -31,8 +31,13 @@ void Climber::Periodic() {
 }
 
 void Climber::RaiseExtendingArms() {
-  m_staticRight.Set(ControlMode::PercentOutput, ClimbConstants::kStaticUpSpeed);
-  m_staticLeft.Set(ControlMode::PercentOutput, ClimbConstants::kStaticUpSpeed);
+  double ticksToFullExtend = 535000;
+
+  if(GetRightPostion() < ticksToFullExtend)
+    m_staticRight.Set(ControlMode::PercentOutput, ClimbConstants::kStaticUpSpeed);
+
+  if(GetLeftPosition() < ticksToFullExtend)
+    m_staticLeft.Set(ControlMode::PercentOutput, ClimbConstants::kStaticUpSpeed);
 }
 
 void Climber::LowerExtendingArms() {

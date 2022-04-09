@@ -49,7 +49,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   // Top buttons
   i_f310.leftShoulderButton.WhenHeld( RunFeeder(&m_intake, true) );         // Reverse feeder //?: left shoulder
-  i_f310.rightShoulderButton.WhenHeld( ManipulateIntakeArm(&m_intake) );            // Intake cargo   //?: right shoulder
+  i_f310.rightShoulderButton.WhenPressed( ManipulateIntakeArm(&m_intake) );            // Intake cargo   //?: right shoulder
 
   i_f310.greenButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );    // Switch front     //?: start button
 
@@ -69,7 +69,7 @@ void RobotContainer::ConfigureButtonBindings() {
   i_extreme3.middleRightButton.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );
 
   i_extreme3.bottomLeftButton.WhenHeld( ExtendArms(&m_climber, true) );
-  i_extreme3.bottomRightJoyButton.WhenHeld( ExtendArms(&m_climber, false) );
+  i_extreme3.bottomRightButton.WhenHeld( ExtendArms(&m_climber, false) );
 
   i_extreme3.bottomLeftJoyButton.WhenHeld( Pivot(&m_climber, true) );
   i_extreme3.bottomRightJoyButton.WhenHeld( Pivot(&m_climber, false) );
