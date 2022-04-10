@@ -28,7 +28,7 @@ class Climber : public frc2::SubsystemBase {
   /**
    * Sets both climber motors to spool, lowering the arms.
    */
-  void LowerExtendingArms();
+  void LowerExtendingArms(bool isRight, bool isLeft);
 
   /**
    * Sets both climber motors to stop.

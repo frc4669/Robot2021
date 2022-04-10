@@ -4,10 +4,12 @@
 
 #include "commands/ExtendArms.h"
 
-ExtendArms::ExtendArms(Climber* climber, bool isRaising) {
+ExtendArms::ExtendArms(Climber* climber, bool isRaising, bool isRight, bool isLeft) {
   AddRequirements( {climber} );
   this->climber = climber;
   this->isRaising = isRaising;
+  this->isLeft = isLeft;
+  this->isRight = isRight;
 }
 
 // Called when the command is initially scheduled.
@@ -15,13 +17,22 @@ void ExtendArms::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ExtendArms::Execute() {
-  double ticksToFullExtend = 535000;
+  double ticksToFullExtend = 445000;
 
   //if(climber->AreArmsZeroed()) {  //?: to avoid moving the arms while they're zeroing.
-  if(isRaising)
-      climber->RaiseExtendingArms();
-  else
-    climber->LowerExtendingArms();
+    if(isRaising)
+      if(climber->GetLeftPosition() < ticksToFullExtend && climber->GetRightPostion() < ticksToFullExtend)
+        climber->RaiseExtendingArms();
+      else  
+        End(true);
+    else {
+      if(isRight && isLeft)
+        climber->LowerExtendingArms(true, true);
+      else if(isRight)
+        climber->LowerExtendingArms(true, false);
+      else
+        climber->LowerExtendingArms(false, true);
+    }
   //}
 }
 
