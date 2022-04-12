@@ -18,7 +18,7 @@ class ExtendArms : public frc2::CommandHelper<frc2::CommandBase, ExtendArms> {
    * @param climber a Climber object pointer
    * @param isRaising whether to raise or lower arms
    */
-  ExtendArms(Climber* climber, bool isRaising, bool isRight, bool isLeft);
+  ExtendArms(Climber* climber, bool isRaising);
 
   void Initialize() override;
 
@@ -31,6 +31,4 @@ class ExtendArms : public frc2::CommandHelper<frc2::CommandBase, ExtendArms> {
  private:
   Climber* climber;
   bool isRaising;
-  bool isRight;
-  bool isLeft;
 };

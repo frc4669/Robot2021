@@ -12,7 +12,6 @@ ShiftGear::ShiftGear(Drivetrain* drivetrain) {
 // Called when the command is initially scheduled.
 void ShiftGear::Initialize() {
   drivetrain->ShiftGear();
-  drivetrain->tempKpChange();
 }
 
 // Called repeatedly when this Command is scheduled to run

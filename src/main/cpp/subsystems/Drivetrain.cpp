@@ -175,18 +175,24 @@ bool Drivetrain::IsShiftedToHighGear() {
 void Drivetrain::ReverseRelativeFront() {
   // basically gets the inverted status and adds "!" to it which inverts it
   if(kForwardTowardIntake) {
-    m_leftMaster.SetInverted(false);
-    m_leftSlave.SetInverted(false);
+    ConfigureMotor(m_leftMaster, false);
+    ConfigureMotor(m_leftSlave, false);
 
-    m_rightMaster.SetInverted(true);
-    m_rightSlave.SetInverted(true);
+    ConfigureMotor(m_rightMaster, true);
+    ConfigureMotor(m_rightSlave, true);
   } else {
-    m_leftMaster.SetInverted(true);
-    m_leftSlave.SetInverted(true);
+    ConfigureMotor(m_leftMaster, true);
+    ConfigureMotor(m_leftSlave, true);
 
+<<<<<<< HEAD
     m_rightMaster.SetInverted(false);
     m_rightSlave.SetInverted(false);
   }
+=======
+    ConfigureMotor(m_rightMaster, false);
+    ConfigureMotor(m_rightSlave, false);
+  } 
+>>>>>>> parent of 0e6877e... SVR end of day changes (WORKING)
 
   kForwardTowardIntake = !kForwardTowardIntake;
 }
@@ -201,14 +207,6 @@ void Drivetrain::ChangeControllerAccess(bool changeTo) {
 
 bool Drivetrain::DoesControllerHaveMovementRights() {
   return kcontrollerMoveEnabled;
-}
-
-void Drivetrain::tempKpChange() {
-  m_leftMaster.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
-  m_leftSlave.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
-
-  m_rightMaster.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
-  m_rightSlave.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
 }
 
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
@@ -237,7 +235,7 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.SetInverted(inverted);
 
   // Motor PID values (for now)
-  motor.Config_kP(0, 0.01); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
+  motor.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
   motor.Config_kD(0, 0.00); // kD, the derivative constant (drives the velocity error to zero)
   motor.Config_kF(0, 0.00); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
