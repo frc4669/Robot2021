@@ -25,8 +25,6 @@
 
 #include <commands/SetHoodAngle.h>
 
-#include <commands/FollowAutoPath.h>
-
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -79,8 +77,9 @@ void RobotContainer::ConfigureButtonBindings() {
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-
-  return new frc2::SequentialCommandGroup {
-      FollowAutoPath(&m_drivetrain)
+  return new frc2::ParallelCommandGroup  {
+    RunShooter(&m_shooter),             // start shooter
+    IntakeCargo(&m_intake),             // run feeder
+    DriveForward(&m_drivetrain, 75.0)   // drive forward
   };
 }

@@ -8,20 +8,12 @@
 #include <frc/SpeedController.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
-#include <frc/kinematics/DifferentialDriveKinematics.h>
-#include <frc2/command/RamseteCommand.h>
-#include <frc/kinematics/DifferentialDriveOdometry.h>
 
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
 #include <frc/DoubleSolenoid.h> // gear shifter solenoid
 
-#include <pathplanner/lib/PathPlanner.h>
-#include <pathplanner/lib/PathPlannerTrajectory.h>
-
 #include <Constants.h>
-
-using namespace pathplanner;
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -157,39 +149,6 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   double GetRightVelocity();
 
-  /**
-   * @benjamin can u add the return type?
-   * 
-   * 
-   * 
-  */
-  frc::Trajectory GetAutoTrajectory();
-
-  void ResetOdometry(frc::Pose2d pose, frc::Rotation2d angle);
-
-  frc::Rotation2d GetRotation();
-
-  frc::Rotation2d GetAutoInitialRotation();
-  frc::Pose2d GetAutoInitialPose();
-
-  frc::RamseteController& GetRamseteController();
-
-  frc::DifferentialDriveKinematics& GetKinematics();
-
-  units::meter_t GetLeftDistanceMeters();
-  units::meter_t GetRightDistanceMeters();
-
-  units::meters_per_second_t GetLeftVelMetersPerSecond();
-  units::meters_per_second_t GetRightVelMetersPerSecond();
-
-  frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
-
-  frc::Pose2d GetCurrentPose();
-
-  void SetLeftVoltage(units::volt_t voltage);
-  void SetRightVoltage(units::volt_t voltage);
-
-  frc::SimpleMotorFeedforward<units::meters> GetFeedforward();
   void ChangeControllerAccess(bool changeTo);
 
   bool DoesControllerHaveMovementRights();
@@ -212,10 +171,8 @@ class Drivetrain : public frc2::SubsystemBase {
   // Robot's main drive object
   frc::DifferentialDrive m_drive{ m_leftMotors, m_rightMotors };
 
-  frc::DifferentialDriveKinematics m_driveKinematics{ DriveConstants::kTrackWidth };
-  frc::RamseteController m_ramseteController;
-  frc::DifferentialDriveOdometry m_odometry{ frc::Rotation2d(), frc::Pose2d() };
-  frc::SimpleMotorFeedforward<units::meters> m_feedforward{ DriveConstants::ks, DriveConstants::kv, DriveConstants::ka };
+  // Kinematics
+  //frc::DifferentialDriveKinematics m_kinematics{ DriveConstants::kTrackWidth };
 
   // Shifter for gearboxes (solenoid)
   frc::DoubleSolenoid m_shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::kGearFwdChannel, DriveConstants::kGearRevChannel };
