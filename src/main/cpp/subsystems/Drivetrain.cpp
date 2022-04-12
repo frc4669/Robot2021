@@ -5,6 +5,13 @@
 #include "subsystems/Drivetrain.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc/trajectory/Trajectory.h>
+
+#include <pathplanner/lib/PathPlanner.h>
+#include <pathplanner/lib/PathPlannerTrajectory.h>
+
+using namespace pathplanner;
 
 Drivetrain::Drivetrain() {
   // Disable safety on the drivetrain motors
@@ -33,6 +40,7 @@ void Drivetrain::Periodic() {
   // setup smartdashboard to show our drivetrain values
   //frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
   //frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
+  m_odometry.Update(GetRotation(), GetLeftDistanceMeters(), GetRightDistanceMeters());
 
   frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVelocity());
   frc::SmartDashboard::PutNumber("Right Velocity", GetRightVelocity());
@@ -50,6 +58,22 @@ void Drivetrain::CurvatureDrive(double fwd, double rot, bool fromController) {
 
   //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
   m_drive.CurvatureDrive(fwd, rot, kTurnInPlaceEnabled);
+}
+
+frc::Trajectory Drivetrain::GetAutoTrajectory() {
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  frc::Trajectory trajectory = autonomousPath.asWPILibTrajectory();
+  return trajectory;
+}
+
+frc::Pose2d Drivetrain::GetAutoInitialPose() {
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  return autonomousPath.getInitialState()->pose;
+}
+
+frc::Rotation2d Drivetrain::GetAutoInitialRotation() {
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  return autonomousPath.getInitialState()->pose.Rotation();
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
@@ -110,7 +134,20 @@ double Drivetrain::GetRightEncoderDistance() {
 
 units::degree_t Drivetrain::GetHeading() {
   // return units::degree_t(std::remainder(m_imu.GetAngle(), 360.0)) * (DriveConstants::kGyroReversed ? -1.0 : 1.0); // !: Come back to this
-  return units::degree_t(0);
+  return m_imu.GetAngle();
+  // return units::degree_t(0);
+}
+
+frc::Rotation2d Drivetrain::GetRotation() {
+  return frc::Rotation2d(m_imu.GetAngle());
+}
+
+frc::RamseteController& Drivetrain::GetRamseteController() {
+  return m_ramseteController;
+}
+
+frc::DifferentialDriveKinematics& Drivetrain::GetKinematics() {
+  return m_driveKinematics;
 }
 
 frc::ADIS16470_IMU& Drivetrain::GetIMU() {
@@ -205,3 +242,64 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.Config_kF(0, 0.00); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
 
+void Drivetrain::ResetOdometry(frc::Pose2d pose, frc::Rotation2d angle) {
+  ResetEncoders();
+  m_odometry.ResetPosition(pose, angle);
+}
+
+units::meter_t Drivetrain::GetLeftDistanceMeters() {
+  return units::meter_t(
+    units::inch_t(
+      m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition() * ( IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear )
+    )
+  );
+}
+
+units::meter_t Drivetrain::GetRightDistanceMeters() {
+  return units::meter_t(
+    units::inch_t(
+      m_rightMaster.GetSensorCollection().GetIntegratedSensorPosition() * ( IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear )
+    )
+  );
+}
+
+units::meters_per_second_t Drivetrain::GetLeftVelMetersPerSecond() {
+  double ticksPerSecond = m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
+  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear);
+
+  return units::meters_per_second_t(
+    units::meter_t(units::inch_t(velMpS)).value()
+  );
+}
+
+units::meters_per_second_t Drivetrain::GetRightVelMetersPerSecond() {
+  double ticksPerSecond = m_rightMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
+  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear);
+
+  return units::meters_per_second_t(
+    units::meter_t(units::inch_t(velMpS)).value()
+  );
+}
+
+frc::DifferentialDriveWheelSpeeds Drivetrain::GetWheelSpeeds() {
+  return {
+    GetLeftVelMetersPerSecond(),
+    GetRightVelMetersPerSecond()
+  };
+}
+
+frc::Pose2d Drivetrain::GetCurrentPose() {
+  return m_odometry.GetPose();
+}
+
+void Drivetrain::SetLeftVoltage(units::volt_t voltage) {
+  m_leftMaster.SetVoltage(voltage);
+}
+
+void Drivetrain::SetRightVoltage(units::volt_t voltage) {
+  m_rightMaster.SetVoltage(voltage);
+}
+
+frc::SimpleMotorFeedforward <units::meters> Drivetrain::GetFeedforward() {
+  return m_feedforward;
+}
