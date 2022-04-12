@@ -50,8 +50,8 @@ void RobotContainer::ConfigureButtonBindings() {
   i_f310.rightJoyButton.WhenPressed( InverseMode(&m_drivetrain) );          // Inverse drive mode //?: right joy button
 
   // Top buttons
-  i_f310.leftShoulderButton.WhenHeld( RunFeeder(&m_intake, true) );         // Reverse feeder //?: left shoulder
-  i_f310.rightShoulderButton.WhenHeld( ManipulateIntakeArm(&m_intake) );            // Intake cargo   //?: right shoulder
+  i_f310.leftShoulderButton.WhenHeld( IntakeCargo(&m_intake) );         // Reverse feeder //?: left shoulder
+  i_f310.rightShoulderButton.WhenPressed( ManipulateIntakeArm(&m_intake) );            // Intake cargo   //?: right shoulder
 
   i_f310.greenButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );    // Switch front     //?: start button
 
@@ -64,31 +64,23 @@ void RobotContainer::ConfigureButtonBindings() {
 
   i_extreme3.topRightJoyButton.WhenPressed( ManipulateIntakeArm(&m_intake) );
 
-  i_extreme3.topLeftButton.WhenHeld( MoveHood(&m_shooter, 0.10) );
-  i_extreme3.topRightButton.WhenHeld( MoveHood(&m_shooter, -0.10) );
+  i_extreme3.topLeftButton.WhenHeld( MoveHood(&m_shooter, 0.20) );
+  i_extreme3.topRightButton.WhenHeld( MoveHood(&m_shooter, -0.20) );
 
   i_extreme3.middleLeftButton.WhenPressed( IncrementShooterSetSpeed(&m_shooter, -100) );
   i_extreme3.middleRightButton.WhenPressed( IncrementShooterSetSpeed(&m_shooter, 100) );
 
-  i_extreme3.bottomLeftButton.WhenHeld( ExtendArms(&m_climber, true) );
-  i_extreme3.bottomRightJoyButton.WhenHeld( ExtendArms(&m_climber, false) );
+  i_extreme3.bottomLeftButton.WhenHeld( ExtendArms(&m_climber, true, false, false) );
+  i_extreme3.bottomRightButton.WhenHeld( ExtendArms(&m_climber, false, true, true) );
 
-  i_extreme3.bottomLeftJoyButton.WhenHeld( Pivot(&m_climber, true) );
-  i_extreme3.bottomRightJoyButton.WhenHeld( Pivot(&m_climber, false) );
+  i_extreme3.bottomLeftJoyButton.WhenHeld( ExtendArms(&m_climber, false, false, true) );
+  i_extreme3.bottomRightJoyButton.WhenHeld( ExtendArms(&m_climber, true, true, false ) );
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  /*return new frc2::SequentialCommandGroup { 
-    frc2::ParallelCommandGroup {
-      RunShooter(&m_shooter),             // start shooter
-      IntakeCargo(&m_intake),             // run feeder
-      DriveForward(&m_drivetrain, 75.0)   // drive forward
-    },
-  };*/
+
   return new frc2::SequentialCommandGroup {
-    frc2::ParallelCommandGroup {
       FollowAutoPath(&m_drivetrain)
-    }
   };
 }

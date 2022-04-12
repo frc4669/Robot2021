@@ -14,14 +14,14 @@ void IntakeCargo::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void IntakeCargo::Execute() {
-  intake->RunIntake(false);
+  intake->RunIntake(0.8);
   intake->RunFeeder(false);
 }
 
 // Called once the command ends or is interrupted.
 void IntakeCargo::End(bool interrupted) {
-  intake->RunIntake(false, true);
-  intake->RunIntake(false, true);
+  intake->RunIntake(0);
+  intake->RunFeeder(false, true);
 }
 
 // Returns true when the command should end.

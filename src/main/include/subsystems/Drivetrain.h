@@ -194,6 +194,8 @@ class Drivetrain : public frc2::SubsystemBase {
 
   bool DoesControllerHaveMovementRights();
 
+  void tempKpChange();
+
  private:
   // Motor controllers
   WPI_TalonFX m_leftMaster{ DriveConstants::kLeftFrontCAN };
