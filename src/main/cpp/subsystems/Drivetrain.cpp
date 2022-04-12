@@ -3,11 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Drivetrain.h"
-#include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/shuffleboard/Shuffleboard.h>
-#include <frc/kinematics/DifferentialDriveKinematics.h>
-#include <frc/trajectory/Trajectory.h>
 
+#include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/trajectory/Trajectory.h>
 #include <pathplanner/lib/PathPlanner.h>
 #include <pathplanner/lib/PathPlannerTrajectory.h>
 
@@ -87,7 +87,7 @@ bool Drivetrain::IsCurvatureDriveEnabled() {
 double Drivetrain::GetTicksToTravel(double inches) {
   //?: If shifted to high gear, use the high gear ticks per inch, otherwise use the low gear one
   double ticksPerInch = kShiftedToHighGear ? DriveGearingConstants::kTicksPerInch_HighGear : DriveGearingConstants::kTicksPerInch_LowGear;
-  
+
   return (inches * ticksPerInch);
 }
 
@@ -133,7 +133,7 @@ double Drivetrain::GetRightEncoderDistance() {
 }
 
 units::degree_t Drivetrain::GetHeading() {
-  // return units::degree_t(std::remainder(m_imu.GetAngle(), 360.0)) * (DriveConstants::kGyroReversed ? -1.0 : 1.0); // !: Come back to this
+  // return units::degree_t(std::remainder(m_imu.GetAngle(), 360.0)) * (DriveGearingConstants::kGyroReversed ? -1.0 : 1.0); // !: Come back to this
   return m_imu.GetAngle();
   // return units::degree_t(0);
 }
@@ -186,7 +186,7 @@ void Drivetrain::ReverseRelativeFront() {
 
     m_rightMaster.SetInverted(false);
     m_rightSlave.SetInverted(false);
-  } 
+  }
 
   kForwardTowardIntake = !kForwardTowardIntake;
 }
@@ -250,7 +250,7 @@ void Drivetrain::ResetOdometry(frc::Pose2d pose, frc::Rotation2d angle) {
 units::meter_t Drivetrain::GetLeftDistanceMeters() {
   return units::meter_t(
     units::inch_t(
-      m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition() * ( IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear )
+      m_leftMaster.GetSensorCollection().GetIntegratedSensorPosition() * ( IsShiftedToHighGear() ? DriveGearingConstants::kInchesPerTick_HighGear : DriveGearingConstants::kInchesPerTick_LowGear )
     )
   );
 }
@@ -258,14 +258,14 @@ units::meter_t Drivetrain::GetLeftDistanceMeters() {
 units::meter_t Drivetrain::GetRightDistanceMeters() {
   return units::meter_t(
     units::inch_t(
-      m_rightMaster.GetSensorCollection().GetIntegratedSensorPosition() * ( IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear )
+      m_rightMaster.GetSensorCollection().GetIntegratedSensorPosition() * ( IsShiftedToHighGear() ? DriveGearingConstants::kInchesPerTick_HighGear : DriveGearingConstants::kInchesPerTick_LowGear )
     )
   );
 }
 
 units::meters_per_second_t Drivetrain::GetLeftVelMetersPerSecond() {
   double ticksPerSecond = m_leftMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
-  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear);
+  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveGearingConstants::kInchesPerTick_HighGear : DriveGearingConstants::kInchesPerTick_LowGear);
 
   return units::meters_per_second_t(
     units::meter_t(units::inch_t(velMpS)).value()
@@ -274,7 +274,7 @@ units::meters_per_second_t Drivetrain::GetLeftVelMetersPerSecond() {
 
 units::meters_per_second_t Drivetrain::GetRightVelMetersPerSecond() {
   double ticksPerSecond = m_rightMaster.GetSensorCollection().GetIntegratedSensorVelocity() * 10;
-  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveConstants::kInchesPerTicksHighGear : DriveConstants::kInchesPerTicksLowGear);
+  double velMpS = ticksPerSecond * (IsShiftedToHighGear() ? DriveGearingConstants::kInchesPerTick_HighGear : DriveGearingConstants::kInchesPerTick_LowGear);
 
   return units::meters_per_second_t(
     units::meter_t(units::inch_t(velMpS)).value()
