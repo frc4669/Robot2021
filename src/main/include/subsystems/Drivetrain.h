@@ -8,6 +8,7 @@
 #include <frc/SpeedController.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc/filter/SlewRateLimiter.h>
 
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
@@ -183,6 +184,8 @@ class Drivetrain : public frc2::SubsystemBase {
   bool kTurnInPlaceEnabled = true; // whether we are able to turn in place
   bool kForwardTowardIntake = true;
   bool kcontrollerMoveEnabled = true;
+
+  frc::SlewRateLimiter<units::scalar> filter{0.5 / 1_s};
 
   /**
    * Configure motor to desired settings

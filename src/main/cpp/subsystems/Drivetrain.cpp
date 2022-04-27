@@ -49,7 +49,8 @@ void Drivetrain::CurvatureDrive(double fwd, double rot, bool fromController) {
   rot = kcontrollerMoveEnabled ? rot : 0;
 
   //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
-  m_drive.CurvatureDrive(fwd, rot, kTurnInPlaceEnabled);
+  m_drive.CurvatureDrive(filter.Calculate(fwd
+  ), rot, kTurnInPlaceEnabled);
 }
 
 void Drivetrain::ToggleCurvatureTurnInPlace() {
