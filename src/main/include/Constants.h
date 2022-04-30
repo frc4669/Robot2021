@@ -9,7 +9,7 @@
 #include <units/angle.h>
 #include <units/angular_velocity.h>
 #include <units/constants.h>
-//#include <units/length.h>
+#include <units/length.h>
 #include <units/time.h>
 #include <units/velocity.h>
 #include <units/voltage.h>
@@ -71,8 +71,8 @@ namespace DriveConstants {
   constexpr int kRightBackCAN = 53;    // Following right motor
 
   // Drivetrain solenoid shifter pneumatic channels
-  constexpr int kGearFwdChannel = 0;     // striped blue channel
-  constexpr int kGearRevChannel = 1;     // unstriped blue channel
+  constexpr int kGearFwdChannel = 1;     // striped blue channel
+  constexpr int kGearRevChannel = 0;     // unstriped blue channel
 
   constexpr auto ks = 1_V;
   constexpr auto kv = 0.8_V * 1_s / 1_m;
