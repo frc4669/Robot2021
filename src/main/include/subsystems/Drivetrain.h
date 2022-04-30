@@ -182,7 +182,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   bool kTurnInPlaceEnabled = true; // whether we are able to turn in place
   bool kForwardTowardIntake = true;
-  bool kcontrollerMoveEnabled = true;
+  bool kControllerMoveEnabled = true;
 
   frc::SlewRateLimiter<units::scalar> filter{0.5 / 1_s};
 

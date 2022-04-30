@@ -6,16 +6,22 @@
 
 #include <commands/Autonomous/DriveForward.h>
 #include <commands/Autonomous/PrimeHoodToHub.h>
+
 #include <commands/Climber/ExtendArms.h>
+
 #include <commands/Drivetrain/CurvatureDriveToggle.h>
 #include <commands/Drivetrain/InverseMode.h>
 #include <commands/Drivetrain/ShiftGear.h>
-#include <commands/Intake/IntakeCargo.h>
+
+#include <commands/Intake/RunIntakeAndFeeder.h>
 #include <commands/Intake/ManipulateIntakeArm.h>
 #include <commands/Intake/RunFeeder.h>
+
 #include <commands/Shooter/IncrementShooterSetSpeed.h>
 #include <commands/Shooter/MoveHood.h>
 #include <commands/Shooter/RunShooter.h>
+
+
 #include <frc2/command/ParallelCommandGroup.h>
 #include <frc2/command/RunCommand.h>
 
@@ -37,14 +43,14 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Joystick buttons
-  i_f310.leftJoyButton.WhenPressed( ShiftGear(&m_drivetrain) );             // Shift gear up/down //?: left joy button
-  i_f310.rightJoyButton.WhenPressed( InverseMode(&m_drivetrain) );          // Inverse drive mode //?: right joy button
+  i_f310.leftJoyButton.WhenPressed( ShiftGear(&m_drivetrain) );               // Shift gear up/down //?: left joy button
+  i_f310.rightJoyButton.WhenPressed( InverseMode(&m_drivetrain) );            // Inverse drive mode //?: right joy button
 
   // Top buttons
-  i_f310.leftShoulderButton.WhenHeld( IntakeCargo(&m_intake) );         // Reverse feeder //?: left shoulder
-  i_f310.rightShoulderButton.WhenPressed( ManipulateIntakeArm(&m_intake) );            // Intake cargo   //?: right shoulder
+  i_f310.leftShoulderButton.WhenHeld( RunIntakeAndFeeder(&m_intake) );        // Reverse feeder //?: left shoulder
+  i_f310.rightShoulderButton.WhenPressed( ManipulateIntakeArm(&m_intake) );    // Intake cargo   //?: right shoulder
 
-  i_f310.greenButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );    // Switch front     //?: start button
+  i_f310.greenButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );        // Switch front     //?: start button
 
   // Colour buttons
 
@@ -72,7 +78,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return new frc2::ParallelCommandGroup  {
     RunShooter(&m_shooter),             // start shooter
-    IntakeCargo(&m_intake),             // run feeder
+    RunIntakeAndFeeder(&m_intake),             // run feeder
     DriveForward(&m_drivetrain, 75.0)   // drive forward
   };
 }

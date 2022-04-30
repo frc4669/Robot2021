@@ -36,17 +36,19 @@ class Intake : public frc2::SubsystemBase {
    * Run intake motor
    *
    * @param runReverse whether to reverse the intake
-   * @param stopIntake whether to stop the intake (defaults to false)
    */
-  void RunIntake(double percentOut);
+  void RunIntake(bool runReverse = false);
+
+  void StopIntake();
 
   /**
    * Run feeder motor
    *
    * @param runReverse whether to reverse the feeder
-   * @param stopFeeder whether to stop the feeder (defaults to false)
    */
-  void RunFeeder(bool runReverse, bool stopFeeder = false);
+  void RunFeeder(bool runReverse = false);
+
+  void StopFeeder();
 
   double GetIntakeVelocity();
 

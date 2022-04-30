@@ -35,5 +35,6 @@ void AlignToHub::End(bool interrupted) {
 
 // Returns true when the command should end.
 bool AlignToHub::IsFinished() {
+  // ends if target is not in sight or is within 0.5 yaw
   return targetYaw <= 0.5 || !vision->ShooterHasTarget();
 }

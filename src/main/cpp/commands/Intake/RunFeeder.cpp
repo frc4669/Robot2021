@@ -15,12 +15,12 @@ void RunFeeder::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void RunFeeder::Execute() {
-  intake->RunFeeder(runReverse, false);
+  intake->RunFeeder(runReverse);
 }
 
 // Called once the command ends or is interrupted.
 void RunFeeder::End(bool interrupted) {
-  intake->RunFeeder(runReverse, true);
+  intake->StopFeeder();
 }
 
 // Returns true when the command should end.

@@ -12,6 +12,14 @@ ManipulateIntakeArm::ManipulateIntakeArm(Intake* intake) {
 // Called when the command is initially scheduled.
 void ManipulateIntakeArm::Initialize() {
   intake->ManipulateArm();
+  
+  if(intake->IsArmExtended()) {
+    intake->RunIntake();
+    intake->RunFeeder();
+  } else {
+    intake->StopIntake();
+    intake->StopFeeder();
+  }
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -15,12 +15,12 @@ void RunIntake::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void RunIntake::Execute() {
-  intake->RunIntake(0.8);
+  intake->RunIntake(runReverse);
 }
 
 // Called once the command ends or is interrupted.
 void RunIntake::End(bool interrupted) {
-  intake->RunIntake(0);
+  intake->StopIntake();
 }
 
 // Returns true when the command should end.

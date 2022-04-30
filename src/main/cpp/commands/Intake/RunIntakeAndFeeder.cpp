@@ -2,29 +2,29 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/Intake/IntakeCargo.h"
+#include "commands/Intake/RunIntakeAndFeeder.h"
 
-IntakeCargo::IntakeCargo(Intake* intake) {
+RunIntakeAndFeeder::RunIntakeAndFeeder(Intake* intake) {
   AddRequirements( {intake} );
   this->intake = intake;
 }
 
 // Called when the command is initially scheduled.
-void IntakeCargo::Initialize() {}
+void RunIntakeAndFeeder::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void IntakeCargo::Execute() {
-  intake->RunIntake(0.8);
-  intake->RunFeeder(false);
+void RunIntakeAndFeeder::Execute() {
+  intake->RunIntake();
+  intake->RunFeeder();
 }
 
 // Called once the command ends or is interrupted.
-void IntakeCargo::End(bool interrupted) {
-  intake->RunIntake(0);
-  intake->RunFeeder(false, true);
+void RunIntakeAndFeeder::End(bool interrupted) {
+  intake->StopIntake();
+  intake->StopFeeder();
 }
 
 // Returns true when the command should end.
-bool IntakeCargo::IsFinished() {
+bool RunIntakeAndFeeder::IsFinished() {
   return false;
 }

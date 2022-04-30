@@ -47,7 +47,7 @@ void Drivetrain::Periodic() {
 void Drivetrain::CurvatureDrive(double fwd, double rot, bool fromController) {
   //?: If forward towards intake, use normal turning, if not, inverse turning
   rot = kForwardTowardIntake ? rot : -rot;
-  rot = kcontrollerMoveEnabled ? rot : 0;
+  rot = kControllerMoveEnabled ? rot : 0;
 
   //?: Same as arcade drive, except you can toggle on and off the ability to turn in place or use curvature drive
   m_drive.CurvatureDrive(filter.Calculate(fwd
@@ -161,19 +161,19 @@ bool Drivetrain::IsForwardTowardIntake() {
 }
 
 void Drivetrain::ChangeControllerAccess(bool changeTo) {
-  kcontrollerMoveEnabled = changeTo;
+  kControllerMoveEnabled = changeTo;
 }
 
 bool Drivetrain::DoesControllerHaveMovementRights() {
-  return kcontrollerMoveEnabled;
+  return kControllerMoveEnabled;
 }
 
 void Drivetrain::tempKpChange() {
-  m_leftMaster.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
-  m_leftSlave.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
+  m_leftMaster.Config_kP(0, 2.1706);
+  m_leftSlave.Config_kP(0, 2.1706);
 
-  m_rightMaster.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
-  m_rightSlave.Config_kP(0, 2.1706); // kP, the proportional constant (how fast the motor changes speed), acts like a “software-defined springs”
+  m_rightMaster.Config_kP(0, 2.1706);
+  m_rightSlave.Config_kP(0, 2.1706);
 }
 
 void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {

@@ -8,9 +8,9 @@
 #include <frc2/command/CommandHelper.h>
 #include <subsystems/Intake.h>
 
-class IntakeCargo : public frc2::CommandHelper<frc2::CommandBase, IntakeCargo> {
+class RunIntakeAndFeeder : public frc2::CommandHelper<frc2::CommandBase, RunIntakeAndFeeder> {
  public:
-  IntakeCargo(Intake* intake);
+  RunIntakeAndFeeder(Intake* intake);
 
   void Initialize() override;
 

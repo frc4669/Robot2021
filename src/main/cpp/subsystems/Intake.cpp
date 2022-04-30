@@ -22,35 +22,38 @@ void Intake::Periodic() {
 }
 
 void Intake::ManipulateArm() {
-  if (IsArmExtended()) {
+  if (IsArmExtended())
     m_intakeArm.Set(frc::DoubleSolenoid::kForward);
-    kIntakeArmExtended = false;
-    RunIntake(0);
-    RunFeeder(false, true);
-  } else {
+  else
     m_intakeArm.Set(frc::DoubleSolenoid::kReverse);
-    kIntakeArmExtended = true;
-    RunIntake(0.8);
-    RunFeeder(false, false);
-  }
+
+  kIntakeArmExtended = !kIntakeArmExtended;
 }
 
 bool Intake::IsArmExtended() {
   return kIntakeArmExtended;
 }
 
-void Intake::RunIntake(double percentOut) {
-  m_intakeMotor.Set(ControlMode::PercentOutput, percentOut);
+void Intake::RunIntake(bool runReverse) {
+  if(runReverse)
+    m_intakeMotor.Set(ControlMode::PercentOutput, -kIntakeSpeedPercentage);
+  else
+    m_intakeMotor.Set(ControlMode::PercentOutput, kIntakeSpeedPercentage);
 }
 
-void Intake::RunFeeder(bool runReverse, bool stopFeeder) {
-  if(stopFeeder)
-    m_feederMotor.Set(ControlMode::PercentOutput, 0);
+void Intake::StopIntake() {
+  m_intakeMotor.Set(ControlMode::PercentOutput, 0);
+}
+
+void Intake::RunFeeder(bool runReverse) {
+  if(runReverse)
+    m_feederMotor.Set(ControlMode::PercentOutput, -kFeederSpeedPercentage);
   else
-    if(runReverse)
-      m_feederMotor.Set(ControlMode::PercentOutput, -kIntakeSpeedPercentage);
-    else
-      m_feederMotor.Set(ControlMode::PercentOutput, kIntakeSpeedPercentage);
+    m_feederMotor.Set(ControlMode::PercentOutput, kFeederSpeedPercentage);
+}
+
+void Intake::StopFeeder() {
+  m_feederMotor.Set(ControlMode::PercentOutput, 0);
 }
 
 double Intake::GetIntakeVelocity() {
