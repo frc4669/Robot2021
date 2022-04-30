@@ -11,6 +11,7 @@ on:
 jobs:
   wpiformat:
     runs-on: ubuntu-latest
+    container: wpilib/roborio-cross-ubuntu:2022-20.04
     steps:
      - uses: actions/checkout@v2
      - name: Fetch all history and metadata
