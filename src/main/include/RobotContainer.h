@@ -6,12 +6,14 @@
 
 #include <controllers/Extreme3DJoystick.h>
 #include <controllers/GamepadF310.h>
-#include <frc2/command/Command.h>
+
 #include <subsystems/Climber.h>
 #include <subsystems/Drivetrain.h>
 #include <subsystems/Intake.h>
 #include <subsystems/Shooter.h>
 #include <subsystems/Vision.h>
+
+#include <frc2/command/Command.h>
 
 #include "Constants.h"
 #include "commands/ExampleCommand.h"
