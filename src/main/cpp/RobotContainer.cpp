@@ -48,9 +48,9 @@ void RobotContainer::ConfigureButtonBindings() {
 
   // Top buttons
   i_f310.leftShoulderButton.WhenHeld( RunIntakeAndFeeder(&m_intake) );        // Reverse feeder //?: left shoulder
-  i_f310.rightShoulderButton.WhenPressed( ManipulateIntakeArm(&m_intake) );    // Intake cargo   //?: right shoulder
+  i_f310.rightShoulderButton.WhenPressed( ManipulateIntakeArm(&m_intake) );   // Intake cargo   //?: right shoulder
 
-  i_f310.greenButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );        // Switch front     //?: start button
+  i_f310.greenButton.WhenPressed( CurvatureDriveToggle(&m_drivetrain) );      // Switch front   //?: start button
 
   // Colour buttons
 
@@ -78,7 +78,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return new frc2::ParallelCommandGroup  {
     RunShooter(&m_shooter),             // start shooter
-    RunIntakeAndFeeder(&m_intake),             // run feeder
+    RunIntakeAndFeeder(&m_intake),      // run feeder
     DriveForward(&m_drivetrain, 75.0)   // drive forward
   };
 }
