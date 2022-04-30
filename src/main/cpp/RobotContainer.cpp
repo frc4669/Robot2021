@@ -82,3 +82,23 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     DriveForward(&m_drivetrain, 75.0)   // drive forward
   };
 }
+
+Drivetrain* RobotContainer::GetDrivetrain() {
+  return &m_drivetrain;
+}
+
+Shooter* RobotContainer::GetShooter() {
+  return &m_shooter;
+}
+
+Intake* RobotContainer::GetIntake() {
+  return &m_intake;
+}
+
+Climber* RobotContainer::GetClimber() {
+  return &m_climber;
+}
+
+Vision* RobotContainer::GetVision() {
+  return &m_vision;
+}

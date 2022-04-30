@@ -30,6 +30,12 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
 
+  Drivetrain* GetDrivetrain();
+  Shooter* GetShooter();
+  Intake* GetIntake();
+  Climber* GetClimber();
+  Vision* GetVision();
+
  private:
   // Miscellaneous
   double joyMultiplier = 0.50; // Joystick is too sensitive, multiply the output of the joystick by this value
