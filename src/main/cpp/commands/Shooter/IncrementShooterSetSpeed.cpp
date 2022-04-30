@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/IncrementShooterSetSpeed.h"
+#include "commands/Shooter/IncrementShooterSetSpeed.h"
 
 IncrementShooterSetSpeed::IncrementShooterSetSpeed(Shooter* shooter, double increment) {
   AddRequirements( {shooter} );

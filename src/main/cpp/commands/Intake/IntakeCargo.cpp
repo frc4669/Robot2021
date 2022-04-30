@@ -2,25 +2,29 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/ManipulateIntakeArm.h"
+#include "commands/Intake/IntakeCargo.h"
 
-ManipulateIntakeArm::ManipulateIntakeArm(Intake* intake) {
+IntakeCargo::IntakeCargo(Intake* intake) {
   AddRequirements( {intake} );
   this->intake = intake;
 }
 
 // Called when the command is initially scheduled.
-void ManipulateIntakeArm::Initialize() {
-  intake->ManipulateArm();
-}
+void IntakeCargo::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ManipulateIntakeArm::Execute() {}
+void IntakeCargo::Execute() {
+  intake->RunIntake(0.8);
+  intake->RunFeeder(false);
+}
 
 // Called once the command ends or is interrupted.
-void ManipulateIntakeArm::End(bool interrupted) {}
+void IntakeCargo::End(bool interrupted) {
+  intake->RunIntake(0);
+  intake->RunFeeder(false, true);
+}
 
 // Returns true when the command should end.
-bool ManipulateIntakeArm::IsFinished() {
-  return true;  // finish instantly after Initialize() is called
+bool IntakeCargo::IsFinished() {
+  return false;
 }

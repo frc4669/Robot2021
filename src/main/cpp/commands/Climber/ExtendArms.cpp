@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/ExtendArms.h"
+#include "commands/Climber/ExtendArms.h"
 
 ExtendArms::ExtendArms(Climber* climber, bool isRaising, bool isRight, bool isLeft) {
   AddRequirements( {climber} );
@@ -18,7 +18,7 @@ void ExtendArms::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ExtendArms::Execute() {
   double ticksToFullExtend = 445000;
-
+  
   //if(climber->AreArmsZeroed()) {  //?: to avoid moving the arms while they're zeroing.
     if(isRaising)
       if(climber->GetLeftPosition() < ticksToFullExtend && climber->GetRightPostion() < ticksToFullExtend)

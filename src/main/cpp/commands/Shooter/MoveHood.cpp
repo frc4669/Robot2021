@@ -2,26 +2,29 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/SetHoodAngle.h"
+#include "commands/Shooter/MoveHood.h"
 
-SetHoodAngle::SetHoodAngle(Shooter* shooter, double angle) {
-  AddRequirements({ shooter });
+MoveHood::MoveHood(Shooter* shooter, double percent) {
+  // Use addRequirements() here to declare subsystem dependencies.
+  AddRequirements( {shooter} );
   this->shooter = shooter;
-  this->angle = angle;  
+  this->percent = percent;
 }
 
 // Called when the command is initially scheduled.
-void SetHoodAngle::Initialize() {
-  shooter->SetHoodAngle(angle);
-}
+void MoveHood::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void SetHoodAngle::Execute() {}
+void MoveHood::Execute() {
+  shooter->MoveHood(percent);
+}
 
 // Called once the command ends or is interrupted.
-void SetHoodAngle::End(bool interrupted) {}
+void MoveHood::End(bool interrupted) {
+  shooter->MoveHood(0.0);
+}
 
 // Returns true when the command should end.
-bool SetHoodAngle::IsFinished() {
-  return true;
+bool MoveHood::IsFinished() {
+  return false;
 }

@@ -2,25 +2,25 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/CurvatureDriveToggle.h"
+#include "commands/Drivetrain/InverseMode.h"
 
-CurvatureDriveToggle::CurvatureDriveToggle(Drivetrain* drivetrain) {
+InverseMode::InverseMode(Drivetrain* drivetrain) {
   AddRequirements( {drivetrain} );
   this->drivetrain = drivetrain;
 }
 
 // Called when the command is initially scheduled.
-void CurvatureDriveToggle::Initialize() {
-  drivetrain->ToggleCurvatureTurnInPlace();
+void InverseMode::Initialize() {
+  drivetrain->ReverseRelativeFront();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void CurvatureDriveToggle::Execute() {}
+void InverseMode::Execute() {}
 
 // Called once the command ends or is interrupted.
-void CurvatureDriveToggle::End(bool interrupted) {}
+void InverseMode::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool CurvatureDriveToggle::IsFinished() {
+bool InverseMode::IsFinished() {
   return true;
 }

@@ -2,25 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/InverseMode.h"
+#include "commands/Autonomous/RotateByAngle.h"
 
-InverseMode::InverseMode(Drivetrain* drivetrain) {
+RotateByAngle::RotateByAngle(Drivetrain* drivetrain, double targetAngle) {
   AddRequirements( {drivetrain} );
   this->drivetrain = drivetrain;
+  this->targetAngle = targetAngle;
 }
 
 // Called when the command is initially scheduled.
-void InverseMode::Initialize() {
-  drivetrain->ReverseRelativeFront();
-}
+void RotateByAngle::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void InverseMode::Execute() {}
+void RotateByAngle::Execute() {}
 
 // Called once the command ends or is interrupted.
-void InverseMode::End(bool interrupted) {}
+void RotateByAngle::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool InverseMode::IsFinished() {
-  return true;
+bool RotateByAngle::IsFinished() {
+  return false;
 }

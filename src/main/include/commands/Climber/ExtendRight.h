@@ -7,8 +7,6 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <subsystems/Climber.h>
-
 /**
  * An example command.
  *
@@ -16,10 +14,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Pivot
-    : public frc2::CommandHelper<frc2::CommandBase, Pivot> {
+class ExtendRight
+    : public frc2::CommandHelper<frc2::CommandBase, ExtendRight> {
  public:
-  Pivot(Climber* climber, bool pivotForward);
+  ExtendRight();
 
   void Initialize() override;
 
@@ -28,8 +26,4 @@ class Pivot
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-
- private:
-  Climber* climber;
-  bool pivotForward;
 };

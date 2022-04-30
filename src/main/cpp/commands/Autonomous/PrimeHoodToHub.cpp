@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/PrimeHoodToHub.h"
+#include "commands/Autonomous/PrimeHoodToHub.h"
 
 PrimeHoodToHub::PrimeHoodToHub(Shooter* shooter, Vision* vision) {
   AddRequirements( {shooter, vision} );
@@ -22,7 +22,7 @@ void PrimeHoodToHub::Execute() {
   trackedTarget = pipelineResult.GetBestTarget();
 
   double distanceToHub = vision->GetHubTargetDistance(&trackedTarget);
-  
+  //TODO: Finish command
 }
 
 // Called once the command ends or is interrupted.

@@ -2,27 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/RunShooter.h"
+#include "commands/Climber/ExtendLeft.h"
 
-RunShooter::RunShooter(Shooter* shooter) {
-  AddRequirements({ shooter });
-  this->shooter = shooter;
+ExtendLeft::ExtendLeft() {
+  // Use addRequirements() here to declare subsystem dependencies.
 }
 
 // Called when the command is initially scheduled.
-void RunShooter::Initialize() {}
+void ExtendLeft::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RunShooter::Execute() {
-  shooter->RunShooter();
-}
+void ExtendLeft::Execute() {}
 
 // Called once the command ends or is interrupted.
-void RunShooter::End(bool interrupted) {
-  shooter->RunShooter(true);
-}
+void ExtendLeft::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool RunShooter::IsFinished() {
+bool ExtendLeft::IsFinished() {
   return false;
 }

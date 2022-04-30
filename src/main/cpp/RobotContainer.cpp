@@ -5,25 +5,22 @@
 #include "RobotContainer.h"
 #include <frc2/command/RunCommand.h>
 
-#include <commands/DriveForward.h>
-#include <commands/ShiftGear.h>
-#include <commands/RunShooter.h>
-#include <commands/ExtendArms.h>
-#include <commands/InverseMode.h>
-#include <commands/ManipulateIntakeArm.h>
-#include <commands/RunFeeder.h>
+#include <commands/Autonomous/DriveForward.h>
+#include <commands/Drivetrain/ShiftGear.h>
+#include <commands/Shooter/RunShooter.h>
+#include <commands/Climber/ExtendArms.h>
+#include <commands/Drivetrain/InverseMode.h>
+#include <commands/Intake/ManipulateIntakeArm.h>
+#include <commands/Intake/RunFeeder.h>
 
-#include <commands/IntakeCargo.h>
-#include <commands/PrimeHoodToHub.h>
-#include <commands/IncrementShooterSetSpeed.h>
-#include <commands/CurvatureDriveToggle.h>
+#include <commands/Intake/IntakeCargo.h>
+#include <commands/Autonomous/PrimeHoodToHub.h>
+#include <commands/Shooter/IncrementShooterSetSpeed.h>
+#include <commands/Drivetrain/CurvatureDriveToggle.h>
 
-#include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/ParallelCommandGroup.h>
-#include <commands/MoveHood.h>
-#include <commands/Pivot.h>
+#include <commands/Shooter/MoveHood.h>
 
-#include <commands/SetHoodAngle.h>
 
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
