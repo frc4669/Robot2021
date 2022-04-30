@@ -4,7 +4,7 @@
 
 //?: Written by FRC team 4669 for the 2021-2022 season.
 
-#include <controllers/Attack3Joystick.h>
+#include "controllers/Attack3Joystick.h"
 
 Attack3Joystick::Attack3Joystick(int controllerID, double joyYDeadzone, double joyXDeadzone, double sliderDeadzone) : attack3Controller{controllerID} {
   this->joyYDeadzone = joyYDeadzone;
@@ -28,7 +28,7 @@ double Attack3Joystick::getSlider(){
 double Attack3Joystick::deadzone(int axisID, double threshold) {
   double joystickValue = attack3Controller.GetRawAxis(axisID);
   double joystickDeadzone = threshold;
-  double absJoystickValue = abs(joystickValue);
+  double absJoystickValue = std::abs(joystickValue);
 
   if(absJoystickValue > joystickDeadzone)
     return joystickValue;

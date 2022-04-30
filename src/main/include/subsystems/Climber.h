@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
-#include <frc/motorcontrol/MotorControllerGroup.h>
-
 #include <ctre/Phoenix.h>       // talon
+#include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc2/command/SubsystemBase.h>
 
 #include <Constants.h>
 
@@ -37,15 +36,15 @@ class Climber : public frc2::SubsystemBase {
 
   /**
    * Gets the current encoder position of the right climber motor.
-   * 
-   * @return encoder position of the right climber motor 
+   *
+   * @return encoder position of the right climber motor
    */
   double GetRightPostion();
 
   /**
    * Gets the current encoder position of the left climber motor.
-   * 
-   * @return encoder position of the left climber motor 
+   *
+   * @return encoder position of the left climber motor
    */
   double GetLeftPosition();
 
@@ -55,24 +54,24 @@ class Climber : public frc2::SubsystemBase {
   void ZeroArms();
 
   /**
-   * Check if the right climber is hitting its limit switch. 
+   * Check if the right climber is hitting its limit switch.
    * If true, you cannot lower the arm any more.
-   * 
+   *
    * @return true if the right climber is at its limit switch, false otherwise.
    */
   bool IsRightLimitHit();
 
   /**
-   * Check if the left climber is hitting its limit switch. 
+   * Check if the left climber is hitting its limit switch.
    * If true, you cannot lower the arm any more.
-   * 
+   *
    * @return true if the left climber is at its limit switch, false otherwise.
    */
   bool IsLeftLimitHit();
 
   /**
    * Check if the climbing arms have been zeroed and are in sync.
-   * 
+   *
    * @return true if the arms are in have been zeroed (synced), false otherwise.
    */
   bool AreArmsZeroed();

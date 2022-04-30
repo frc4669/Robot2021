@@ -4,15 +4,14 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
-#include <frc/SpeedController.h>
-#include <frc/drive/DifferentialDrive.h>
-#include <frc/motorcontrol/MotorControllerGroup.h>
-#include <frc/filter/SlewRateLimiter.h>
-
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
 #include <frc/DoubleSolenoid.h> // gear shifter solenoid
+#include <frc/SpeedController.h>
+#include <frc/drive/DifferentialDrive.h>
+#include <frc/filter/SlewRateLimiter.h>
+#include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc2/command/SubsystemBase.h>
 
 #include <Constants.h>
 
@@ -40,7 +39,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   /**
    * Gets current status of being able to turn in place.
-   * 
+   *
    * @return true if we can turn in place, false otherwise
    */
   bool IsCurvatureDriveEnabled();
@@ -124,28 +123,28 @@ class Drivetrain : public frc2::SubsystemBase {
   bool IsShiftedToHighGear();
 
   /**
-   * Reverse relative front, switching from the intake being the 
+   * Reverse relative front, switching from the intake being the
    * "front", to the shooter side being the "front". Vice-versa.
    */
   void ReverseRelativeFront();
 
   /**
    * Returns if the robot's forward is torwards intake
-   * 
+   *
    * @return whether the robot's forward is torwards intake
    */
   bool IsForwardTowardIntake();
 
   /**
    * Gets the left gearbox's velocity
-   * 
+   *
    * @return left gearbox's velocity
    */
   double GetLeftVelocity();
 
   /**
    * Gets the right gearbox's velocity
-   * 
+   *
    * @return right gearbox's velocity
    */
   double GetRightVelocity();

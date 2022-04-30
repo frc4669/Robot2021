@@ -4,7 +4,7 @@
 
 //?: Written by FRC team 4669 for the 2021-2022 season.
 
-#include <controllers/Extreme3DJoystick.h>
+#include "controllers/Extreme3DJoystick.h"
 
 Extreme3DJoystick::Extreme3DJoystick(int controllerID, double joyYDeadzone, double joyXDeadzone, double joyZDeadzone, double sliderDeadzone) : extremeJoystick{controllerID} {
   this->joyYDeadzone = joyYDeadzone;
@@ -33,7 +33,7 @@ double Extreme3DJoystick::getSlider() {
 double Extreme3DJoystick::deadzone(int axisID, double threshold) {
   double joystickValue = extremeJoystick.GetRawAxis(axisID);
   double joystickDeadzone = threshold;
-  double absJoystickValue = abs(joystickValue);
+  double absJoystickValue = std::abs(joystickValue);
 
   if(absJoystickValue > joystickDeadzone)
     return joystickValue;

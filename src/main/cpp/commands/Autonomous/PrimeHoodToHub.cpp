@@ -13,7 +13,7 @@ PrimeHoodToHub::PrimeHoodToHub(Shooter* shooter, Vision* vision) {
 // Called when the command is initially scheduled.
 void PrimeHoodToHub::Initialize() {
   if(!vision->ShooterHasTarget())
-    End(true); 
+    End(true);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -27,7 +27,7 @@ void PrimeHoodToHub::Execute() {
 
 // Called once the command ends or is interrupted.
 void PrimeHoodToHub::End(bool interrupted) {
-  
+
 }
 
 // Returns true when the command should end.

@@ -6,14 +6,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
 #include <subsystems/Drivetrain.h>
-
 
 class InverseMode : public frc2::CommandHelper<frc2::CommandBase, InverseMode> {
  public:
   /**
-   * Switches mode of robot, changing the relative "front" of the robot. 
+   * Switches mode of robot, changing the relative "front" of the robot.
    * Making driving much easier as shooter and intake do not face the same way.
    *
    * @param drivetrain a Drivetrain object pointer

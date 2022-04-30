@@ -6,7 +6,7 @@
 
 RunFeeder::RunFeeder(Intake* intake, bool runReverse) {
   AddRequirements( {intake} );
-  this->intake = intake;  
+  this->intake = intake;
   this->runReverse = runReverse;
 }
 

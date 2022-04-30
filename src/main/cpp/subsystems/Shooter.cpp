@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Shooter.h"
+
 #include <frc/smartdashboard/SmartDashboard.h> // for debugging
 
 Shooter::Shooter() {

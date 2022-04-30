@@ -58,7 +58,7 @@ void Climber::ZeroArms() {
   //?: slave motor lowered first because if the master hits the limit switch, the slave will not be able to move
   if(!IsLeftLimitHit())
     m_staticLeft.Set(ControlMode::PercentOutput, 0.1);
-  
+
   // Lower master motor if not at base position once slave motor is at base position
   if(!IsRightLimitHit())
     m_staticRight.Set(ControlMode::PercentOutput, 0.1);
@@ -118,9 +118,9 @@ double Climber::GetLeftTicks() {
 
 void Climber::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   //!: LimitReverse should be set on Disabled
-  //!: ClearPos on Forward limit should be set on Enabled 
+  //!: ClearPos on Forward limit should be set on Enabled
 
-  motor.SetInverted(inverted);  
+  motor.SetInverted(inverted);
 
   motor.ConfigNominalOutputForward(0);
   motor.ConfigNominalOutputReverse(0);

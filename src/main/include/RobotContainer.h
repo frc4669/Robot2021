@@ -4,21 +4,18 @@
 
 #pragma once
 
+#include <controllers/Extreme3DJoystick.h>
+#include <controllers/GamepadF310.h>
 #include <frc2/command/Command.h>
-
-#include "commands/ExampleCommand.h"
-#include "subsystems/ExampleSubsystem.h"
-
 #include <subsystems/Climber.h>
 #include <subsystems/Drivetrain.h>
 #include <subsystems/Intake.h>
 #include <subsystems/Shooter.h>
 #include <subsystems/Vision.h>
 
-#include <controllers/GamepadF310.h>
-#include <controllers/Extreme3DJoystick.h>
-
 #include "Constants.h"
+#include "commands/ExampleCommand.h"
+#include "subsystems/ExampleSubsystem.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -49,7 +46,7 @@ class RobotContainer {
   Intake m_intake;
   Climber m_climber;
   Vision m_vision;
-  
+
   // Controllers (takes USB port order as seen on FRC Driver Station and optionally axis deadzones)
   GamepadF310 i_f310{ 0 };
   Extreme3DJoystick i_extreme3{ 1 };

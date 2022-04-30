@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 /**
- * ?: Written by FRC team 4669 for the 2021-2022 season. 
+ * ?: Written by FRC team 4669 for the 2021-2022 season.
  */
 
 #pragma once
@@ -18,13 +18,13 @@ class Extreme3DJoystick {
  public:
   /**
    * Actual controller object.
-   * 
-   * !: Make sure the USB order ID is correct. 
+   *
+   * !: Make sure the USB order ID is correct.
    * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
-   * 
+   *
    * For example, this ID is 0. https://i.imgur.com/f5Y4lWg.png
    * For example, this ID is 3. https://i.imgur.com/CZ21uRp.png
-   * 
+   *
    * @param controllerID USB order ID of the controller.
    * @param joyYDeadzone The deadzone for the joystick Y axis. Default is 0.0.
    * @param joyXDeadzone The deadzone for the joystick X axis. Default is 0.0.
@@ -46,7 +46,7 @@ class Extreme3DJoystick {
   double getSlider();
 
 
-  //*: Objects 
+  //*: Objects
   frc::Joystick extremeJoystick;
 
   // Buttons on joystick handle
@@ -88,7 +88,7 @@ class Extreme3DJoystick {
 
   /**
    * Get value of a given axis after applying a deadzone.
-   * 
+   *
    * @param axisID ID of the axis to get the value of.
    * @param threshold The deadzone threshold.
    * @return value of axis, if it's above the threshold (deadzone), 0.0 otherwise

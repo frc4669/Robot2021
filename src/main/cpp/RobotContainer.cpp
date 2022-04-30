@@ -3,25 +3,21 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
-#include <frc2/command/RunCommand.h>
 
 #include <commands/Autonomous/DriveForward.h>
-#include <commands/Drivetrain/ShiftGear.h>
-#include <commands/Shooter/RunShooter.h>
+#include <commands/Autonomous/PrimeHoodToHub.h>
 #include <commands/Climber/ExtendArms.h>
+#include <commands/Drivetrain/CurvatureDriveToggle.h>
 #include <commands/Drivetrain/InverseMode.h>
+#include <commands/Drivetrain/ShiftGear.h>
+#include <commands/Intake/IntakeCargo.h>
 #include <commands/Intake/ManipulateIntakeArm.h>
 #include <commands/Intake/RunFeeder.h>
-
-#include <commands/Intake/IntakeCargo.h>
-#include <commands/Autonomous/PrimeHoodToHub.h>
 #include <commands/Shooter/IncrementShooterSetSpeed.h>
-#include <commands/Drivetrain/CurvatureDriveToggle.h>
-
-#include <frc2/command/ParallelCommandGroup.h>
 #include <commands/Shooter/MoveHood.h>
-
-
+#include <commands/Shooter/RunShooter.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/RunCommand.h>
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -31,7 +27,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
   // Setup F310 joystick bindings
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
-    [this] 
+    [this]
       {  m_drivetrain.CurvatureDrive(i_f310.getLeftJoyY(), i_f310.getRightJoyX()*joyMultiplier, true); },
       {  &m_drivetrain  }
   ));

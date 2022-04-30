@@ -6,17 +6,14 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
 #include <subsystems/Shooter.h>
 #include <subsystems/Vision.h>
-
-
 
 class PrimeHoodToHub : public frc2::CommandHelper<frc2::CommandBase, PrimeHoodToHub> {
  public:
   /**
    * Align to the hub if seen by targetting system.
-   * 
+   *
    * @param Shooter a Drivetrain object pointer
    */
   PrimeHoodToHub(Shooter* shooter, Vision* vision);

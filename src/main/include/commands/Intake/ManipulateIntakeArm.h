@@ -6,9 +6,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
 #include <subsystems/Intake.h>
-
 
 class ManipulateIntakeArm : public frc2::CommandHelper<frc2::CommandBase, ManipulateIntakeArm> {
  public:

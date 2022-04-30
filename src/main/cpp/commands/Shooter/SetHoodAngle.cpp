@@ -7,7 +7,7 @@
 SetHoodAngle::SetHoodAngle(Shooter* shooter, double angle) {
   AddRequirements({ shooter });
   this->shooter = shooter;
-  this->angle = angle;  
+  this->angle = angle;
 }
 
 // Called when the command is initially scheduled.

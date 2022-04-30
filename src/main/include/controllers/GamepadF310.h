@@ -3,15 +3,15 @@
 // the WPILib BSD license file in the root directory of this project.
 
 /**
- * ?: Written by FRC team 4669 for the 2021-2022 season. 
- * 
- * !: Please make sure that the controller is set to XInput and not DirectInput. 
+ * ?: Written by FRC team 4669 for the 2021-2022 season.
+ *
+ * !: Please make sure that the controller is set to XInput and not DirectInput.
  * To check, look on the back of the controller at the X/D switch, make sure its towards X.
- * 
- * !: Please make sure that the controller mode is not on. 
+ *
+ * !: Please make sure that the controller mode is not on.
  * To check, look at the controller, near the Logitech logo there is a LED, if on, press the MODE button.
- * 
- * !: The F310 controller does not have rumble. 
+ *
+ * !: The F310 controller does not have rumble.
  * Do not use the rumble feature. It will not work.
  */
 
@@ -27,13 +27,13 @@ class GamepadF310 {
  public:
   /**
    * Actual controller object.
-   * 
-   * !: Make sure the USB order ID is correct. 
+   *
+   * !: Make sure the USB order ID is correct.
    * To check, open FRC driver station and check the "USB Devices" tab and look at the order ID.
-   * 
-   * For example, this ID is 0. https://i.imgur.com/8G8JkBM.png 
+   *
+   * For example, this ID is 0. https://i.imgur.com/8G8JkBM.png
    * For example, this ID is 3. https://i.imgur.com/daCHBMz.png
-   * 
+   *
    * @param controllerID USB order ID of the controller.
    * @param leftJoyYDeadzone The deadzone for the left joystick Y axis. Default is 0.0.
    * @param leftJoyXDeadzone The deadzone for the left joystick X axis. Default is 0.0.
@@ -53,8 +53,8 @@ class GamepadF310 {
   double getLeftTrigger();
   double getRightTrigger();
 
-  
-  //*: Objects 
+
+  //*: Objects
   frc::Joystick f310Controller;
 
   // Colour buttons
@@ -97,7 +97,7 @@ class GamepadF310 {
 
   /**
    * Get value of a given axis after applying a deadzone.
-   * 
+   *
    * @param axisID ID of the axis to get the value of.
    * @param threshold The deadzone threshold.
    * @return value of axis, if it's above the threshold (deadzone), 0.0 otherwise

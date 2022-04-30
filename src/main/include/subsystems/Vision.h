@@ -5,7 +5,6 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-
 #include <photonlib/PhotonCamera.h>
 #include <units/angle.h>
 #include <units/length.h>
@@ -23,21 +22,21 @@ class Vision : public frc2::SubsystemBase {
 
   /**
    * Get shooter camera data.
-   * 
+   *
    * @return PhotonPipelineResult object containing the frame information.
    */
   photonlib::PhotonPipelineResult GetShooterCamData();
 
   /**
    * Get intake camera data.
-   * 
+   *
    * @return PhotonPipelineResult object containing the frame information.
    */
   photonlib::PhotonPipelineResult GetIntakeCamData();
 
   /**
    * Get the distance from the target hub to the camera.
-   * 
+   *
    * @return distance to the target from the shooter camera in inches.
    * @param result PhotonPipelineResult object containing the frame information.
    */
@@ -45,7 +44,7 @@ class Vision : public frc2::SubsystemBase {
 
   /**
    * Get the angle offset from the target hub to the camera.
-   * 
+   *
    * @return angle offset to the target from the shooter camera in degrees.
    * @param result PhotonPipelineResult object containing the frame information.
    */

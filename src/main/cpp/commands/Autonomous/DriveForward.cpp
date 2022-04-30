@@ -33,5 +33,5 @@ bool DriveForward::IsFinished() {
   double rightVelocity = drivetrain->GetRightVelocity();
 
   // Check if we've stopped moving
-  return ( abs(10-leftVelocity) < 10 ) && ( abs(10-rightVelocity) < 10 );
+  return ( std::abs(10-leftVelocity) < 10 ) && ( std::abs(10-rightVelocity) < 10 );
 }

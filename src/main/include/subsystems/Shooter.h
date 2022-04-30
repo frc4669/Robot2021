@@ -4,11 +4,10 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
-#include <frc/motorcontrol/MotorControllerGroup.h>
-
-#include <rev/CANSparkMax.h>
 #include <ctre/Phoenix.h>       // for hood motor
+#include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc2/command/SubsystemBase.h>
+#include <rev/CANSparkMax.h>
 
 #include <Constants.h>
 
@@ -23,7 +22,7 @@ class Shooter : public frc2::SubsystemBase {
 
   /**
    * Run the shooter at a set velocity.
-   * 
+   *
    * @param stopShooter whether to stop the shooter
    * (defaults to false)
    */
@@ -42,33 +41,33 @@ class Shooter : public frc2::SubsystemBase {
    * @return the current velocity of the slave shooter
    */
   double GetSlaveShooterVelocity();
-  
+
   /**
    * Get the current set velocity of the shooter system.
-   * 
+   *
    * @return set velocity of the shooter system
    */
   double GetSetVelocityPoint();
 
   /**
    * Move hood by a percentage of its maximum speed.
-   * 
-   * @param percentage Percent of maximum speed to move the hood by 
-   * (negative moves the hood up, positive moves the hood down) 
+   *
+   * @param percentage Percent of maximum speed to move the hood by
+   * (negative moves the hood up, positive moves the hood down)
    * (defaults to 0, stops the hood)
    */
   void MoveHood(double percentage = 0.0);
 
   /**
    * Sets the hood to a given angle.
-   * 
+   *
    * @param angle in degrees
    */
   void SetHoodAngle(double angle);
 
   /**
    * Returns the current angle of the hood.
-   * 
+   *
    * @return the current angle of the hood
    */
   double GetHoodAngle();

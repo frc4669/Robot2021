@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Intake.h"
+
 #include <frc/smartdashboard/SmartDashboard.h>
 
 Intake::Intake() {
@@ -53,7 +54,7 @@ void Intake::RunFeeder(bool runReverse, bool stopFeeder) {
 }
 
 double Intake::GetIntakeVelocity() {
-  return m_intakeMotor.GetSensorCollection().GetQuadratureVelocity(); 
+  return m_intakeMotor.GetSensorCollection().GetQuadratureVelocity();
 }
 
 double Intake::GetFeederVelocity() {

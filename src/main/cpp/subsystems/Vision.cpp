@@ -30,9 +30,9 @@ photonlib::PhotonPipelineResult Vision::GetIntakeCamData() {
 }
 
 double Vision::GetHubTargetDistance(photonlib::PhotonTrackedTarget* result) {
-  units::meter_t dist =  photonlib::PhotonUtils::CalculateDistanceToTarget( VisionContants::kCameraHeight, 
-                                                                            VisionContants::kHubHeight, 
-                                                                            VisionContants::kCameraAngle, 
+  units::meter_t dist =  photonlib::PhotonUtils::CalculateDistanceToTarget( VisionContants::kCameraHeight,
+                                                                            VisionContants::kHubHeight,
+                                                                            VisionContants::kCameraAngle,
                                                                             units::degree_t{ result->GetPitch() } );
   return dist.value();
 }

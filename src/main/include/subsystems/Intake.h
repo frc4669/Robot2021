@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
-
-#include <frc/DoubleSolenoid.h> //for intake arm
 #include <ctre/Phoenix.h>       //for intake/feeder belts
+#include <frc/DoubleSolenoid.h> //for intake arm
+#include <frc2/command/SubsystemBase.h>
 
 #include <Constants.h>
 
@@ -21,21 +20,21 @@ class Intake : public frc2::SubsystemBase {
   void Periodic() override;
 
   /**
-   * Manipulate the intake arm, extending or retracting, 
+   * Manipulate the intake arm, extending or retracting,
    * works as a flip flop switch
    */
   void ManipulateArm();
 
   /**
    * Get the current state of the intake arm
-   * 
+   *
    * @return extended or retracted
    */
   bool IsArmExtended();
 
   /**
    * Run intake motor
-   * 
+   *
    * @param runReverse whether to reverse the intake
    * @param stopIntake whether to stop the intake (defaults to false)
    */
@@ -43,7 +42,7 @@ class Intake : public frc2::SubsystemBase {
 
   /**
    * Run feeder motor
-   * 
+   *
    * @param runReverse whether to reverse the feeder
    * @param stopFeeder whether to stop the feeder (defaults to false)
    */

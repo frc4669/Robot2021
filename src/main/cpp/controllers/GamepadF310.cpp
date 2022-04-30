@@ -4,7 +4,7 @@
 
 //?: Written by FRC team 4669 for the 2021-2022 season.
 
-#include <controllers/GamepadF310.h>
+#include "controllers/GamepadF310.h"
 
 GamepadF310::GamepadF310(int controllerID, double leftJoyXDeadzone, double leftJoyYDeadzone, double rightJoyXDeadzone, double rightJoyYDeadzone, double leftTriggerDeadzone, double rightTriggerDeadzone) : f310Controller{controllerID} {
   this->leftJoyXDeadzone = leftJoyXDeadzone;
@@ -35,12 +35,12 @@ double GamepadF310::getRightJoyX() {
 }
 
 
-double GamepadF310::getLeftTrigger() { 
-  return deadzone(2, leftTriggerDeadzone); 
+double GamepadF310::getLeftTrigger() {
+  return deadzone(2, leftTriggerDeadzone);
 }
 
-double GamepadF310::getRightTrigger() { 
-  return deadzone(3, rightTriggerDeadzone); 
+double GamepadF310::getRightTrigger() {
+  return deadzone(3, rightTriggerDeadzone);
 }
 
 

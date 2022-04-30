@@ -3,8 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Drivetrain.h"
-#include <frc/smartdashboard/SmartDashboard.h>
+
 #include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 Drivetrain::Drivetrain() {
   // Disable safety on the drivetrain motors
@@ -64,7 +65,7 @@ bool Drivetrain::IsCurvatureDriveEnabled() {
 double Drivetrain::GetTicksToTravel(double inches) {
   //?: If shifted to high gear, use the high gear ticks per inch, otherwise use the low gear one
   double ticksPerInch = kShiftedToHighGear ? DriveGearingConstants::kTicksPerInch_HighGear : DriveGearingConstants::kTicksPerInch_LowGear;
-  
+
   return (inches * ticksPerInch);
 }
 
@@ -150,7 +151,7 @@ void Drivetrain::ReverseRelativeFront() {
 
     m_rightMaster.SetInverted(false);
     m_rightSlave.SetInverted(false);
-  } 
+  }
 
   kForwardTowardIntake = !kForwardTowardIntake;
 }
@@ -205,4 +206,3 @@ void Drivetrain::ConfigureMotor(WPI_TalonFX &motor, bool inverted) {
   motor.Config_kD(0, 0.00); // kD, the derivative constant (drives the velocity error to zero)
   motor.Config_kF(0, 0.00); // kF, the feed forward constant (how much the output is affected by the setpoint)
 }
-
