@@ -4,8 +4,9 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
 #include <photonlib/PhotonCamera.h>
+
+#include <frc2/command/SubsystemBase.h>
 #include <units/angle.h>
 #include <units/length.h>
 

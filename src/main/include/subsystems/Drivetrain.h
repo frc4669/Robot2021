@@ -7,10 +7,11 @@
 #include <ctre/Phoenix.h>       // talon
 #include <frc/ADIS16470_IMU.h>  // imu
 #include <frc/DoubleSolenoid.h> // gear shifter solenoid
+
 #include <frc/SpeedController.h>
 #include <frc/drive/DifferentialDrive.h>
-#include <frc/filter/SlewRateLimiter.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc/filter/SlewRateLimiter.h>
 #include <frc2/command/SubsystemBase.h>
 
 #include <Constants.h>

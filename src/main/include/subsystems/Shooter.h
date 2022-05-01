@@ -5,9 +5,10 @@
 #pragma once
 
 #include <ctre/Phoenix.h>       // for hood motor
+#include <rev/CANSparkMax.h>    // main shooter motors
+
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc2/command/SubsystemBase.h>
-#include <rev/CANSparkMax.h>
 
 #include <Constants.h>
 

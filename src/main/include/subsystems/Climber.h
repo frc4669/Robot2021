@@ -4,7 +4,8 @@
 
 #pragma once
 
-#include <ctre/Phoenix.h>       // talon
+#include <ctre/Phoenix.h>
+
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc2/command/SubsystemBase.h>
 
