@@ -6,12 +6,13 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Intake.h>
 
 class RunIntake : public frc2::CommandHelper<frc2::CommandBase, RunIntake> {
  public:
   /**
-   * Run the intake system inwards.
+   * Run the intake belt (the intake arm one).
    *
    * @param intake an Intake object pointer
    * @param runReverse whether to reverse the intake

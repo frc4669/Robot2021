@@ -6,19 +6,18 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Shooter.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
-class MoveHood
-    : public frc2::CommandHelper<frc2::CommandBase, MoveHood> {
+class MoveHood : public frc2::CommandHelper<frc2::CommandBase, MoveHood> {
  public:
-  MoveHood(Shooter *shooter, double percent);
+  /**
+   * Move hood by a set motor speed.
+   * 
+   * @param shooter a Shooter object pointer
+   * @param outputPercent motor output percent, 1.0 being 100% motor power
+   */
+  MoveHood(Shooter *shooter, double outputPercent);
 
   void Initialize() override;
 
@@ -30,5 +29,5 @@ class MoveHood
 
  private:
   Shooter* shooter;
-  double percent;
+  double outputPercent;
 };

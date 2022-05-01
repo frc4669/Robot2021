@@ -6,10 +6,16 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Intake.h>
 
 class RunIntakeAndFeeder : public frc2::CommandHelper<frc2::CommandBase, RunIntakeAndFeeder> {
  public:
+  /**
+   * Run both intake and feeder belts inwards.
+   *
+   * @param intake an Intake object pointer
+   */
   RunIntakeAndFeeder(Intake* intake);
 
   void Initialize() override;
@@ -21,5 +27,5 @@ class RunIntakeAndFeeder : public frc2::CommandHelper<frc2::CommandBase, RunInta
   bool IsFinished() override;
 
  private:
-    Intake* intake;
+  Intake* intake;
 };

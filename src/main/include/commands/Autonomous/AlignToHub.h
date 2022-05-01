@@ -4,19 +4,14 @@
 
 #pragma once
 
-#include <frc/controller/PIDController.h>
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
+#include <frc/controller/PIDController.h>
+
 #include <subsystems/Drivetrain.h>
 #include <subsystems/Vision.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
 class AlignToHub : public frc2::CommandHelper<frc2::CommandBase, AlignToHub> {
  public:
   AlignToHub(Drivetrain* drivetrain, Vision* vision);
@@ -32,8 +27,10 @@ class AlignToHub : public frc2::CommandHelper<frc2::CommandBase, AlignToHub> {
  private:
   Drivetrain* drivetrain;
   Vision* vision;
+  
   photonlib::PhotonPipelineResult pipelineResult;
   photonlib::PhotonTrackedTarget trackedTarget;
+
   double targetYaw;
   frc2::PIDController PIDontroller{.1, 0, 0}; //low p
 };

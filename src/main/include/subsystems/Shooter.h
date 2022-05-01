@@ -22,11 +22,10 @@ class Shooter : public frc2::SubsystemBase {
 
   /**
    * Run the shooter at a set velocity.
-   *
-   * @param stopShooter whether to stop the shooter
-   * (defaults to false)
    */
-  void RunShooter(bool stopShooter = false);
+  void RunShooter();
+
+  void StopShooter();
 
   /**
    * Get the current velocity of the master shooter

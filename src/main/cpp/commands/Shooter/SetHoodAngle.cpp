@@ -4,15 +4,15 @@
 
 #include "commands/Shooter/SetHoodAngle.h"
 
-SetHoodAngle::SetHoodAngle(Shooter* shooter, double angle) {
+SetHoodAngle::SetHoodAngle(Shooter* shooter, double toAngle) {
   AddRequirements({ shooter });
   this->shooter = shooter;
-  this->angle = angle;
+  this->toAngle = toAngle;
 }
 
 // Called when the command is initially scheduled.
 void SetHoodAngle::Initialize() {
-  shooter->SetHoodAngle(angle);
+  shooter->SetHoodAngle(toAngle);
 }
 
 // Called repeatedly when this Command is scheduled to run

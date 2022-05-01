@@ -33,11 +33,13 @@ void Shooter::Periodic() {
   frc::SmartDashboard::PutNumber("Hood Angle", GetHoodAngle());
 }
 
-void Shooter::RunShooter(bool stopShooter) {
-  double setVelocity = stopShooter ? 0 : kShooterVelocity;
+void Shooter::RunShooter() {
+  m_masterPIDController.SetReference(kShooterVelocity, rev::ControlType::kVelocity);
+  //?: Slave shooter motor not set because it's already following the master motor
+}
 
-  m_masterPIDController.SetReference(setVelocity, rev::ControlType::kVelocity);
-  //?: Slave shooter motor not set because it's already following the master motor m
+void Shooter::StopShooter() {
+  m_masterPIDController.SetReference(0, rev::ControlType::kVelocity);
 }
 
 double Shooter::GetMasterShooterVelocity() {

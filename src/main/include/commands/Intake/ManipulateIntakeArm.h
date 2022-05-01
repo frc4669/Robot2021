@@ -6,12 +6,13 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Intake.h>
 
 class ManipulateIntakeArm : public frc2::CommandHelper<frc2::CommandBase, ManipulateIntakeArm> {
  public:
   /**
-   * Deploy the intake arm down/up.
+   * Deploy the intake arm down/up while running intake and feeder belts while deployed.
    *
    * @param intake an Intake object pointer
    */

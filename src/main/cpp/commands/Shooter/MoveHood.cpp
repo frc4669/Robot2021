@@ -4,11 +4,11 @@
 
 #include "commands/Shooter/MoveHood.h"
 
-MoveHood::MoveHood(Shooter* shooter, double percent) {
+MoveHood::MoveHood(Shooter* shooter, double outputPercent) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements( {shooter} );
   this->shooter = shooter;
-  this->percent = percent;
+  this->outputPercent = outputPercent;
 }
 
 // Called when the command is initially scheduled.
@@ -16,7 +16,7 @@ void MoveHood::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void MoveHood::Execute() {
-  shooter->MoveHood(percent);
+  shooter->MoveHood(outputPercent);
 }
 
 // Called once the command ends or is interrupted.

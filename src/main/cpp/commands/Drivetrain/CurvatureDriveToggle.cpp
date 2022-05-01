@@ -22,5 +22,5 @@ void CurvatureDriveToggle::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool CurvatureDriveToggle::IsFinished() {
-  return true;
+  return true;  // finish instantly after Initialize() is called
 }

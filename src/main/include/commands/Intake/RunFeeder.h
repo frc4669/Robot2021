@@ -6,14 +6,16 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Intake.h>
 
 class RunFeeder : public frc2::CommandHelper<frc2::CommandBase, RunFeeder> {
  public:
   /**
-   * Run the vertical feeder.
+   * Run the vertical feeder (leading to the shooter).
    *
    * @param intake an Intake object pointer
+   * @param runReverse whether to reverse the feeder
    */
   RunFeeder(Intake* intake, bool runReverse);
 

@@ -6,19 +6,18 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <subsystems/Shooter.h>
 
-/**
- * An example command.
- *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
-class SetHoodAngle
-    : public frc2::CommandHelper<frc2::CommandBase, SetHoodAngle> {
+class SetHoodAngle : public frc2::CommandHelper<frc2::CommandBase, SetHoodAngle> {
  public:
-  SetHoodAngle(Shooter* shooter, double angle);
+  /**
+   * Set the shooter hood to a set angle.
+   * 
+   * @param shooter a Shooter object pointer
+   * @param toAngle angle to set shooter hood to
+   */
+  SetHoodAngle(Shooter* shooter, double toAngle);
 
   void Initialize() override;
 
@@ -30,5 +29,5 @@ class SetHoodAngle
 
  private:
   Shooter* shooter;
-  double angle;
+  double toAngle;
 };

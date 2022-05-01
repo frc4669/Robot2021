@@ -22,5 +22,5 @@ void InverseMode::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool InverseMode::IsFinished() {
-  return true;
+  return true;  // finish instantly after Initialize() is called
 }
