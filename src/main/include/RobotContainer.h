@@ -4,9 +4,11 @@
 
 #pragma once
 
+#include <frc2/command/Command.h>
+
 #include <controllers/Extreme3DJoystick.h>
 #include <controllers/GamepadF310.h>
-#include <frc2/command/Command.h>
+
 #include <subsystems/Climber.h>
 #include <subsystems/Drivetrain.h>
 #include <subsystems/Intake.h>
@@ -14,8 +16,6 @@
 #include <subsystems/Vision.h>
 
 #include "Constants.h"
-#include "commands/ExampleCommand.h"
-
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -38,8 +38,6 @@ class RobotContainer {
  private:
   // Miscellaneous
   double joyMultiplier = 0.50; // Joystick is too sensitive, multiply the output of the joystick by this value
-
-  ExampleCommand m_autonomousCommand;
 
   void ConfigureButtonBindings();
 
