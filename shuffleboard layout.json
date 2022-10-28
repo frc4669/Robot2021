@@ -335,6 +335,61 @@
                 }
               ]
             }
+          },
+          "6,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/feeder ticks",
+              "_title": "feeder ticks"
+            }
+          },
+          "7,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Pivot Position",
+              "_title": "Right Pivot Position"
+            }
+          },
+          "11,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Pivot Position",
+              "_title": "Left Pivot Position"
+            }
+          },
+          "12,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hood Angle",
+              "_title": "Hood Angle"
+            }
+          },
+          "4,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hood Ticks",
+              "_title": "Hood Ticks"
+            }
           }
         }
       }
@@ -343,7 +398,7 @@
   "windowGeometry": {
     "x": -8.0,
     "y": -8.0,
-    "width": 1936.0,
-    "height": 1066.0
+    "width": 1553.5999755859375,
+    "height": 881.5999755859375
   }
 }
