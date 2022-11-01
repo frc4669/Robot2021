@@ -77,6 +77,8 @@ void RobotContainer::ConfigureButtonBindings() {
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
 
+  m_drivetrain.ResetOdometry(m_drivetrain.GetAutoInitialPose(), m_drivetrain.GetAutoInitialRotation());
+
   std::function<frc::Pose2d()> getPose = [this] () { return m_drivetrain.GetCurrentPose(); };
   std::function<frc::DifferentialDriveWheelSpeeds()> getWheelSpeeds = [this] () { return m_drivetrain.GetWheelSpeeds(); };
   std::function<void(units::volt_t, units::volt_t)> setVoltages = [this] (auto left, auto right) {
@@ -91,13 +93,11 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     m_drivetrain.GetFeedforward(),
     m_drivetrain.GetKinematics(),
     getWheelSpeeds, //Allows the command to repeatedly get the speeds of the wheels
-    frc2::PIDController(DriveConstants::kp, 0, 0), //PID controller (confirm kp is right)
-    frc2::PIDController(DriveConstants::kp, 0, 0), //PID controller (confirm kp is right)
+    frc2::PIDController(DriveConstants::kp, 0, DriveConstants::kd), //PID controller (confirm kp is right)
+    frc2::PIDController(DriveConstants::kp, 0, DriveConstants::kd), //PID controller (confirm kp is right)
     setVoltages, //Sets voltage of motors based on command output
     { &m_drivetrain }
   };
-
-  m_drivetrain.ResetOdometry(m_drivetrain.GetAutoInitialPose(), m_drivetrain.GetAutoInitialRotation());
   
   return new frc2::SequentialCommandGroup(
     std::move(followPathplannerFile)

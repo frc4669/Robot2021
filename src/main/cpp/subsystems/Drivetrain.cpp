@@ -38,8 +38,8 @@ Drivetrain::Drivetrain() {
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {
   // setup smartdashboard to show our drivetrain values
-  //frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
-  //frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
+  frc::SmartDashboard::PutNumber("Left Encoder", GetLeftEncoderDistance());
+  frc::SmartDashboard::PutNumber("Right Encoder", GetRightEncoderDistance());
   m_odometry.Update(GetRotation(), GetLeftDistanceMeters(), GetRightDistanceMeters());
 
   frc::SmartDashboard::PutNumber("Left Velocity", GetLeftVelocity());
@@ -61,18 +61,18 @@ void Drivetrain::CurvatureDrive(double fwd, double rot, bool fromController) {
 }
 
 frc::Trajectory Drivetrain::GetAutoTrajectory() {
-  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 1.5_mps, 2_mps_sq);
   frc::Trajectory trajectory = autonomousPath.asWPILibTrajectory();
   return trajectory;
 }
 
 frc::Pose2d Drivetrain::GetAutoInitialPose() {
-  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 1.5_mps, 2_mps_sq);
   return autonomousPath.getInitialState()->pose;
 }
 
 frc::Rotation2d Drivetrain::GetAutoInitialRotation() {
-  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 4_mps, 4_mps_sq);
+  PathPlannerTrajectory autonomousPath = PathPlanner::loadPath(AUTO_TRAJECTORY, 1.5_mps, 2_mps_sq);
   return autonomousPath.getInitialState()->pose.Rotation();
 }
 

@@ -14,7 +14,8 @@
 //#include <units/length.h>
 #include <units/constants.h>
 
-#define AUTO_TRAJECTORY "PathTest1"
+// #define AUTO_TRAJECTORY "PathTest1"
+#define AUTO_TRAJECTORY "5inchForwardStraight"
 
 //?: If you're asking why we use constexpr, it's because constexpr computes at compile time instead of run time, making it faster.
 
@@ -76,11 +77,12 @@ namespace DriveConstants {
   constexpr int kGearFwdChannel = 0;     // striped blue channel
   constexpr int kGearRevChannel = 1;     // unstriped blue channel
   
-  constexpr auto ks = 1_V;
-  constexpr auto kv = 0.8_V * 1_s / 1_m;
-  constexpr auto ka = 0.15_V * 1_s * 1_s / 1_m;
+  constexpr auto ks = 0.62518_V; // 1_V
+  constexpr auto kv = 0.092241_V * 1_s / 1_m; // 0.8_V
+  constexpr auto ka = 0.006398_V * 1_s * 1_s / 1_m; // 0.15_V
 
-  constexpr double kp = 1;
+  constexpr double kp = 1.8051;
+  constexpr double kd = 0.10332; 
 
   constexpr auto kMaxSpeed = 3_mps;
   constexpr auto kMaxAcceleration = 3_mps_sq;
